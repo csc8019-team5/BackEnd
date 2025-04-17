@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wishlist</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style>
+    .active-category {
+      color: #ffdb69 !important;
+    }
+  </style>
+</head>
+<body class="bg-[#f8f5ec] text-gray-800">
+
+<section class="py-16 px-6">
+  <div class="max-w-7xl mx-auto flex flex-col md:flex-row">
+    
+    <!-- Left Navigation -->
+    <aside class="w-full md:w-[220px] mb-8 md:mb-0">
+      <h2 class="text-2xl font-bold mb-6 text-[#0f172a]">Wishlist</h2>
+      <ul class="space-y-3 text-lg font-medium text-gray-700">
+        <li>
+          <a href="#" class="active-category flex items-center justify-between cursor-pointer">
+            My Wishlist
+            <i class="fa-solid fa-heart text-sm ml-2"></i>
+          </a>
+        </li>
+      </ul>
+
+      <!-- 清除按钮 -->
+      <div class="mt-8">
+        <button id="clearDataBtn" class="w-full bg-red-500 hover:bg-red-600 text-white text-sm py-2 px-4 rounded-full shadow transition">
+          Clear All Books
+        </button>
+      </div>
+    </aside>
+
+    <!-- Vertical Divider -->
+    <div class="hidden md:block w-[1px] bg-gray-300 mx-4"></div>
+
+    <!-- Book Display Area -->
+    <div class="flex-1 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 pl-2" id="wishlistContainer">
+      <!-- JS will dynamically insert book cards here -->
+    </div>
+  </div>
+</section>
+
+<script>
+  let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+  const wishlistContainer = document.getElementById('wishlistContainer');
+
+  function addToBorrowingList(book) {
+    const borrowed = JSON.parse(localStorage.getItem('borrowedBooks')) || [];
+    borrowed.push({
+      ...book,
+      daysBorrowed: 0,
+      totalDays: 30,
+      returned: false,
+      id: Date.now()
+    });
+    localStorage.setItem('borrowedBooks', JSON.stringify(borrowed));
+  }
+
+  function renderWishlist() {
+    wishlistContainer.innerHTML = '';
+
+    if (wishlist.length === 0) {
+      wishlistContainer.innerHTML = '<p class="text-gray-500">Your wishlist is currently empty.</p>';
+      return;
+    }
+
+    wishlist.forEach(book => {
+      const card = document.createElement('div');
+      card.className = 'relative flex flex-col items-center text-center bg-white rounded-lg shadow p-4';
+      card.innerHTML = `
+        <button class="remove-btn absolute top-2 right-2 text-red-500 hover:text-red-700" data-title="${book.title}" title="Remove">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+        <img src="${book.image}" alt="${book.title}" class="w-full h-[350px] object-contain rounded-lg shadow" />
+        <div class="mt-4 w-full">
+          <p class="font-bold text-lg text-gray-900">Title: ${book.title}</p>
+          <p class="text-sm text-gray-500 mb-1">Author: ${book.author}</p>
+          <span class="inline-block text-xs px-2 py-1 rounded-full mt-2
+            ${book.category === 'Romance' ? 'bg-pink-100 text-pink-600' : 
+              book.category === 'History' ? 'bg-yellow-100 text-yellow-700' : 
+              'bg-gray-100 text-gray-600'}">
+            ${book.category}
+          </span>
+          <div class="mt-4">
+            <button class="borrow-btn bg-[#ffdb69] hover:bg-yellow-400 text-black text-sm font-semibold py-2 px-4 rounded-full shadow" data-title="${book.title}">
+              Borrow
+            </button>
+          </div>
+        </div>
+      `;
+      wishlistContainer.appendChild(card);
+    });
+
+    document.querySelectorAll('.remove-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const title = btn.dataset.title;
+        Swal.fire({
+          title: `Remove "${title}"?`,
+          text: "This book will be removed from your wishlist.",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#e53e3e",
+          cancelButtonColor: "#aaa",
+          confirmButtonText: "Confirm",
+          cancelButtonText: "Cancel"
+        }).then((result) => {
+          if (result.isConfirmed) {
+            const index = wishlist.findIndex(book => book.title === title);
+            if (index !== -1) {
+              wishlist.splice(index, 1);
+              localStorage.setItem('wishlist', JSON.stringify(wishlist));
+              renderWishlist();
+              Swal.fire({
+                title: 'Deleted',
+                text: `"${title}" has been removed from your wishlist.`,
+                icon: 'success',
+                timer: 1500,
+                showConfirmButton: false
+              });
+            }
+          }
+        });
+      });
+    });
+
+    document.querySelectorAll('.borrow-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const title = btn.dataset.title;
+        const index = wishlist.findIndex(book => book.title === title);
+        if (index !== -1) {
+          const borrowedBook = wishlist[index];
+          wishlist.splice(index, 1);
+          localStorage.setItem('wishlist', JSON.stringify(wishlist));
+          addToBorrowingList(borrowedBook);
+          renderWishlist();
+          Swal.fire({
+            icon: 'success',
+            title: 'Success!',
+            text: `"${title}" has been added to your borrowing list!`,
+            timer: 1500,
+            showConfirmButton: false
+          }).then(() => {
+            window.location.href = "borrow management.html#list";
+          });
+        }
+      });
+    });
+  }
+
+  renderWishlist();
+
+  // 清空所有数据按钮
+  document.getElementById('clearDataBtn').addEventListener('click', () => {
+    Swal.fire({
+      title: 'Clear all local data?',
+      text: 'This will remove your wishlist and borrowing history.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, clear it!',
+      cancelButtonText: 'Cancel'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        localStorage.removeItem('wishlist');
+        localStorage.removeItem('borrowedBooks');
+        Swal.fire({
+          title: 'Cleared!',
+          text: 'All local data has been cleared.',
+          icon: 'success',
+          timer: 1500,
+          showConfirmButton: false
+        }).then(() => {
+          window.location.reload();
+        });
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
+
+
+

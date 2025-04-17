@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Borrow Management</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-[#f8f5ec] text-gray-800">
+
+<section class="py-16 px-6">
+  <div class="max-w-7xl mx-auto flex flex-col md:flex-row">
+
+    <!-- Sidebar -->
+    <aside class="w-full md:w-[220px] mb-8 md:mb-0">
+      <h2 class="text-2xl font-bold mb-6 text-[#0f172a]">Borrow Management</h2>
+      <ul class="space-y-3 text-lg font-medium text-gray-700">
+        <li>
+          <a id="borrowingListBtn" href="javascript:void(0)" class="menu-tab text-[#ffdb69] transition-colors flex items-center justify-between cursor-pointer">
+            Borrowing List
+            <i class="fa-solid fa-chevron-down text-sm ml-2"></i>
+          </a>
+        </li>
+        <li>
+          <a id="borrowingHistoryBtn" href="javascript:void(0)" class="menu-tab transition-colors flex items-center justify-between cursor-pointer">
+            Borrowing History
+            <i class="fa-solid fa-chevron-down text-sm ml-2"></i>
+          </a>
+        </li>
+      </ul>
+    </aside>
+
+    <!-- Divider -->
+    <div class="hidden md:block w-[1px] bg-gray-300 mx-4"></div>
+
+    <!-- Content Area -->
+    <div class="flex-1 space-y-10">
+
+      <!-- Borrowing List -->
+      <div id="borrowingListWrapper" class="space-y-4">
+        <div class="flex justify-end">
+          <button id="returnAllBtn" class="bg-green-500 hover:bg-green-600 text-white text-sm font-semibold py-2 px-4 rounded-full shadow">
+            Return All
+          </button>
+        </div>
+        <div id="borrowingListSection" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10"></div>
+      </div>
+
+      <!-- Borrowing History -->
+      <div class="hidden" id="borrowingHistorySectionWrapper">
+        <div class="flex justify-end mb-4">
+          <button id="clearHistoryBtn" class="bg-red-500 hover:bg-red-600 text-white text-sm font-semibold py-2 px-4 rounded-full shadow">
+             Clear History
+          </button>
+        </div>
+        <div id="borrowingHistorySection" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const borrowingListSection = document.getElementById('borrowingListSection');
+  const borrowingListWrapper = document.getElementById('borrowingListWrapper');
+  const borrowingHistorySectionWrapper = document.getElementById('borrowingHistorySectionWrapper');
+  const borrowingHistorySection = document.getElementById('borrowingHistorySection');
+  const listBtn = document.getElementById('borrowingListBtn');
+  const historyBtn = document.getElementById('borrowingHistoryBtn');
+  const allTabs = document.querySelectorAll('.menu-tab');
+
+  function activateTab(activeBtn) {
+    if (activeBtn === listBtn) {
+      borrowingListWrapper.classList.remove('hidden');
+      borrowingHistorySectionWrapper.classList.add('hidden');
+    } else {
+      borrowingHistorySectionWrapper.classList.remove('hidden');
+      borrowingListWrapper.classList.add('hidden');
+    }
+
+    allTabs.forEach(tab => tab.classList.remove('text-[#ffdb69]'));
+    activeBtn.classList.add('text-[#ffdb69]');
+  }
+
+  listBtn.addEventListener('click', () => activateTab(listBtn));
+  historyBtn.addEventListener('click', () => activateTab(historyBtn));
+
+  function renderBorrowingList() {
+    const books = JSON.parse(localStorage.getItem('borrowedBooks')) || [];
+    borrowingListSection.innerHTML = '';
+
+    const activeBooks = books.filter(book => !book.returned);
+    if (activeBooks.length === 0) {
+      borrowingListSection.innerHTML = '<p class="text-gray-500">No books currently borrowed.</p>';
+      return;
+    }
+
+    activeBooks.forEach(book => {
+      const progress = (book.daysBorrowed / book.totalDays) * 100;
+      const card = document.createElement('div');
+      card.className = 'book-card flex flex-col items-center text-center bg-white rounded-lg shadow p-4';
+      card.innerHTML = `
+        <img src="${book.image}" alt="${book.title}" class="w-full h-[350px] object-contain rounded-lg shadow" />
+        <div class="mt-4 w-full">
+          <p class="font-bold text-lg text-gray-900">Title: ${book.title}</p>
+          <p class="text-sm text-gray-500 mb-1">Author: ${book.author}</p>
+          <div class="flex items-center space-x-3 w-full mt-2">
+            <span class="text-sm text-black whitespace-nowrap">Due</span>
+            <div class="flex-1 bg-gray-200 rounded-full h-2.5">
+              <div class="bg-[#ffdb69] h-2.5 rounded-full" style="width:${progress}%;"></div>
+            </div>
+            <span class="text-sm text-black whitespace-nowrap">${book.daysBorrowed}/${book.totalDays} days</span>
+          </div>
+          <div class="mt-4">
+            <button class="return-btn bg-green-500 hover:bg-green-600 text-white text-sm font-medium py-2 px-4 rounded-full shadow" data-id="${book.id}">
+              Return
+            </button>
+          </div>
+        </div>
+      `;
+      borrowingListSection.appendChild(card);
+    });
+
+    document.querySelectorAll('.return-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const bookId = parseInt(btn.dataset.id);
+        let books = JSON.parse(localStorage.getItem('borrowedBooks')) || [];
+        books = books.map(b => {
+          if (b.id === bookId) {
+            b.returned = true;
+            b.returnedDate = new Date().toLocaleDateString();
+          }
+          return b;
+        });
+        localStorage.setItem('borrowedBooks', JSON.stringify(books));
+        renderBorrowingList();
+        renderBorrowingHistory();
+      });
+    });
+  }
+
+  function renderBorrowingHistory() {
+    const books = JSON.parse(localStorage.getItem('borrowedBooks')) || [];
+    borrowingHistorySection.innerHTML = '';
+
+    const returnedBooks = books.filter(book => book.returned);
+    if (returnedBooks.length === 0) {
+      borrowingHistorySection.innerHTML = '<p class="text-gray-500">No books in borrowing history.</p>';
+      return;
+    }
+
+    returnedBooks.forEach(book => {
+      const status = `<span class="bg-gray-200 text-green-700 px-4 py-1 text-sm font-semibold rounded-full shadow">
+                        Returned (${book.returnedDate || "Returned"})
+                      </span>`;
+
+      const card = document.createElement('div');
+      card.className = 'flex flex-col items-center text-center bg-white rounded-lg shadow p-4';
+      card.innerHTML = `
+        <img src="${book.image}" alt="${book.title}" class="w-full h-[350px] object-contain rounded-lg shadow" />
+        <div class="mt-4 w-full">
+          <p class="font-bold text-lg text-gray-900">Title: ${book.title}</p>
+          <p class="text-sm text-gray-500 mb-1">Author: ${book.author}</p>
+          <div class="flex justify-center mt-2">${status}</div>
+        </div>
+      `;
+      borrowingHistorySection.appendChild(card);
+    });
+  }
+
+  window.addEventListener('load', () => {
+    if (window.location.hash === '#history') {
+      activateTab(historyBtn);
+    } else if (window.location.hash === '#list') {
+      activateTab(listBtn);
+    } else {
+      activateTab(listBtn);
+    }
+
+    renderBorrowingList();
+    renderBorrowingHistory();
+  });
+
+  document.getElementById('clearHistoryBtn').addEventListener('click', () => {
+    Swal.fire({
+      title: 'Clear borrowing history?',
+      text: 'This will remove all returned books.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, clear it!',
+      cancelButtonText: 'Cancel'
+    }).then(result => {
+      if (result.isConfirmed) {
+        let books = JSON.parse(localStorage.getItem('borrowedBooks')) || [];
+        books = books.filter(book => !book.returned);
+        localStorage.setItem('borrowedBooks', JSON.stringify(books));
+        Swal.fire({
+          title: 'Cleared!',
+          text: 'Borrowing history has been cleared.',
+          icon: 'success',
+          timer: 1500,
+          showConfirmButton: false
+        }).then(() => {
+          renderBorrowingList();
+          renderBorrowingHistory();
+        });
+      }
+    });
+  });
+
+  document.getElementById('returnAllBtn').addEventListener('click', () => {
+    Swal.fire({
+      title: 'Return all books?',
+      text: 'All books currently borrowed will be marked as returned.',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, return all!',
+      cancelButtonText: 'Cancel'
+    }).then(result => {
+      if (result.isConfirmed) {
+        let books = JSON.parse(localStorage.getItem('borrowedBooks')) || [];
+        const now = new Date().toLocaleDateString();
+        books = books.map(b => {
+          if (!b.returned) {
+            return { ...b, returned: true, returnedDate: now };
+          }
+          return b;
+        });
+        localStorage.setItem('borrowedBooks', JSON.stringify(books));
+        Swal.fire({
+          title: 'All Returned!',
+          text: 'All books have been marked as returned.',
+          icon: 'success',
+          timer: 1500,
+          showConfirmButton: false
+        }).then(() => {
+          renderBorrowingList();
+          renderBorrowingHistory();
+        });
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
