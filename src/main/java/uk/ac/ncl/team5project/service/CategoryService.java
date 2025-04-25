@@ -6,13 +6,49 @@ import uk.ac.ncl.team5project.repository.BookRepository;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * Class: CategoryService
+ * File: CategoryService.java
+ * Created on: 24/04/2025
+ * Author: Yixin Zhang
+ *
+ * Description:
+ * <pre>
+ *     Function: Provides book category visualization data, including tag cloud information and
+ *               category distribution statistics for the library management system.
+ *     Interface Description:
+ *         - getCategoryTagCloud: Generates tag cloud data for book categories.
+ *         - getCategoryDistribution: Calculates statistical distribution of books across categories.
+ *     Calling Sequence:
+ *         - Get Tag Cloud: List<Map<String, Object>> tagCloud = categoryService.getCategoryTagCloud();
+ *         - Get Distribution: Map<String, Object> distribution = categoryService.getCategoryDistribution();
+ *     Argument Description:
+ *         - No input parameters for either method.
+ *         - Return values include category names, book counts, weights and percentages.
+ *     List of Subordinate Classes: BookRepository.
+ * </pre>
+ *
+ * Development History:
+ * <pre>
+ *     Designer: Yixin Zhang
+ *     Reviewer: Yixin Zhang
+ *     Review Date: 24/04/2025
+ *     Modification Date: 24/04/2025
+ *     Modification Description: Implemented category visualization features for Module 9.
+ * </pre>
+ */
 @Service
 public class CategoryService {
 
     @Autowired
     private BookRepository bookRepository;
 
-    // 获取词云数据
+    /**
+     * Generates tag cloud data for book categories.
+     * Calculates category counts and relative weights for visualization.
+     * 
+     * @return List of maps containing category name, count, and weight
+     */
     public List<Map<String, Object>> getCategoryTagCloud() {
         List<Object[]> result = bookRepository.countBooksByCategory();
         int total = result.stream().mapToInt(row -> ((Number) row[1]).intValue()).sum();
@@ -30,7 +66,12 @@ public class CategoryService {
         }).collect(Collectors.toList());
     }
 
-    // 获取分布统计数据
+    /**
+     * Calculates distribution statistics for book categories.
+     * Provides total book count and percentage breakdown by category.
+     * 
+     * @return Map containing total books count and category distribution
+     */
     public Map<String, Object> getCategoryDistribution() {
         List<Object[]> result = bookRepository.countBooksByCategory();
         int total = result.stream().mapToInt(row -> ((Number) row[1]).intValue()).sum();

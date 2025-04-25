@@ -12,7 +12,49 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Class: LoanService
+ * File: LoanService.java
+ * Created on: 24/04/2025
+ * Author: Yixin Zhang
+ *
+ * Description:
+ * <pre>
+ *     Function: Implements the core business logic of the book lending system, including processing
+ *               book borrowing, returning books, querying current loans and loan history, and
+ *               automatic processing of expired loans.
+ *     Interface Description:
+ *         - borrowBook: Creates new loan record and updates book availability status.
+ *         - getCurrentLoans: Retrieves active loans for a specific user.
+ *         - returnBook: Processes book return and updates availability.
+ *         - getLoanHistory: Retrieves all loan records for a specific user.
+ *         - getAllLoans: Internal method retrieving all loans for a user.
+ *         - autoExpire: Scheduled method that handles expired loans automatically.
+ *     Calling Sequence:
+ *         - Borrow Book: Loan loan = loanService.borrowBook(1, 2, 14);
+ *         - Current Loans: List<Loan> loans = loanService.getCurrentLoans(1);
+ *         - Return Book: Loan loan = loanService.returnBook(5);
+ *         - Loan History: List<Loan> history = loanService.getLoanHistory(1);
+ *         - Auto Expire: loanService.autoExpire(); (called by scheduler)
+ *     Argument Description:
+ *         - userId: Identifies the borrowing user in the system.
+ *         - bookId: Identifies the book being borrowed or returned.
+ *         - borrowDurationDays: Number of days the book can be borrowed.
+ *         - loanId: Unique identifier for the loan record being processed.
+ *     List of Subordinate Classes: Loan, Book, LoanRepository, BookRepository.
+ * </pre>
+ *
+ * Development History:
+ * <pre>
+ *     Designer: Yixin Zhang
+ *     Reviewer: Yixin Zhang
+ *     Review Date: 24/04/2025
+ *     Modification Date: 24/04/2025
+ *     Modification Description: Implemented transaction management and added auto-expiry functionality.
+ * </pre>
+ */
 @Service
+@Transactional
 public class LoanService {
 
     @Autowired
@@ -22,23 +64,30 @@ public class LoanService {
     private BookRepository bookRepository;
 
     /**
-     * 3.1 借书
+     * Creates a loan record for borrowing a book.
+     * Updates book availability status to unavailable.
+     * 
+     * @param userId User ID of the borrower
+     * @param bookId Book ID to be borrowed
+     * @param borrowDurationDays Number of days for borrowing period
+     * @return The created Loan record
+     * @throws RuntimeException If book doesn't exist or is unavailable
      */
     @Transactional
     public Loan borrowBook(Integer userId, Integer bookId, int borrowDurationDays) {
-        // 检查图书是否存在且可用
+        // Check if book exists and is available
         Book book = bookRepository.findById(bookId)
-                .orElseThrow(() -> new RuntimeException("图书不存在"));
+                .orElseThrow(() -> new RuntimeException("Book not found"));
                 
         if (book.getAvailable() == null || book.getAvailable() != 1) {
-            throw new RuntimeException("该图书不可借阅");
+            throw new RuntimeException("The book is not available for borrowing");
         }
         
-        // 更新图书状态为不可用
+        // Set book status to unavailable
         book.setAvailable(0);
         bookRepository.save(book);
         
-        // 创建借阅记录
+        // Create loan record
         Loan loan = new Loan();
         loan.setUserId(userId);
         loan.setBookId(bookId);
@@ -49,33 +98,41 @@ public class LoanService {
     }
 
     /**
-     * 3.2 当前正在借的书
+     * Retrieves current active loans for a specific user.
+     * 
+     * @param userId User ID to get loans for
+     * @return List of active loans (not returned)
      */
     public List<Loan> getCurrentLoans(Integer userId) {
-        // 查询未归还的借阅记录
+        // Get user's current active loans
         return loanRepository.findByUserIdAndReturnDateIsNull(userId);
     }
     
     /**
-     * 3.3 归还图书
+     * Processes the return of a borrowed book.
+     * Updates book availability status to available.
+     * 
+     * @param loanId Loan record ID to process
+     * @return Updated Loan record with return date
+     * @throws RuntimeException If loan record doesn't exist
      */
     @Transactional
     public Loan returnBook(Integer loanId) {
         Loan loan = loanRepository.findById(loanId)
-                .orElseThrow(() -> new RuntimeException("借阅记录不存在"));
+                .orElseThrow(() -> new RuntimeException("Loan record not found"));
         
-        // 如果已归还，直接返回
+        // If already returned, return directly
         if (loan.getReturnDate() != null) {
             return loan;
         }
         
-        // 更新借阅记录
+        // Update loan record
         loan.setReturnDate(LocalDate.now());
         loanRepository.save(loan);
-        
-        // 更新图书状态为可用
+
+        // Set book status to available
         Book book = bookRepository.findById(loan.getBookId())
-                .orElseThrow(() -> new RuntimeException("图书不存在"));
+                .orElseThrow(() -> new RuntimeException("Book not found"));
         book.setAvailable(1);
         bookRepository.save(book);
         
@@ -83,23 +140,33 @@ public class LoanService {
     }
     
     /**
-     * 3.4 借阅历史记录
+     * Retrieves loan history for a specific user.
+     * Returns all loan records regardless of status.
+     * 
+     * @param userId User ID to get history for
+     * @return List of all loan records for the user
      */
     public List<Loan> getLoanHistory(Integer userId) {
-        // 查询所有已归还的借阅记录
+        // Get all returned loans
         return loanRepository.findByUserId(userId);
     }
     
     /**
-     * 3.5 查询所有借阅记录（为3.4提供支持）
+     * Retrieves all loan records for a specific user.
+     * Supports the loan history feature.
+     * 
+     * @param userId User ID to get records for
+     * @return Complete list of loan records
      */
     public List<Loan> getAllLoans(Integer userId) {
-        // 返回用户的所有借阅记录，包括当前和历史
+        // Get all loan records including current and historical
         return loanRepository.findByUserId(userId);
     }
     
     /**
-     * 3.6 自动将过期借阅设置为expired
+     * Automatically processes expired loans.
+     * Sets return date for expired loans and updates book availability.
+     * Invoked by scheduled task.
      */
     @Transactional
     public void autoExpire() {
@@ -108,13 +175,13 @@ public class LoanService {
 
         for (Loan loan : activeLoans) {
             if (loan.getReturnDateEstimated() != null && loan.getReturnDateEstimated().isBefore(today)) {
-                // 更新借阅记录
-                loan.setReturnDate(loan.getReturnDateEstimated()); // 简化处理，将归还日期设为预期日期
+
+                loan.setReturnDate(loan.getReturnDateEstimated()); //Set return date to the estimated due date
                 loanRepository.save(loan);
                 
-                // 更新图书状态
+
                 Book book = bookRepository.findById(loan.getBookId())
-                        .orElseThrow(() -> new RuntimeException("图书不存在"));
+                        .orElseThrow(() -> new RuntimeException("Book not found"));
                 book.setAvailable(1);
                 bookRepository.save(book);
             }
