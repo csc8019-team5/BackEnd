@@ -17,6 +17,7 @@ public class CategoryService {
         List<Object[]> result = bookRepository.countBooksByCategory();
         int total = result.stream().mapToInt(row -> ((Number) row[1]).intValue()).sum();
 
+        
         return result.stream().map(row -> {
             String category = (String) row[0];
             int count = ((Number) row[1]).intValue();
@@ -34,11 +35,13 @@ public class CategoryService {
         List<Object[]> result = bookRepository.countBooksByCategory();
         int total = result.stream().mapToInt(row -> ((Number) row[1]).intValue()).sum();
 
+      
         List<Map<String, Object>> distribution = result.stream().map(row -> {
             String category = (String) row[0];
             int count = ((Number) row[1]).intValue();
             double percentage = total == 0 ? 0 : (count * 100.0 / total);
 
+           
             Map<String, Object> map = new HashMap<>();
             map.put("category", category);
             map.put("book_count", count);
