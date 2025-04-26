@@ -14,5 +14,19 @@ spring:
 mybatis:
   type-aliases-package: uk.ac.ncl.team5.entities
   configuration:
-    map-underscore-to-camel-case: true                 # ????? user_name -> Java ?? userName
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl # ?? SQL ??????????
+    map-underscore-to-camel-case: true                 # user_name -> userName
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl # SQL logging
+
+mybatis-plus:
+  mapper-locations: classpath*:mapper/*.xml
+  global-config:
+    db-config:
+      id-type: auto
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+jwt:
+  secret: MySecretKeyKK # Salt value for JWT
+  expiration: 86400000 # 1 day in milliseconds
