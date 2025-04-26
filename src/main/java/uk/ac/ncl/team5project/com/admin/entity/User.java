@@ -2,43 +2,41 @@ package uk.ac.ncl.team5project.com.admin.entity;
 
 import java.util.Date;
 
-public class Admin {
-    private Integer adminId;
+public class User {
+    private Integer userId;
 
-    private String adminName;
+    private String userName;
 
-    private String adminEmail;
+    private String userEmail;
 
     private String password;
-
-    private Integer adminLevel;
 
     private Date registrationTime;
 
     private Date updateTime;
 
-    public Integer getAdminId() {
-        return adminId;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setAdminId(Integer adminId) {
-        this.adminId = adminId;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
-    public String getAdminName() {
-        return adminName;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setAdminName(String adminName) {
-        this.adminName = adminName;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public String getAdminEmail() {
-        return adminEmail;
+    public String getUserEmail() {
+        return userEmail;
     }
 
-    public void setAdminEmail(String adminEmail) {
-        this.adminEmail = adminEmail;
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
     }
 
     public String getPassword() {
@@ -47,14 +45,6 @@ public class Admin {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public Integer getAdminLevel() {
-        return adminLevel;
-    }
-
-    public void setAdminLevel(Integer adminLevel) {
-        this.adminLevel = adminLevel;
     }
 
     public Date getRegistrationTime() {
@@ -79,11 +69,10 @@ public class Admin {
         sb.append(getClass().getSimpleName());
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
-        sb.append(", adminId=").append(adminId);
-        sb.append(", adminName=").append(adminName);
-        sb.append(", adminEmail=").append(adminEmail);
+        sb.append(", userId=").append(userId);
+        sb.append(", userName=").append(userName);
+        sb.append(", userEmail=").append(userEmail);
         sb.append(", password=").append(password);
-        sb.append(", adminLevel=").append(adminLevel);
         sb.append(", registrationTime=").append(registrationTime);
         sb.append(", updateTime=").append(updateTime);
         sb.append("]");

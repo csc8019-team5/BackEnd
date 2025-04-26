@@ -2,14 +2,12 @@ package uk.ac.ncl.team5project.com.admin.service;
 
 import java.util.List;
 
-
-import uk.ac.ncl.team5project.com.admin.entity.Admin;
-
-
+import uk.ac.ncl.team5project.com.admin.Param.BookInsertParam;
+import uk.ac.ncl.team5project.com.admin.entity.Book;
 
 /**
- * @file AdminService.java
- * @date 2025-04-10 11:08
+ * @file BookService.java
+ * @date 2025-04-13 15:12
  * @function_description: 
  * @interface_description: 
  *     @calling_sequence: 
@@ -24,9 +22,15 @@ import uk.ac.ncl.team5project.com.admin.entity.Admin;
  *     @description: 
  */
 
-public interface AdminService {
+public interface BookService {
 
-    List<Admin> display();
+    List<Book> loadBooks();
 
-    
-} 
+    void insert(BookInsertParam param) throws Exception;
+
+    void modify(BookInsertParam param);
+
+    void delete(Integer bookId);
+
+
+}
