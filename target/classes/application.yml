@@ -17,6 +17,12 @@ mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapperLocations: classpath*:mapper/*Mapper.xml
+  type-aliases-package: uk.ac.ncl.team5project.entity
+
 
 jwt:
   secret: MySecretKeyKK # 盐值 salt。炒菜 不同的菜加的盐不一样 就能保证安全了。因为你无法反推

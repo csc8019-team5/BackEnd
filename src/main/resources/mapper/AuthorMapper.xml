@@ -1,5 +1,228 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="uk.ac.ncl.team5project.mapper.AuthorMapper">
-
+  <resultMap id="BaseResultMap" type="uk.ac.ncl.team5project.entity.Author">
+    <id column="author_id" jdbcType="INTEGER" property="authorId" />
+    <result column="author_name" jdbcType="VARCHAR" property="authorName" />
+    <result column="nationality" jdbcType="VARCHAR" property="nationality" />
+    <result column="professional" jdbcType="VARCHAR" property="professional" />
+    <result column="famous_work" jdbcType="VARCHAR" property="famousWork" />
+    <result column="author_describe" jdbcType="VARCHAR" property="authorDescribe" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    author_id, author_name, nationality, professional, famous_work, author_describe
+  </sql>
+  <select id="selectByExample" parameterType="uk.ac.ncl.team5project.entity.AuthorExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from AUTHOR
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from AUTHOR
+    where author_id = #{authorId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from AUTHOR
+    where author_id = #{authorId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="uk.ac.ncl.team5project.entity.AuthorExample">
+    delete from AUTHOR
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="uk.ac.ncl.team5project.entity.Author">
+    insert into AUTHOR (author_id, author_name, nationality, 
+      professional, famous_work, author_describe
+      )
+    values (#{authorId,jdbcType=INTEGER}, #{authorName,jdbcType=VARCHAR}, #{nationality,jdbcType=VARCHAR}, 
+      #{professional,jdbcType=VARCHAR}, #{famousWork,jdbcType=VARCHAR}, #{authorDescribe,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="uk.ac.ncl.team5project.entity.Author">
+    insert into AUTHOR
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="authorId != null">
+        author_id,
+      </if>
+      <if test="authorName != null">
+        author_name,
+      </if>
+      <if test="nationality != null">
+        nationality,
+      </if>
+      <if test="professional != null">
+        professional,
+      </if>
+      <if test="famousWork != null">
+        famous_work,
+      </if>
+      <if test="authorDescribe != null">
+        author_describe,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="authorId != null">
+        #{authorId,jdbcType=INTEGER},
+      </if>
+      <if test="authorName != null">
+        #{authorName,jdbcType=VARCHAR},
+      </if>
+      <if test="nationality != null">
+        #{nationality,jdbcType=VARCHAR},
+      </if>
+      <if test="professional != null">
+        #{professional,jdbcType=VARCHAR},
+      </if>
+      <if test="famousWork != null">
+        #{famousWork,jdbcType=VARCHAR},
+      </if>
+      <if test="authorDescribe != null">
+        #{authorDescribe,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="uk.ac.ncl.team5project.entity.AuthorExample" resultType="java.lang.Long">
+    select count(*) from AUTHOR
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update AUTHOR
+    <set>
+      <if test="row.authorId != null">
+        author_id = #{row.authorId,jdbcType=INTEGER},
+      </if>
+      <if test="row.authorName != null">
+        author_name = #{row.authorName,jdbcType=VARCHAR},
+      </if>
+      <if test="row.nationality != null">
+        nationality = #{row.nationality,jdbcType=VARCHAR},
+      </if>
+      <if test="row.professional != null">
+        professional = #{row.professional,jdbcType=VARCHAR},
+      </if>
+      <if test="row.famousWork != null">
+        famous_work = #{row.famousWork,jdbcType=VARCHAR},
+      </if>
+      <if test="row.authorDescribe != null">
+        author_describe = #{row.authorDescribe,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update AUTHOR
+    set author_id = #{row.authorId,jdbcType=INTEGER},
+      author_name = #{row.authorName,jdbcType=VARCHAR},
+      nationality = #{row.nationality,jdbcType=VARCHAR},
+      professional = #{row.professional,jdbcType=VARCHAR},
+      famous_work = #{row.famousWork,jdbcType=VARCHAR},
+      author_describe = #{row.authorDescribe,jdbcType=VARCHAR}
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="uk.ac.ncl.team5project.entity.Author">
+    update AUTHOR
+    <set>
+      <if test="authorName != null">
+        author_name = #{authorName,jdbcType=VARCHAR},
+      </if>
+      <if test="nationality != null">
+        nationality = #{nationality,jdbcType=VARCHAR},
+      </if>
+      <if test="professional != null">
+        professional = #{professional,jdbcType=VARCHAR},
+      </if>
+      <if test="famousWork != null">
+        famous_work = #{famousWork,jdbcType=VARCHAR},
+      </if>
+      <if test="authorDescribe != null">
+        author_describe = #{authorDescribe,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where author_id = #{authorId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="uk.ac.ncl.team5project.entity.Author">
+    update AUTHOR
+    set author_name = #{authorName,jdbcType=VARCHAR},
+      nationality = #{nationality,jdbcType=VARCHAR},
+      professional = #{professional,jdbcType=VARCHAR},
+      famous_work = #{famousWork,jdbcType=VARCHAR},
+      author_describe = #{authorDescribe,jdbcType=VARCHAR}
+    where author_id = #{authorId,jdbcType=INTEGER}
+  </update>
 </mapper>
