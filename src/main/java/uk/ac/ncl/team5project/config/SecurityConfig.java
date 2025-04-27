@@ -38,7 +38,8 @@ public class SecurityConfig {
                                 "/v1/users/admin/login",
                                 "/v1/users/login",
                                 "/v1/books/**",
-                                "/v1/books/*/reviews"
+                                "/v1/books/*/reviews",
+                                "/api/v1/admin/**"
                         ).permitAll()
                         .anyRequest().authenticated()
                 );
