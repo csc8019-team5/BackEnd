@@ -1,0 +1,24 @@
+server:
+  port: 8080
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3307/team05
+    username: user2025
+    password: 12345
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+mybatis-plus:
+  mapper-locations: classpath*:mapper/*.xml
+  global-config:
+    db-config:
+      id-type: auto
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+
+jwt:
+  secret: MySecretKeyKK # 盐值 salt。炒菜 不同的菜加的盐不一样 就能保证安全了。因为你无法反推
+  expiration: 86400000 # 1天 (毫秒)
+
