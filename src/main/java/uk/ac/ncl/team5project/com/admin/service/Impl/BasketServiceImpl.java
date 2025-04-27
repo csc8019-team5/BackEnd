@@ -18,15 +18,21 @@ import uk.ac.ncl.team5project.com.admin.service.BasketService;
 
 /**
  * @file BasketServiceImpl.java
- * @date 2025-04-19 23:41
- * @function_description: 
- * @discussion: 
+ * @date 2025-04-19 
+ * @function_description: Service implementation for `Basket` 
+ * @interface_description:
+ * - Query all books in user's basket
+ * - Add the book into user's basket
+ * - Delete the book from user's basket
+ * - Check the book if already in the basket. If so, the `add to basket` button should change.
+ * @discussion: Require authentication before loading this page.
  * @development_history: 
  *     @designer Qingyu Cao 
- *     @reviewer: 
- *     @review_date: 
- *     @modification_date: 
+ *     @reviewer: Qingyu Cao 
+ *     @review_date: 2025-04-27
+ *     @modification_date: 2025-04-27
  *     @description: 
+ *      - Add `Check` method for button
  */
 
 
