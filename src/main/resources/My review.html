@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <title>My review</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+  </head>
+  <body class="bg-[#f4f1ea]">
+    <div id="root"></div>
+
+    <script type="text/babel">
+      const { useState } = React;
+
+      function CommentList() {
+        const commentsPerPage = 5;
+        const [currentPage, setCurrentPage] = useState(1);
+
+        const [comments, setComments] = useState([
+          {
+            id: 1,
+            user: { name: "piu", avatar: "👤" },
+            content: "寡头竞争是一种市场结构...",
+            book: {
+              title: "博弈论：每个人都能成为决策高手",
+              author: "蒋冬林",
+              rating: "🌟🌟🌟🌟🌟",
+              cover: "📘",
+            },
+            date: "2024/1/14",
+          },
+          {
+            id: 2,
+            user: { name: "雯", avatar: "🧑‍💼" },
+            content: "micro manager 是什么？...",
+            book: {
+              title: "低欲望社会",
+              author: "大前研一",
+              rating: "🌟🌟🌟🌟🌟",
+              cover: "📗",
+            },
+            date: "2024/9/8",
+          },
+          {
+            id: 3,
+            user: { name: "雯", avatar: "🧑‍💼" },
+            content: "micro manager 是什么？...",
+            book: {
+              title: "低欲望社会",
+              author: "大前研一",
+              rating: "🌟🌟🌟🌟🌟",
+              cover: "📗",
+            },
+            date: "2024/9/8",
+          },
+          {
+            id: 4,
+            user: { name: "雯", avatar: "🧑‍💼" },
+            content: "micro manager 是什么？...",
+            book: {
+              title: "低欲望社会",
+              author: "大前研一",
+              rating: "🌟🌟🌟🌟🌟",
+              cover: "📗",
+            },
+            date: "2024/9/8",
+          },
+          {
+            id: 5,
+            user: { name: "雯", avatar: "🧑‍💼" },
+            content: "micro manager 是什么？...",
+            book: {
+              title: "低欲望社会",
+              author: "大前研一",
+              rating: "🌟🌟🌟🌟🌟",
+              cover: "📗",
+            },
+            date: "2024/9/8",
+          },
+          {
+            id: 6,
+            user: { name: "雯", avatar: "🧑‍💼" },
+            content: "micro manager 是什么？...",
+            book: {
+              title: "低欲望社会",
+              author: "大前研一",
+              rating: "🌟🌟🌟🌟🌟",
+              cover: "📗",
+            },
+            date: "2024/9/8",
+          },
+        ]);
+        
+
+        const [newComment, setNewComment] = useState({
+          user: { name: "我", avatar: "😊" },
+          content: "",
+          book: { title: "", author: "", rating: "", cover: "📕" },
+        });
+
+        const totalPages = Math.ceil(comments.length / commentsPerPage);
+        const currentComments = comments.slice(
+          (currentPage - 1) * commentsPerPage,
+          currentPage * commentsPerPage
+        );
+
+        const handleDelete = (id) => {
+          setComments((prev) => prev.filter((c) => c.id !== id));
+        };
+
+        const handleShare = (comment) => {
+          alert(`已将《${comment.book.title}》的评论分享到社交媒体！`);
+        };
+
+        const handlePublish = () => {
+          if (!newComment.content.trim() || !newComment.book.title.trim()) {
+            alert("请填写完整的评论内容和书名！");
+            return;
+          }
+
+          const today = new Date();
+          const dateStr = `${today.getFullYear()}/${today.getMonth() + 1}/${today.getDate()}`;
+
+          const newItem = {
+            id: Date.now(),
+            user: newComment.user,
+            content: newComment.content,
+            book: newComment.book,
+            date: dateStr,
+          };
+
+          setComments([newItem, ...comments]);
+          setNewComment({
+            user: { name: "我", avatar: "😊" },
+            content: "",
+            book: { title: "", author: "", rating: "", cover: "📕" },
+          });
+          setCurrentPage(1);
+        };
+
+        return (
+          <div className="max-w-4xl mx-auto space-y-6 p-4">
+
+            {/* 评论列表 */}
+            {currentComments.map((comment) => (
+              <div key={comment.id} className="rounded-xl p-4 shadow-sm bg-white">
+                <div className="flex items-center space-x-2 text-gray-600 mb-2">
+                  <span>{comment.user.avatar}</span>
+                  <span className="font-semibold">{comment.user.name}</span>
+                  <span className="ml-auto text-xs">{comment.date}</span>
+                </div>
+                <p className="text-gray-800 mb-4">{comment.content}</p>
+                <div className="rounded-lg p-3 bg-gray-100">
+                  <div className="flex items-center space-x-4">
+                    <div className="text-3xl">{comment.book.cover}</div>
+                    <div>
+                      <h3 className="font-semibold">{comment.book.title}</h3>
+                      <p className="text-sm text-gray-500">{comment.book.author}</p>
+                      <p className="text-sm text-blue-500">{comment.book.rating}</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="mt-2 grid grid-cols-3 divide-x text-sm text-gray-600 pt-3">
+                  {/*第一个按钮*/}
+                  <div className="flex justify-center pr-4">
+                    <button
+                      onClick={() => handleShare(comment)}
+                      className="text-gray-600 flex items-center space-x-1 hover:underline"
+                    >
+                      <i className="fa-solid fa-pen-to-square"></i>
+                      <span>Edit</span>
+                    </button>
+                  </div>
+                  {/*第二个按钮*/}
+                  <div className="flex justify-center pr-4">
+                    <button
+                      onClick={() => handleShare(comment)}
+                      className="text-gray-600 flex items-center space-x-1 hover:underline"
+                    >
+                      <i className="fa-solid fa-share-nodes"></i>
+                      <span>Share</span>
+                    </button>
+                  </div>
+                  
+                  {/*第三个按钮*/}
+                  <div className="flex justify-center pl-4">
+                    <button
+                      onClick={() => handleDelete(comment.id)}
+                      className="text-gray-600 flex items-center space-x-1 hover:underline"
+                    >
+                
+                    <i className="fa-solid fa-trash"></i>
+                    <span>Delete</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+            ))}
+
+            {/* 分页按钮 */}
+            <div className="flex justify-center items-center space-x-4 mt-4">
+              <button
+                onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
+                disabled={currentPage === 1}
+                className="px-4 py-2 rounded bg-gray-200 hover:bg-gray-300 disabled:opacity-50"
+              >
+                上一页
+              </button>
+              <span className="text-sm text-gray-600">
+                第 {currentPage} / {totalPages} 页
+              </span>
+              <button
+                onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
+                disabled={currentPage === totalPages}
+                className="px-4 py-2 rounded bg-gray-200 hover:bg-gray-300 disabled:opacity-50"
+              >
+                下一页
+              </button>
+            </div>
+          </div>
+        );
+      }
+
+      ReactDOM.createRoot(document.getElementById("root")).render(<CommentList />);
+    </script>
+  </body>
+</html>

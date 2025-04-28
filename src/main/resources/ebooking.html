@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Readventure</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-[#ece7dc] font-sans text-gray-900">
+<!-- 顶部导航栏 -->
+<header class="flex flex-col md:flex-row md:justify-between md:items-center px-6 py-4 bg-[#ded6c6] space-y-4 md:space-y-0">
+  <!-- 左侧 Logo -->
+  <div class="flex items-center space-x-3 justify-center md:justify-start">
+    <img src="images/logo.png" alt="Logo" class="h-14 max-h-14 w-auto object-contain">
+    <span class="text-2xl font-semibold text-[#0f172a]">Readventure</span>
+  </div>
+
+  <!-- 右侧 搜索栏 + 按钮 -->
+  <div class="flex flex-col sm:flex-row items-center space-y-3 sm:space-y-0 sm:space-x-4 justify-center md:justify-end">
+    <div class="relative w-[500px]">
+      <svg class="absolute left-4 top-1/2 transform -transform -translate-y-1/2 text-gray-400 w-5 h-5 pointer-events-none"xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1011.5 19.5a7.5 7.5 0 005.15-2.85z" />
+      </svg>
+    <!-- 胶囊搜索框 -->
+    <input
+      id="searchInput"
+      type="text"
+      placeholder="Search by title, author or keywords"
+      class="pl-12 px-6 py-2 rounded-full bg-white text-gray-700 w-[500px] shadow-sm focus:outline-none focus:ring-4 focus:ring-[#ffdb69] focus:ring-opacity-60 focus:ring-offset-0"
+    />
+    <script>
+      const searchInput = document.getElementById("searchInput");
+      
+      searchInput.addEventListener("keydown", function(e){
+        if (e.key === "Enter"){
+          const keyword = searchInput.value.trim();
+          if (keyword){
+            alert("You searched for:"+keyword);
+          }
+        }
+    });
+    </script>
+    </div>
+
+    <div class="relative flex items-center space-x-3">
+      <button class="px-6 py-2 rounded-full bg-black text-white hover:bg-gray-800 transition duration-200">
+        Log in
+      </button>
+      <button id="menuToggle" class="text-2xl text-gray-800 hover:text-black cursor-pointer focus:outline-none">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    
+      <div id="dropdownMenu" class="hidden absolute right-0 top-full mt-2 w-48 bg-white border rounded-lg shadow-lg z-50">
+        <a href="categories.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100">
+          <i class="fa-solid fa-list mr-2"></i> Categories
+        </a>
+        <a href="borrow management.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100">
+          <i class="fa-solid fa-book mr-2"></i>Borrow Management
+        </a>
+        <a href="Wishlist.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100">
+          <i class="fa-regular fa-heart mr-2"></i>My Wishlist
+        </a>
+        <a href="My review.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100">
+          <i class="fa-solid fa-comment mr-2"></i>My Review
+        </a>
+      </div>
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  </div>
+    <script>
+    const toggleBtn = document.getElementById('menuToggle');
+    const dropdown = document.getElementById('dropdownMenu');
+
+    toggleBtn.addEventListener('click', () => {
+      dropdown.classList.toggle('hidden');
+    });
+
+    // 点击页面其他区域时关闭菜单
+    window.addEventListener('click', function (e) {
+      if (!toggleBtn.contains(e.target) && !dropdown.contains(e.target)) {
+        dropdown.classList.add('hidden');
+      }
+    });
+    </script>
+</header>
+
+<section class="relative px-6 py-20 bg-white h-[600px] md:h-[700px] overflow-hidden">
+  <!-- 背景图 -->
+  <img src="images/banner.jpg" alt="banner"
+       class="absolute inset-0 w-full h-full object-cover opacity-90">
+
+  <!-- 左侧文字内容 -->
+  <div class="relative z-10 h-full flex items-center">
+    <div class="text-left pl-2 md:pl-10 max-w-2xl">
+      <p class="text-3xl md:text-4xl mb-4 text-gray-800">Turn the page,</p>
+      <p class="text-3xl md:text-4xl mb-8 text-gray-800">begin the journey.</p>
+      <h1 class="text-7xl md:text-8xl font-bold leading-tight text-black">
+        Readventure<br>starts<br>here.
+      </h1>
+    </div>
+  </div>
+</section>
+
+
+
+  <!-- 浏览类别 -->
+  <section class="py-12 px-8">
+    <h2 class="text-3xl font-semibold mb-6 text-center">CATEGORY</h2>
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+    
+      <a href="categories.html" class="relative block group">
+        <img src="images/romance.jpg" class="w-full h-40 object-cover group-hover:opacity-80 transition" />
+        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center text-white text-xl font-bold">ROMANCE</div>
+      </a>
+      
+      <a href="categories.html" class="relative block group">
+        <img src="images/business.jpg" class="w-full h-40 object-cover group-hover:opacity-80 transition" />
+        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center text-white text-xl font-bold">BUSINESS</div>
+      </a>
+      
+      <a href="categories.html" class="relative block group">
+        <img src="images/history.jpg" class="w-full h-40 object-cover group-hover:opacity-80 transition" />
+        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center text-white text-xl font-bold">HISTORY</div>
+      </a>
+      
+      <a href="categories.html" class="relative block group">
+        <img src="images/technology.jpg" class="w-full h-40 object-cover object-[50%_75%] group-hover:opacity-80 transition" />
+        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center text-white text-xl font-bold">TECHNOLOGY</div>
+      </a>
+      
+      <a href="categories.html" class="relative block group col-span-2 md:col-span-1">
+        <img src="images/food.jpg" class="w-full h-40 object-cover group-hover:opacity-80 transition" />
+        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center text-white text-xl font-bold">FOOD</div>
+      </a>
+    </div>
+  </section>
+
+  <!-- 热门图书 -->
+  <section class="px-8 py-12 bg-[#ffffff]">
+    <h2 class="text-3xl font-semibold mb-6 text-center">POPULAR BOOKS</h2>
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+    
+      <div class="h-[530px] flex flex-col justify-between">
+        <img src="images/the hired girl.jpg" class="w-full h-[470px] object-contain rounded-md" />
+        <div class="mt-2">
+          <p class="font-bold">Title: The Hired Girl</p>
+          <p>Author: Laura Amy Schlitz</p>
+        </div>
+      </div>
+      
+      <div class="h-[530px] flex flex-col justify-between">
+        <img src="images/becoming attached.jpg" class="w-full h-[470px] object-contain rounded-md" />
+        <div class="mt-2">
+          <p class="font-bold">Title: Becoming Attached</p>
+          <p>Author: Robert Karen</p>
+        </div>
+      </div>
+      
+      <div class="h-[530px] flex flex-col justify-between">
+        <img src="images/the time machine.jpg" class="w-full h-[470px] object-contain rounded-md" />
+        <div class="mt-2">
+          <p class="font-bold">Title: The Time Machine</p>
+          <p>Author: H.G.Wells</p>
+        </div>
+      </div>
+      
+      <a href="Beauvallet-book details.html" class="h-[530px] flex flex-col justify-between hover:opacity-90 transition">
+        <img src="images/beauvallet.jpg" class="w-full h-[470px] object-contain rounded-md" />
+        <div class="mt-2">
+          <p class="font-bold">Title: Beauvallet</p>
+          <p>Author: Georgette Heyer</p>
+        </div>
+      </a>
+
+      
+      <div class="h-[530px] flex flex-col justify-between">
+        <img src="images/areopagitica.jpg" class="w-full h-[470px] object-contain rounded-md" />
+        <div class="mt-2">
+          <p class="font-bold">Title: Areopagitica</p>
+          <p>Author: John Milton</p>
+        </div>
+      </div>
+      
+      <a href="his last bow-book details.html" class="h-[530px] flex flex-col justify-between hover:opacity-90 transition">
+        <img src="images/his last bow.jpg" class="w-full h-[470px] object-contain rounded-md" />
+        <div class="mt-2">
+          <p class="font-bold">Title: His Last Bow</p>
+          <p>Author: Arthur Conan Doyle</p>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- 底部版权信息 -->
+  <footer class="text-center py-6 text-gray-600 text-sm border-t bg-[#ded6c6]">
+    © 2025 Team 5. All Rights Reserved.
+  </footer>
+</body>
+</html>

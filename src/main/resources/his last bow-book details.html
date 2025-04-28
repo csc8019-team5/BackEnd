@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <title>His Last Bow - 图书详情</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body class="bg-[#f4f1ea] text-gray-900 p-6 font-sans">
+  <div class="max-w-6xl mx-auto bg-white rounded-xl shadow-lg p-6 space-y-6">
+    <div class="flex flex-col md:flex-row gap-6">
+
+      <!-- 左栏 -->
+      <div class="flex flex-col w-full md:w-1/3 space-y-4">
+        <img src="images/his last bow.jpg" alt="His Last Bow" class="w-52 h-auto mx-auto rounded shadow" />
+        <div class="text-center text-gray-600 text-sm">
+          <p>Stock: 10</p>
+          <p>Loan Duration: 30 days</p>
+        </div>
+        <button id="borrowButton" class="w-full bg-[#ffdb69] hover:bg-yellow-400 text-black py-2 rounded">Borrow</button>
+        <button id="addToWishlist" class="w-full bg-[#23272a] text-white py-2 rounded">Add to Wishlist</button>
+        <div class="flex justify-around w-full text-sm text-gray-600">
+          <button>📄 Review</button>
+          <button>🔗 Share</button>
+        </div>
+
+        <div class="bg-gray-50 border rounded p-4 w-full">
+          <h3 class="text-lg font-semibold mb-2 border-b border-gray-300 pb-2">Top Comments</h3>
+          <div class="space-y-4 text-sm divide-y divide-gray-300">
+            <div class="pt-2">
+              <p><strong>Josh</strong> ⭐⭐⭐⭐⭐</p>
+              <p>"An underrated gem among the Holmes stories... you can feel it."</p>
+            </div>
+            <div class="pt-2">
+              <p><strong>Daniel</strong> ⭐⭐⭐⭐⭐</p>
+              <p>"Short, sharp, and satisfying. Holmes remains as brilliant as ever—even in retirement."</p>
+            </div>
+            <div class="pt-2">
+              <p><strong>Amy</strong> ⭐⭐⭐⭐⭐</p>
+              <p>"Loved the wartime espionage twist! A perfect send-off before WWI."</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 右栏 -->
+      <div class="flex-1 space-y-4">
+        <h1 class="text-3xl font-bold">His Last Bow</h1>
+        <p class="text-lg">By Arthur Conan Doyle</p>
+
+        <div class="border rounded p-4 w-fit border-gray-300">
+          <p class="text-sm text-gray-500">Sale price:</p>
+          <div class="border-t border-gray-300 my-2"></div>
+          <p class="text-2xl font-bold text-yellow-500">1.99 <span class="line-through text-gray-400 text-base ml-2">2.99</span></p>
+        </div>
+
+        <section>
+          <h2 class="text-2xl font-semibold border-b pb-1">Introduction</h2>
+          <h3 class="text-xl font-bold mt-2">Synopsis</h3>
+          <p class="text-sm mt-1 leading-relaxed">
+            His Last Bow is a collection of eight Sherlock Holmes short stories written by Sir Arthur Conan Doyle, first published in 1917.
+            These tales depict some of the final adventures of the legendary detective before his retirement...
+          </p>
+        </section>
+
+        <section>
+          <h3 class="text-xl font-semibold border-b pb-1 mt-4">Key Features</h3>
+          <ol class="list-decimal pl-6 text-sm space-y-2 mt-2">
+            <li><strong>Sherlock Holmes’ Farewell</strong> – Final act of service.</li>
+            <li><strong>Eight Classic Short Stories</strong> – Including Devil’s Foot, Bruce-Partington, and more.</li>
+            <li><strong>Blend of Detective and Espionage</strong> – Holmes steps into the role of a spy.</li>
+            <li><strong>Historical Significance</strong> – Reflects patriotic sentiment before WWI.</li>
+            <li><strong>Nuanced Holmes</strong> – Not just logic, but conscience.</li>
+          </ol>
+        </section>
+
+        <section>
+          <h3 class="text-xl font-semibold border-b pb-1 mt-4">About the author</h3>
+          <p class="text-sm mt-2 leading-relaxed">
+            <strong>Nationality:</strong> British<br>
+            <strong>Profession:</strong> Writer and Physician<br>
+            <strong>Notable Works:</strong> Sherlock Holmes, The Lost World, Hound of the Baskervilles<br><br>
+            Arthur Conan Doyle (1859–1930) was a British author best known for Sherlock Holmes...
+          </p>
+        </section>
+
+        <section>
+          <h3 class="text-xl font-semibold border-b pb-1 mt-4">Publication Information</h3>
+          <ul class="text-sm mt-2 space-y-1">
+            <li><strong>Title:</strong> His Last Bow</li>
+            <li><strong>Author:</strong> Arthur Conan Doyle</li>
+            <li><strong>Language:</strong> English</li>
+            <li><strong>First Published:</strong> 1917</li>
+            <li><strong>Original Publisher:</strong> John Murray (UK)</li>
+            <li><strong>Number of Stories:</strong> 8 short stories</li>
+            <li><strong>Genre:</strong> Detective Fiction / Short Story Collection</li>
+          </ul>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <!-- 功能脚本 -->
+  <script>
+    document.getElementById('addToWishlist').addEventListener('click', () => {
+      const book = {
+        title: "His Last Bow",
+        author: "Arthur Conan Doyle",
+        image: "images/his last bow.jpg",
+        category: "History"
+      };
+
+      const wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+      const exists = wishlist.some(b => b.title === book.title);
+
+      if (!exists) {
+        wishlist.push(book);
+        localStorage.setItem('wishlist', JSON.stringify(wishlist));
+        Swal.fire({
+          icon: 'success',
+          title: 'Added!',
+          text: `"${book.title}" has been added to your wishlist.`,
+          timer: 1500,
+          showConfirmButton: false
+        }).then(() => {
+          window.location.href = "Wishlist.html";
+        });
+      } else {
+        Swal.fire({
+          icon: 'info',
+          title: 'Already Added',
+          text: `"${book.title}" is already in your wishlist.`,
+          timer: 1500,
+          showConfirmButton: false
+        });
+      }
+    });
+
+    document.getElementById('borrowButton').addEventListener('click', () => {
+      const book = {
+        id: Date.now(),
+        title: "His Last Bow",
+        author: "Arthur Conan Doyle",
+        image: "images/his last bow.jpg",
+        daysBorrowed: 0,
+        totalDays: 30,
+        returned: false
+      };
+
+      const borrowed = JSON.parse(localStorage.getItem('borrowedBooks')) || [];
+      const exists = borrowed.some(b => b.title === book.title && !b.returned);
+
+      if (!exists) {
+        borrowed.push(book);
+        localStorage.setItem('borrowedBooks', JSON.stringify(borrowed));
+        Swal.fire({
+          icon: 'success',
+          title: 'Borrowed!',
+          text: `"${book.title}" has been added to your borrowing list.`,
+          timer: 1500,
+          showConfirmButton: false
+        }).then(() => {
+          window.location.href = "borrow management.html#list";
+        });
+      } else {
+        Swal.fire({
+          icon: 'info',
+          title: 'Already Borrowed',
+          text: `"${book.title}" is already in your borrowing list.`,
+          timer: 1500,
+          showConfirmButton: false
+        });
+      }
+    });
+  </script>
+</body>
+</html>
+
+
+
+
