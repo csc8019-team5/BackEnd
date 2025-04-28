@@ -1,10 +1,10 @@
 package uk.ac.ncl.team5project.config;
 
-import uk.ac.ncl.team5project.util.Result;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+
 /**
  * @file GlobalExceptionHandler.java
  * @date 2025-04-01
@@ -31,7 +31,7 @@ public class GlobalExceptionHandler {
      * @return standardized error result
      */
     @ExceptionHandler(Exception.class)
-    public Result<?> handleException(Exception e){
+    public Result handleException(Exception e){
         e.printStackTrace();
         return Result.error(500, e.getMessage());
     }
@@ -43,7 +43,7 @@ public class GlobalExceptionHandler {
      * @return result with 400 status and error message
      */
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public Result<?> handleValidationException(MethodArgumentNotValidException e){
+    public Result handleValidationException(MethodArgumentNotValidException e){
         FieldError fieldError = e.getBindingResult().getFieldError();
         if(fieldError != null){
             return Result.error(400, fieldError.getDefaultMessage());

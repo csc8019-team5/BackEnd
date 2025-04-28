@@ -1,36 +1,22 @@
 package uk.ac.ncl.team5project.service;
 
 import java.util.List;
-
+import org.springframework.data.domain.Page;
 import uk.ac.ncl.team5project.param.BookInsertParam;
-import uk.ac.ncl.team5project.entity.Book;
 
 /**
  * @file BookService.java
  * @date 2025-04-13 15:12
- * @function_description: 
- * @interface_description: 
- *     @calling_sequence: 
- *     @arguments_description: 
- *     @list_of_subordinate_classes: 
- * @discussion: 
- * @development_history: 
- *     @designer Qingyu Cao 
- *     @reviewer: 
- *     @review_date: 
- *     @modification_date: 
- *     @description: 
+ * @function_description: Book service interface that handles both MyBatis and JPA operations
  */
-
 public interface BookService {
-
-    List<Book> loadBooks();
-
+    // MyBatis operations
+    List<uk.ac.ncl.team5project.entity.Book> loadBooks();
     void insert(BookInsertParam param) throws Exception;
-
     void modify(BookInsertParam param);
-
     void delete(Integer bookId);
 
-
+    // JPA operations
+    Page<uk.ac.ncl.team5project.entity.jpa.Book> getBooks(int page, int perPage, String search, String publishingHouse);
+    uk.ac.ncl.team5project.entity.jpa.Book getBookById(Integer id);
 }

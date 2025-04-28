@@ -39,8 +39,11 @@ public class SecurityConfig {
                                 "/v1/users/login",
                                 "/v1/books/**",
                                 "/v1/books/*/reviews",
+                                "/v1/auth/**",  
+                                "/v1/categories/**",
                                 "/api/v1/admin/**"
                         ).permitAll()
+                        .requestMatchers("/v1/loans/**").authenticated()
                         .anyRequest().authenticated()
                 );
 
@@ -48,4 +51,4 @@ public class SecurityConfig {
 
         return http.build();
     }
-}
+} 
