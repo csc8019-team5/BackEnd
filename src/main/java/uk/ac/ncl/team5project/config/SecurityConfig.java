@@ -41,7 +41,8 @@ public class SecurityConfig {
                                 "/v1/books/*/reviews",
                                 "/v1/auth/**",  
                                 "/v1/categories/**",
-                                "/api/v1/admin/**",
+                                "/api/v1/admin/**",     //ADMIN test
+                                "/api/v1/basket/**",    //BASKET test
                                 "/v1/reviews/**"
                         ).permitAll()
                         .requestMatchers("/v1/loans/**").authenticated()
