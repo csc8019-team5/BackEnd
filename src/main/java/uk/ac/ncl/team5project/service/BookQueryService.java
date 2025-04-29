@@ -1,4 +1,4 @@
-package uk.ac.ncl.team5project.service.book;
+package uk.ac.ncl.team5project.service;
 
 import org.springframework.data.domain.Page;
 import uk.ac.ncl.team5project.entity.jpa.Book;
