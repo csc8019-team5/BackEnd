@@ -8,36 +8,20 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
 /**
- * @file SecurityConfig.java
- * @date 2025-04-01
- * @function_description: Configures Spring Security settings including JWT integration and endpoint access rules.
- * @interface_description: Defines the security filter chain and access control rules for HTTP endpoints.
- * @calling_sequence: Spring Boot startup → Load SecurityConfig → Apply security filter chain
- * @arguments_description: HttpSecurity http
- * @list_of_subordinate_classes: JwtAuthEntryPoint, JwtAuthenticationFilter
- * @discussion: Enables stateless session management and injects JWT authentication filter.
- * @development_history: Created on 2025-04-01 as part of security module
- * @designer: wensi huang
- * @reviewer: wensi huang
- * @review_date: 2025-04-18
- * @modification_date: 2025-04-18
- * @description: Central security configuration using Spring Security with JWT authentication support.
+ * Security configuration class for JWT authentication
  */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+
     @Autowired
     private JwtAuthEntryPoint unauthorizedHandler;
 
     @Autowired
     private JwtAuthenticationFilter jwtAuthenticationFilter;
-    /**
-     * Configures HTTP security including CSRF disabling, stateless session, JWT filter, and access rules.
-     * @param http HttpSecurity object
-     * @return configured SecurityFilterChain
-     * @throws Exception in case of configuration errors
-     */
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
@@ -49,13 +33,23 @@ public class SecurityConfig {
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/v1/users/register","/v1/users/admin/login",
-                                "/v1/users/login","v1/books/*/reviews","v1/books","v1/books/*").permitAll()
+                        .requestMatchers(
+                                "/v1/users/register",
+                                "/v1/users/admin/login",
+                                "/v1/users/login",
+                                "/v1/books/**",
+                                "/v1/books/*/reviews",
+                                "/v1/auth/**",  
+                                "/v1/categories/**",
+                                "/api/v1/admin/**",
+                                "/v1/reviews/**"
+                        ).permitAll()
+                        .requestMatchers("/v1/loans/**").authenticated()
                         .anyRequest().authenticated()
                 );
-        // Add JWT filter before default username/password authentication filter
+
         http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
-}
+} 

@@ -19,6 +19,9 @@ import lombok.NoArgsConstructor;
  * @review_date: 2025-04-18
  * @modification_date: 2025-04-18
  * @description: Generic response format used by all endpoints to wrap success and error messages.
+ * 	- add new Result `fail`
+ * 	- add new Result `noLogin`
+ * 	- add new Result `noPermission`
  */
 @Data
 @AllArgsConstructor
@@ -29,7 +32,7 @@ public class Result<T> {
     private T data;
 
     public static <T> Result<T> success(T data){
-        return new Result<>(200, "Success", data);
+        return new Result<>(200, "success", data);
     }
 
     public static <T> Result<T> success(String message, T data){
@@ -39,4 +42,13 @@ public class Result<T> {
     public static <T> Result<T> error(Integer code, String message){
         return new Result<>(code, message, null);
     }
+
+	public static Result fail(String message,String data){return new Result(409, message, null);}
+	public static Result noLogin(){return new Result(401,"Not logged in","");}
+	public static Result noPermission(){return new Result(402,"No Permission","");}
+	public static Result conflict(String message){return new Result(409, message, null);}
+
+
 }
+
+

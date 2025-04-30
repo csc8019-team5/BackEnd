@@ -3,6 +3,8 @@ package uk.ac.ncl.team5project.util;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -26,6 +28,8 @@ import java.util.Date;
  */
 @Component
 public class JwtUtil {
+    private static final Logger logger = LoggerFactory.getLogger(JwtUtil.class);
+
     @Value("${jwt.secret}")
     private String jwtSecret;
     @Value("${jwt.expiration}")
@@ -38,13 +42,18 @@ public class JwtUtil {
      * @return signed JWT token string
      */
     public String generateJwtToken(String username, String role){
-        return Jwts.builder()
+        logger.debug("Generating JWT token for username: {}, role: {}", username, role);
+        
+        String token = Jwts.builder()
                 .setSubject(username)
                 .claim("role", role)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
                 .signWith(SignatureAlgorithm.HS512, jwtSecret)
                 .compact();
+                
+        logger.debug("Generated token: {}", token);
+        return token;
     }
 
     /**
@@ -53,8 +62,10 @@ public class JwtUtil {
      * @return username (subject)
      */
     public String getUserNameFromJwtToken(String token){
-        return Jwts.parser().setSigningKey(jwtSecret).
+        String username = Jwts.parser().setSigningKey(jwtSecret).
                 parseClaimsJws(token).getBody().getSubject();
+        logger.debug("Extracted username from token: {}", username);
+        return username;
     }
 
     /**
@@ -63,7 +74,9 @@ public class JwtUtil {
      * @return user role
      */
     public String getRoleFromJwtToken(String token){
-        return (String) Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().get("role");
+        String role = Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().get("role", String.class);
+        logger.debug("Extracted role from token: {}", role);
+        return role;
     }
 
     /**
@@ -74,10 +87,11 @@ public class JwtUtil {
     public boolean validateJwtToken(String authToken){
         try{
             Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken);
+            logger.debug("JWT token validation successful");
             return true;
         }
         catch (JwtException e){
-            // Handle JWT parsing or expiration exception(ignore)
+            logger.error("Invalid JWT signature: {}", e.getMessage());
         }
         return false;
     }

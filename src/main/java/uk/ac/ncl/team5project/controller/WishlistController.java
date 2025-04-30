@@ -33,8 +33,8 @@ import uk.ac.ncl.team5project.util.Result;
  * Created on 2025-04-01 for wishlist feature
  * @designer: wensi huang
  * @reviewer: wensi huang
- * @review_date: 2025-04-19
- * @modification_date: 2025-04-19
+ * @review_date: 2025-04-29
+ * @modification_date: 2025-04-29
  * @description: REST controller for user wishlist management
  */
 @RestController
@@ -86,9 +86,13 @@ public class WishlistController {
     @GetMapping("/stat")
     public Result<?> getWishlistStat() {
         WishlistStatVO wishlistStatVO = new WishlistStatVO();
+
         wishlistStatVO.setBookCounts(wishlistMapper.getBookCounts());
-        wishlistStatVO.setWishlistCount(
-                wishlistMapper.selectCount(null));
+
+        wishlistStatVO.setWishlistCount(wishlistMapper.selectCount(null));
+
+        wishlistStatVO.setBookCategoryCounts(wishlistMapper.getBookCategoryCounts());
+
         return Result.success(wishlistStatVO);
     }
 

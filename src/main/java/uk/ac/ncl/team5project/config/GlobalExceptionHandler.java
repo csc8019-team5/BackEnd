@@ -1,10 +1,13 @@
 package uk.ac.ncl.team5project.config;
 
-import uk.ac.ncl.team5project.util.Result;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import uk.ac.ncl.team5project.util.Result;
+
 /**
  * @file GlobalExceptionHandler.java
  * @date 2025-04-01
@@ -31,9 +34,25 @@ public class GlobalExceptionHandler {
      * @return standardized error result
      */
     @ExceptionHandler(Exception.class)
-    public Result<?> handleException(Exception e){
+    public ResponseEntity<?> handleException(Exception e) {
         e.printStackTrace();
-        return Result.error(500, e.getMessage());
+        String message = e.getMessage();
+        
+       
+        if (message != null && message.contains("not available")) {
+            return ResponseEntity.status(HttpStatus.CONFLICT)
+                    .body(Result.error(409, "Book is not available"));
+        }
+        
+        
+        if (message != null && (message.contains("loan limit") || message.contains("maximum"))) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(Result.error(400, "Maximum loan limit reached"));
+        }
+        
+        
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(Result.error(500, message != null ? message : "Internal server error"));
     }
 
     /**
@@ -43,11 +62,13 @@ public class GlobalExceptionHandler {
      * @return result with 400 status and error message
      */
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public Result<?> handleValidationException(MethodArgumentNotValidException e){
+    public ResponseEntity<?> handleValidationException(MethodArgumentNotValidException e) {
         FieldError fieldError = e.getBindingResult().getFieldError();
-        if(fieldError != null){
-            return Result.error(400, fieldError.getDefaultMessage());
+        if (fieldError != null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(Result.error(400, fieldError.getDefaultMessage()));
         }
-        return Result.error(400, "参数验证失败");
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(Result.error(400, "Validation failed"));
     }
 }
