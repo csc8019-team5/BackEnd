@@ -22,4 +22,6 @@ import lombok.Data;
 public class LoginVO {
     // JWT token returned to the client
     private String token;
+    private String username;
+    private int userId;
 }

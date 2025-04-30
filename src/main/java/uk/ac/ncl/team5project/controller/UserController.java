@@ -44,6 +44,7 @@ import java.util.Random;
  */
 @RestController
 @RequestMapping("/v1/users")
+@CrossOrigin(origins = "http://127.0.0.1:5500")
 public class UserController {
     @Autowired
     private UserService userService;

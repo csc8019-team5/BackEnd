@@ -47,6 +47,8 @@ public class BookVO {
     private String description;
     @JsonProperty("cover_url")
     private String coverUrl;
+    @JsonProperty("publishing_house")
+    private String publishingHouse;
     @JsonProperty("available_copies")
     private Integer availableCopies;
     @JsonProperty("loan_duration")
@@ -68,6 +70,7 @@ public class BookVO {
         vo.setCategory(book.getCategory());
         vo.setDescription(book.getDescription());
         vo.setCoverUrl(book.getBookCover());
+        vo.setPublishingHouse(book.getPublishingHouse());
         vo.setAvailableCopies(book.getAvailableNumber());
         vo.setLoanDuration(14); 
         return vo;
