@@ -5272,3 +5272,618 @@ This generated password is for development use only. Your security configuration
 2025-04-30T19:58:55.515+01:00 DEBUG 35756 --- [http-nio-8080-exec-1] u.a.n.t.config.JwtAuthenticationFilter   : Received request for URL: http://localhost:8080/api/v1/basket/loadBasket
 2025-04-30T19:58:55.515+01:00 DEBUG 35756 --- [http-nio-8080-exec-1] u.a.n.t.config.JwtAuthenticationFilter   : Authorization header: null
 2025-04-30T19:58:55.515+01:00 DEBUG 35756 --- [http-nio-8080-exec-1] u.a.n.t.config.JwtAuthenticationFilter   : No JWT token found in request
+2025-04-30T20:03:52.274+01:00  INFO 35756 --- [SpringApplicationShutdownHook] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2025-04-30T20:03:52.276+01:00  INFO 35756 --- [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-04-30T20:03:52.279+01:00  INFO 35756 --- [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-04-30T20:03:52.282+01:00  INFO 35756 --- [SpringApplicationShutdownHook] o.s.s.quartz.SchedulerFactoryBean        : Shutting down Quartz Scheduler
+2025-04-30T20:03:52.282+01:00  INFO 35756 --- [SpringApplicationShutdownHook] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED shutting down.
+2025-04-30T20:03:52.282+01:00  INFO 35756 --- [SpringApplicationShutdownHook] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2025-04-30T20:03:52.283+01:00  INFO 35756 --- [SpringApplicationShutdownHook] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED shutdown complete.
+2025-04-30T20:03:52.286+01:00  INFO 35756 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-04-30T20:03:52.290+01:00  INFO 35756 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-04-30T20:03:52.296+01:00  INFO 35756 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-04-30T20:08:41.693+01:00  INFO 38462 --- [main] u.a.n.t.Team5ProjectApplication          : Starting Team5ProjectApplication using Java 21.0.6 with PID 38462 (/Users/conqury/study/Postgraguate/CSC8019 Software Engineering and Team Project/BackEnd/target/classes started by conqury in /Users/conqury/study/Postgraguate/CSC8019 Software Engineering and Team Project/BackEnd)
+2025-04-30T20:08:41.694+01:00 DEBUG 38462 --- [main] u.a.n.t.Team5ProjectApplication          : Running with Spring Boot v3.4.4, Spring v6.2.5
+2025-04-30T20:08:41.695+01:00  INFO 38462 --- [main] u.a.n.t.Team5ProjectApplication          : No active profile set, falling back to 1 default profile: "default"
+2025-04-30T20:08:42.127+01:00  INFO 38462 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-04-30T20:08:42.162+01:00  INFO 38462 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 31 ms. Found 2 JPA repository interfaces.
+2025-04-30T20:08:42.219+01:00  WARN 38462 --- [main] o.m.s.mapper.ClassPathMapperScanner      : Skipping MapperFactoryBean with name 'adminMapper' and 'uk.ac.ncl.team5project.mapper.AdminMapper' mapperInterface. Bean already defined with the same name!
+2025-04-30T20:08:42.219+01:00  WARN 38462 --- [main] o.m.s.mapper.ClassPathMapperScanner      : Skipping MapperFactoryBean with name 'authorMapper' and 'uk.ac.ncl.team5project.mapper.AuthorMapper' mapperInterface. Bean already defined with the same name!
+2025-04-30T20:08:42.219+01:00  WARN 38462 --- [main] o.m.s.mapper.ClassPathMapperScanner      : Skipping MapperFactoryBean with name 'basketMapper' and 'uk.ac.ncl.team5project.mapper.BasketMapper' mapperInterface. Bean already defined with the same name!
+2025-04-30T20:08:42.220+01:00  WARN 38462 --- [main] o.m.s.mapper.ClassPathMapperScanner      : Skipping MapperFactoryBean with name 'bookMapper' and 'uk.ac.ncl.team5project.mapper.BookMapper' mapperInterface. Bean already defined with the same name!
+2025-04-30T20:08:42.220+01:00  WARN 38462 --- [main] o.m.s.mapper.ClassPathMapperScanner      : Skipping MapperFactoryBean with name 'reviewMapper' and 'uk.ac.ncl.team5project.mapper.ReviewMapper' mapperInterface. Bean already defined with the same name!
+2025-04-30T20:08:42.220+01:00  WARN 38462 --- [main] o.m.s.mapper.ClassPathMapperScanner      : Skipping MapperFactoryBean with name 'userMapper' and 'uk.ac.ncl.team5project.mapper.UserMapper' mapperInterface. Bean already defined with the same name!
+2025-04-30T20:08:42.220+01:00  WARN 38462 --- [main] o.m.s.mapper.ClassPathMapperScanner      : Skipping MapperFactoryBean with name 'wishlistMapper' and 'uk.ac.ncl.team5project.mapper.WishlistMapper' mapperInterface. Bean already defined with the same name!
+2025-04-30T20:08:42.220+01:00  WARN 38462 --- [main] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[uk.ac.ncl.team5project.mapper]' package. Please check your configuration.
+2025-04-30T20:08:42.502+01:00  INFO 38462 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-04-30T20:08:42.513+01:00  INFO 38462 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-04-30T20:08:42.513+01:00  INFO 38462 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.39]
+2025-04-30T20:08:42.550+01:00  INFO 38462 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-04-30T20:08:42.551+01:00  INFO 38462 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 822 ms
+2025-04-30T20:08:42.592+01:00 DEBUG 38462 --- [main] u.a.n.t.config.JwtAuthenticationFilter   : Filter 'jwtAuthenticationFilter' configured for use
+2025-04-30T20:08:42.659+01:00  INFO 38462 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-04-30T20:08:42.678+01:00  INFO 38462 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.11.Final
+2025-04-30T20:08:42.691+01:00  INFO 38462 --- [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-04-30T20:08:42.806+01:00  INFO 38462 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-04-30T20:08:42.818+01:00  INFO 38462 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-04-30T20:08:43.527+01:00  INFO 38462 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@459bf87c
+2025-04-30T20:08:43.532+01:00  INFO 38462 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-04-30T20:08:43.672+01:00  WARN 38462 --- [main] org.hibernate.dialect.Dialect            : HHH000511: The 8.3.0 version for [org.hibernate.dialect.MariaDBDialect] is no longer supported, hence certain features may not work properly. The minimum supported version is 10.4.0. Check the community dialects project for available legacy versions.
+2025-04-30T20:08:43.674+01:00  WARN 38462 --- [main] org.hibernate.orm.deprecation            : HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-04-30T20:08:43.684+01:00  INFO 38462 --- [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.3
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-04-30T20:08:44.006+01:00  INFO 38462 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-04-30T20:08:44.007+01:00  INFO 38462 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-04-30T20:08:44.370+01:00  INFO 38462 --- [main] o.s.d.j.r.query.QueryEnhancerFactory     : JSqlParser is in classpath; If applicable, JSqlParser will be used.
+2025-04-30T20:08:44.370+01:00  INFO 38462 --- [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-04-30T20:08:45.102+01:00  WARN 38462 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-04-30T20:08:45.112+01:00  WARN 38462 --- [main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 697b7da8-5df2-4058-a666-962d8988a8d3
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-04-30T20:08:45.126+01:00  INFO 38462 --- [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2025-04-30T20:08:45.359+01:00  WARN 38462 --- [main] o.s.b.a.f.FreeMarkerAutoConfiguration    : Cannot find template location: [classpath:/templates/] (please add some templates, check your FreeMarker configuration, or set spring.freemarker.check-template-location=false)
+2025-04-30T20:08:45.390+01:00  INFO 38462 --- [main] org.quartz.impl.StdSchedulerFactory      : Using default implementation for ThreadExecutor
+2025-04-30T20:08:45.395+01:00  INFO 38462 --- [main] org.quartz.core.SchedulerSignalerImpl    : Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2025-04-30T20:08:45.395+01:00  INFO 38462 --- [main] org.quartz.core.QuartzScheduler          : Quartz Scheduler v.2.3.2 created.
+2025-04-30T20:08:45.396+01:00  INFO 38462 --- [main] org.quartz.simpl.RAMJobStore             : RAMJobStore initialized.
+2025-04-30T20:08:45.396+01:00  INFO 38462 --- [main] org.quartz.core.QuartzScheduler          : Scheduler meta-data: Quartz Scheduler (v2.3.2) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2025-04-30T20:08:45.396+01:00  INFO 38462 --- [main] org.quartz.impl.StdSchedulerFactory      : Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+2025-04-30T20:08:45.396+01:00  INFO 38462 --- [main] org.quartz.impl.StdSchedulerFactory      : Quartz scheduler version: 2.3.2
+2025-04-30T20:08:45.396+01:00  INFO 38462 --- [main] org.quartz.core.QuartzScheduler          : JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@3c38f10b
+2025-04-30T20:08:45.420+01:00  INFO 38462 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-04-30T20:08:45.421+01:00  INFO 38462 --- [main] o.s.s.quartz.SchedulerFactoryBean        : Starting Quartz Scheduler now
+2025-04-30T20:08:45.421+01:00  INFO 38462 --- [main] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED started.
+2025-04-30T20:08:45.426+01:00  INFO 38462 --- [main] u.a.n.t.Team5ProjectApplication          : Started Team5ProjectApplication in 4.177 seconds (process running for 4.376)
+2025-04-30T20:08:50.435+01:00  INFO 38462 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-04-30T20:08:50.436+01:00  INFO 38462 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-04-30T20:08:50.437+01:00  INFO 38462 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
+2025-04-30T20:08:50.449+01:00 DEBUG 38462 --- [http-nio-8080-exec-1] u.a.n.t.config.JwtAuthenticationFilter   : Parsing JWT from Authorization header: null
+2025-04-30T20:08:50.449+01:00 DEBUG 38462 --- [http-nio-8080-exec-1] u.a.n.t.config.JwtAuthenticationFilter   : Received request for URL: http://localhost:8080/api/v1/basket/loadBasket
+2025-04-30T20:08:50.449+01:00 DEBUG 38462 --- [http-nio-8080-exec-1] u.a.n.t.config.JwtAuthenticationFilter   : Authorization header: null
+2025-04-30T20:08:50.449+01:00 DEBUG 38462 --- [http-nio-8080-exec-1] u.a.n.t.config.JwtAuthenticationFilter   : No JWT token found in request
+2025-04-30T20:10:04.811+01:00 DEBUG 38462 --- [http-nio-8080-exec-3] u.a.n.t.config.JwtAuthenticationFilter   : Parsing JWT from Authorization header: null
+2025-04-30T20:10:04.812+01:00 DEBUG 38462 --- [http-nio-8080-exec-3] u.a.n.t.config.JwtAuthenticationFilter   : Received request for URL: http://localhost:8080/api/v1/basket/loadBasket
+2025-04-30T20:10:04.812+01:00 DEBUG 38462 --- [http-nio-8080-exec-3] u.a.n.t.config.JwtAuthenticationFilter   : Authorization header: null
+2025-04-30T20:10:04.812+01:00 DEBUG 38462 --- [http-nio-8080-exec-3] u.a.n.t.config.JwtAuthenticationFilter   : No JWT token found in request
+2025-04-30T20:10:06.429+01:00 DEBUG 38462 --- [http-nio-8080-exec-4] u.a.n.t.config.JwtAuthenticationFilter   : Parsing JWT from Authorization header: null
+2025-04-30T20:10:06.429+01:00 DEBUG 38462 --- [http-nio-8080-exec-4] u.a.n.t.config.JwtAuthenticationFilter   : Received request for URL: http://localhost:8080/favicon.ico
+2025-04-30T20:10:06.429+01:00 DEBUG 38462 --- [http-nio-8080-exec-4] u.a.n.t.config.JwtAuthenticationFilter   : Authorization header: null
+2025-04-30T20:10:06.429+01:00 DEBUG 38462 --- [http-nio-8080-exec-4] u.a.n.t.config.JwtAuthenticationFilter   : No JWT token found in request
+2025-04-30T20:11:55.164+01:00  INFO 38462 --- [SpringApplicationShutdownHook] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2025-04-30T20:11:55.166+01:00  INFO 38462 --- [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-04-30T20:11:55.170+01:00  INFO 38462 --- [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-04-30T20:11:55.174+01:00  INFO 38462 --- [SpringApplicationShutdownHook] o.s.s.quartz.SchedulerFactoryBean        : Shutting down Quartz Scheduler
+2025-04-30T20:11:55.175+01:00  INFO 38462 --- [SpringApplicationShutdownHook] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED shutting down.
+2025-04-30T20:11:55.175+01:00  INFO 38462 --- [SpringApplicationShutdownHook] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2025-04-30T20:11:55.175+01:00  INFO 38462 --- [SpringApplicationShutdownHook] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED shutdown complete.
+2025-04-30T20:11:55.179+01:00  INFO 38462 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-04-30T20:11:55.182+01:00  INFO 38462 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-04-30T20:11:58.940+01:00  INFO 38462 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-04-30T20:11:59.748+01:00  INFO 39988 --- [main] u.a.n.t.Team5ProjectApplication          : Starting Team5ProjectApplication using Java 21.0.6 with PID 39988 (/Users/conqury/study/Postgraguate/CSC8019 Software Engineering and Team Project/BackEnd/target/classes started by conqury in /Users/conqury/study/Postgraguate/CSC8019 Software Engineering and Team Project/BackEnd)
+2025-04-30T20:11:59.749+01:00 DEBUG 39988 --- [main] u.a.n.t.Team5ProjectApplication          : Running with Spring Boot v3.4.4, Spring v6.2.5
+2025-04-30T20:11:59.750+01:00  INFO 39988 --- [main] u.a.n.t.Team5ProjectApplication          : No active profile set, falling back to 1 default profile: "default"
+2025-04-30T20:12:00.087+01:00  INFO 39988 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-04-30T20:12:00.121+01:00  INFO 39988 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 30 ms. Found 2 JPA repository interfaces.
+2025-04-30T20:12:00.191+01:00  WARN 39988 --- [main] o.m.s.mapper.ClassPathMapperScanner      : Skipping MapperFactoryBean with name 'adminMapper' and 'uk.ac.ncl.team5project.mapper.AdminMapper' mapperInterface. Bean already defined with the same name!
+2025-04-30T20:12:00.191+01:00  WARN 39988 --- [main] o.m.s.mapper.ClassPathMapperScanner      : Skipping MapperFactoryBean with name 'authorMapper' and 'uk.ac.ncl.team5project.mapper.AuthorMapper' mapperInterface. Bean already defined with the same name!
+2025-04-30T20:12:00.192+01:00  WARN 39988 --- [main] o.m.s.mapper.ClassPathMapperScanner      : Skipping MapperFactoryBean with name 'basketMapper' and 'uk.ac.ncl.team5project.mapper.BasketMapper' mapperInterface. Bean already defined with the same name!
+2025-04-30T20:12:00.192+01:00  WARN 39988 --- [main] o.m.s.mapper.ClassPathMapperScanner      : Skipping MapperFactoryBean with name 'bookMapper' and 'uk.ac.ncl.team5project.mapper.BookMapper' mapperInterface. Bean already defined with the same name!
+2025-04-30T20:12:00.192+01:00  WARN 39988 --- [main] o.m.s.mapper.ClassPathMapperScanner      : Skipping MapperFactoryBean with name 'reviewMapper' and 'uk.ac.ncl.team5project.mapper.ReviewMapper' mapperInterface. Bean already defined with the same name!
+2025-04-30T20:12:00.192+01:00  WARN 39988 --- [main] o.m.s.mapper.ClassPathMapperScanner      : Skipping MapperFactoryBean with name 'userMapper' and 'uk.ac.ncl.team5project.mapper.UserMapper' mapperInterface. Bean already defined with the same name!
+2025-04-30T20:12:00.192+01:00  WARN 39988 --- [main] o.m.s.mapper.ClassPathMapperScanner      : Skipping MapperFactoryBean with name 'wishlistMapper' and 'uk.ac.ncl.team5project.mapper.WishlistMapper' mapperInterface. Bean already defined with the same name!
+2025-04-30T20:12:00.192+01:00  WARN 39988 --- [main] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[uk.ac.ncl.team5project.mapper]' package. Please check your configuration.
+2025-04-30T20:12:00.398+01:00  INFO 39988 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-04-30T20:12:00.405+01:00  INFO 39988 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-04-30T20:12:00.405+01:00  INFO 39988 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.39]
+2025-04-30T20:12:00.430+01:00  INFO 39988 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-04-30T20:12:00.431+01:00  INFO 39988 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 656 ms
+2025-04-30T20:12:00.461+01:00 DEBUG 39988 --- [main] u.a.n.t.config.JwtAuthenticationFilter   : Filter 'jwtAuthenticationFilter' configured for use
+2025-04-30T20:12:00.546+01:00  INFO 39988 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-04-30T20:12:00.569+01:00  INFO 39988 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.11.Final
+2025-04-30T20:12:00.587+01:00  INFO 39988 --- [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-04-30T20:12:00.724+01:00  INFO 39988 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-04-30T20:12:00.736+01:00  INFO 39988 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-04-30T20:12:01.934+01:00  INFO 39988 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@e0847a9
+2025-04-30T20:12:01.935+01:00  INFO 39988 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-04-30T20:12:02.044+01:00  WARN 39988 --- [main] org.hibernate.dialect.Dialect            : HHH000511: The 8.3.0 version for [org.hibernate.dialect.MariaDBDialect] is no longer supported, hence certain features may not work properly. The minimum supported version is 10.4.0. Check the community dialects project for available legacy versions.
+2025-04-30T20:12:02.046+01:00  WARN 39988 --- [main] org.hibernate.orm.deprecation            : HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-04-30T20:12:02.055+01:00  INFO 39988 --- [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.3
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-04-30T20:12:02.375+01:00  INFO 39988 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-04-30T20:12:02.376+01:00  INFO 39988 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-04-30T20:12:02.670+01:00  INFO 39988 --- [main] o.s.d.j.r.query.QueryEnhancerFactory     : JSqlParser is in classpath; If applicable, JSqlParser will be used.
+2025-04-30T20:12:02.670+01:00  INFO 39988 --- [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-04-30T20:12:03.284+01:00  WARN 39988 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-04-30T20:12:03.294+01:00  WARN 39988 --- [main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 408dc686-c06f-40af-8cc3-d50440a513ce
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-04-30T20:12:03.308+01:00  INFO 39988 --- [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2025-04-30T20:12:03.576+01:00  WARN 39988 --- [main] o.s.b.a.f.FreeMarkerAutoConfiguration    : Cannot find template location: [classpath:/templates/] (please add some templates, check your FreeMarker configuration, or set spring.freemarker.check-template-location=false)
+2025-04-30T20:12:03.602+01:00  INFO 39988 --- [main] org.quartz.impl.StdSchedulerFactory      : Using default implementation for ThreadExecutor
+2025-04-30T20:12:03.607+01:00  INFO 39988 --- [main] org.quartz.core.SchedulerSignalerImpl    : Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2025-04-30T20:12:03.607+01:00  INFO 39988 --- [main] org.quartz.core.QuartzScheduler          : Quartz Scheduler v.2.3.2 created.
+2025-04-30T20:12:03.608+01:00  INFO 39988 --- [main] org.quartz.simpl.RAMJobStore             : RAMJobStore initialized.
+2025-04-30T20:12:03.608+01:00  INFO 39988 --- [main] org.quartz.core.QuartzScheduler          : Scheduler meta-data: Quartz Scheduler (v2.3.2) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2025-04-30T20:12:03.608+01:00  INFO 39988 --- [main] org.quartz.impl.StdSchedulerFactory      : Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+2025-04-30T20:12:03.608+01:00  INFO 39988 --- [main] org.quartz.impl.StdSchedulerFactory      : Quartz scheduler version: 2.3.2
+2025-04-30T20:12:03.608+01:00  INFO 39988 --- [main] org.quartz.core.QuartzScheduler          : JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@55aa97df
+2025-04-30T20:12:03.631+01:00  INFO 39988 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-04-30T20:12:03.631+01:00  INFO 39988 --- [main] o.s.s.quartz.SchedulerFactoryBean        : Starting Quartz Scheduler now
+2025-04-30T20:12:03.632+01:00  INFO 39988 --- [main] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED started.
+2025-04-30T20:12:03.637+01:00  INFO 39988 --- [main] u.a.n.t.Team5ProjectApplication          : Started Team5ProjectApplication in 4.108 seconds (process running for 4.252)
+2025-04-30T20:12:08.819+01:00  INFO 39988 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-04-30T20:12:08.819+01:00  INFO 39988 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-04-30T20:12:08.821+01:00  INFO 39988 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2025-04-30T20:12:08.834+01:00 DEBUG 39988 --- [http-nio-8080-exec-1] u.a.n.t.config.JwtAuthenticationFilter   : Parsing JWT from Authorization header: null
+2025-04-30T20:12:08.834+01:00 DEBUG 39988 --- [http-nio-8080-exec-1] u.a.n.t.config.JwtAuthenticationFilter   : Received request for URL: http://localhost:8080/api/v1/basket/loadBasket
+2025-04-30T20:12:08.834+01:00 DEBUG 39988 --- [http-nio-8080-exec-1] u.a.n.t.config.JwtAuthenticationFilter   : Authorization header: null
+2025-04-30T20:12:08.834+01:00 DEBUG 39988 --- [http-nio-8080-exec-1] u.a.n.t.config.JwtAuthenticationFilter   : No JWT token found in request
+2025-04-30T20:12:08.910+01:00 DEBUG 39988 --- [http-nio-8080-exec-2] u.a.n.t.config.JwtAuthenticationFilter   : Parsing JWT from Authorization header: null
+2025-04-30T20:12:08.910+01:00 DEBUG 39988 --- [http-nio-8080-exec-2] u.a.n.t.config.JwtAuthenticationFilter   : Received request for URL: http://localhost:8080/favicon.ico
+2025-04-30T20:12:08.910+01:00 DEBUG 39988 --- [http-nio-8080-exec-2] u.a.n.t.config.JwtAuthenticationFilter   : Authorization header: null
+2025-04-30T20:12:08.910+01:00 DEBUG 39988 --- [http-nio-8080-exec-2] u.a.n.t.config.JwtAuthenticationFilter   : No JWT token found in request
+2025-04-30T20:12:40.687+01:00  INFO 39988 --- [SpringApplicationShutdownHook] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2025-04-30T20:12:40.689+01:00  INFO 39988 --- [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-04-30T20:12:40.692+01:00  INFO 39988 --- [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-04-30T20:12:40.694+01:00  INFO 39988 --- [SpringApplicationShutdownHook] o.s.s.quartz.SchedulerFactoryBean        : Shutting down Quartz Scheduler
+2025-04-30T20:12:40.695+01:00  INFO 39988 --- [SpringApplicationShutdownHook] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED shutting down.
+2025-04-30T20:12:40.695+01:00  INFO 39988 --- [SpringApplicationShutdownHook] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2025-04-30T20:12:40.695+01:00  INFO 39988 --- [SpringApplicationShutdownHook] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED shutdown complete.
+2025-04-30T20:12:40.701+01:00  INFO 39988 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-04-30T20:12:40.704+01:00  INFO 39988 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-04-30T20:12:42.673+01:00  INFO 39988 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-04-30T20:12:43.581+01:00  INFO 40526 --- [main] u.a.n.t.Team5ProjectApplication          : Starting Team5ProjectApplication using Java 21.0.6 with PID 40526 (/Users/conqury/study/Postgraguate/CSC8019 Software Engineering and Team Project/BackEnd/target/classes started by conqury in /Users/conqury/study/Postgraguate/CSC8019 Software Engineering and Team Project/BackEnd)
+2025-04-30T20:12:43.582+01:00 DEBUG 40526 --- [main] u.a.n.t.Team5ProjectApplication          : Running with Spring Boot v3.4.4, Spring v6.2.5
+2025-04-30T20:12:43.582+01:00  INFO 40526 --- [main] u.a.n.t.Team5ProjectApplication          : No active profile set, falling back to 1 default profile: "default"
+2025-04-30T20:12:43.923+01:00  INFO 40526 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-04-30T20:12:43.958+01:00  INFO 40526 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 30 ms. Found 2 JPA repository interfaces.
+2025-04-30T20:12:44.015+01:00  WARN 40526 --- [main] o.m.s.mapper.ClassPathMapperScanner      : Skipping MapperFactoryBean with name 'adminMapper' and 'uk.ac.ncl.team5project.mapper.AdminMapper' mapperInterface. Bean already defined with the same name!
+2025-04-30T20:12:44.015+01:00  WARN 40526 --- [main] o.m.s.mapper.ClassPathMapperScanner      : Skipping MapperFactoryBean with name 'authorMapper' and 'uk.ac.ncl.team5project.mapper.AuthorMapper' mapperInterface. Bean already defined with the same name!
+2025-04-30T20:12:44.015+01:00  WARN 40526 --- [main] o.m.s.mapper.ClassPathMapperScanner      : Skipping MapperFactoryBean with name 'basketMapper' and 'uk.ac.ncl.team5project.mapper.BasketMapper' mapperInterface. Bean already defined with the same name!
+2025-04-30T20:12:44.015+01:00  WARN 40526 --- [main] o.m.s.mapper.ClassPathMapperScanner      : Skipping MapperFactoryBean with name 'bookMapper' and 'uk.ac.ncl.team5project.mapper.BookMapper' mapperInterface. Bean already defined with the same name!
+2025-04-30T20:12:44.015+01:00  WARN 40526 --- [main] o.m.s.mapper.ClassPathMapperScanner      : Skipping MapperFactoryBean with name 'reviewMapper' and 'uk.ac.ncl.team5project.mapper.ReviewMapper' mapperInterface. Bean already defined with the same name!
+2025-04-30T20:12:44.016+01:00  WARN 40526 --- [main] o.m.s.mapper.ClassPathMapperScanner      : Skipping MapperFactoryBean with name 'userMapper' and 'uk.ac.ncl.team5project.mapper.UserMapper' mapperInterface. Bean already defined with the same name!
+2025-04-30T20:12:44.016+01:00  WARN 40526 --- [main] o.m.s.mapper.ClassPathMapperScanner      : Skipping MapperFactoryBean with name 'wishlistMapper' and 'uk.ac.ncl.team5project.mapper.WishlistMapper' mapperInterface. Bean already defined with the same name!
+2025-04-30T20:12:44.016+01:00  WARN 40526 --- [main] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[uk.ac.ncl.team5project.mapper]' package. Please check your configuration.
+2025-04-30T20:12:44.214+01:00  INFO 40526 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-04-30T20:12:44.221+01:00  INFO 40526 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-04-30T20:12:44.222+01:00  INFO 40526 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.39]
+2025-04-30T20:12:44.247+01:00  INFO 40526 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-04-30T20:12:44.248+01:00  INFO 40526 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 641 ms
+2025-04-30T20:12:44.276+01:00 DEBUG 40526 --- [main] u.a.n.t.config.JwtAuthenticationFilter   : Filter 'jwtAuthenticationFilter' configured for use
+2025-04-30T20:12:44.349+01:00  INFO 40526 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-04-30T20:12:44.368+01:00  INFO 40526 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.11.Final
+2025-04-30T20:12:44.380+01:00  INFO 40526 --- [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-04-30T20:12:44.491+01:00  INFO 40526 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-04-30T20:12:44.503+01:00  INFO 40526 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-04-30T20:12:45.763+01:00  INFO 40526 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@e0847a9
+2025-04-30T20:12:45.765+01:00  INFO 40526 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-04-30T20:12:45.897+01:00  WARN 40526 --- [main] org.hibernate.dialect.Dialect            : HHH000511: The 8.3.0 version for [org.hibernate.dialect.MariaDBDialect] is no longer supported, hence certain features may not work properly. The minimum supported version is 10.4.0. Check the community dialects project for available legacy versions.
+2025-04-30T20:12:45.900+01:00  WARN 40526 --- [main] org.hibernate.orm.deprecation            : HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-04-30T20:12:45.910+01:00  INFO 40526 --- [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.3
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-04-30T20:12:46.288+01:00  INFO 40526 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-04-30T20:12:46.289+01:00  INFO 40526 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-04-30T20:12:46.576+01:00  INFO 40526 --- [main] o.s.d.j.r.query.QueryEnhancerFactory     : JSqlParser is in classpath; If applicable, JSqlParser will be used.
+2025-04-30T20:12:46.577+01:00  INFO 40526 --- [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-04-30T20:12:47.137+01:00  WARN 40526 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-04-30T20:12:47.145+01:00  WARN 40526 --- [main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: c1c12401-ffac-4f9c-8f12-2ed8c722808d
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-04-30T20:12:47.158+01:00  INFO 40526 --- [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2025-04-30T20:12:47.369+01:00  WARN 40526 --- [main] o.s.b.a.f.FreeMarkerAutoConfiguration    : Cannot find template location: [classpath:/templates/] (please add some templates, check your FreeMarker configuration, or set spring.freemarker.check-template-location=false)
+2025-04-30T20:12:47.400+01:00  INFO 40526 --- [main] org.quartz.impl.StdSchedulerFactory      : Using default implementation for ThreadExecutor
+2025-04-30T20:12:47.405+01:00  INFO 40526 --- [main] org.quartz.core.SchedulerSignalerImpl    : Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2025-04-30T20:12:47.405+01:00  INFO 40526 --- [main] org.quartz.core.QuartzScheduler          : Quartz Scheduler v.2.3.2 created.
+2025-04-30T20:12:47.406+01:00  INFO 40526 --- [main] org.quartz.simpl.RAMJobStore             : RAMJobStore initialized.
+2025-04-30T20:12:47.406+01:00  INFO 40526 --- [main] org.quartz.core.QuartzScheduler          : Scheduler meta-data: Quartz Scheduler (v2.3.2) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2025-04-30T20:12:47.406+01:00  INFO 40526 --- [main] org.quartz.impl.StdSchedulerFactory      : Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+2025-04-30T20:12:47.406+01:00  INFO 40526 --- [main] org.quartz.impl.StdSchedulerFactory      : Quartz scheduler version: 2.3.2
+2025-04-30T20:12:47.406+01:00  INFO 40526 --- [main] org.quartz.core.QuartzScheduler          : JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@55aa97df
+2025-04-30T20:12:47.429+01:00  INFO 40526 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-04-30T20:12:47.430+01:00  INFO 40526 --- [main] o.s.s.quartz.SchedulerFactoryBean        : Starting Quartz Scheduler now
+2025-04-30T20:12:47.430+01:00  INFO 40526 --- [main] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED started.
+2025-04-30T20:12:47.435+01:00  INFO 40526 --- [main] u.a.n.t.Team5ProjectApplication          : Started Team5ProjectApplication in 4.075 seconds (process running for 4.221)
+2025-04-30T20:12:51.369+01:00  INFO 40526 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-04-30T20:12:51.369+01:00  INFO 40526 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-04-30T20:12:51.370+01:00  INFO 40526 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-04-30T20:12:51.380+01:00 DEBUG 40526 --- [http-nio-8080-exec-1] u.a.n.t.config.JwtAuthenticationFilter   : Parsing JWT from Authorization header: null
+2025-04-30T20:12:51.380+01:00 DEBUG 40526 --- [http-nio-8080-exec-1] u.a.n.t.config.JwtAuthenticationFilter   : Received request for URL: http://localhost:8080/api/v1/basket/loadBasket
+2025-04-30T20:12:51.380+01:00 DEBUG 40526 --- [http-nio-8080-exec-1] u.a.n.t.config.JwtAuthenticationFilter   : Authorization header: null
+2025-04-30T20:12:51.380+01:00 DEBUG 40526 --- [http-nio-8080-exec-1] u.a.n.t.config.JwtAuthenticationFilter   : No JWT token found in request
+2025-04-30T20:12:51.426+01:00 DEBUG 40526 --- [http-nio-8080-exec-2] u.a.n.t.config.JwtAuthenticationFilter   : Parsing JWT from Authorization header: null
+2025-04-30T20:12:51.426+01:00 DEBUG 40526 --- [http-nio-8080-exec-2] u.a.n.t.config.JwtAuthenticationFilter   : Received request for URL: http://localhost:8080/favicon.ico
+2025-04-30T20:12:51.426+01:00 DEBUG 40526 --- [http-nio-8080-exec-2] u.a.n.t.config.JwtAuthenticationFilter   : Authorization header: null
+2025-04-30T20:12:51.426+01:00 DEBUG 40526 --- [http-nio-8080-exec-2] u.a.n.t.config.JwtAuthenticationFilter   : No JWT token found in request
+2025-04-30T20:13:28.918+01:00 DEBUG 40526 --- [http-nio-8080-exec-4] u.a.n.t.config.JwtAuthenticationFilter   : Parsing JWT from Authorization header: null
+2025-04-30T20:13:28.919+01:00 DEBUG 40526 --- [http-nio-8080-exec-4] u.a.n.t.config.JwtAuthenticationFilter   : Received request for URL: http://localhost:8080/api/v1/basket/loadBasket
+2025-04-30T20:13:28.920+01:00 DEBUG 40526 --- [http-nio-8080-exec-4] u.a.n.t.config.JwtAuthenticationFilter   : Authorization header: null
+2025-04-30T20:13:28.920+01:00 DEBUG 40526 --- [http-nio-8080-exec-4] u.a.n.t.config.JwtAuthenticationFilter   : No JWT token found in request
+2025-04-30T20:13:33.773+01:00  INFO 40526 --- [SpringApplicationShutdownHook] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2025-04-30T20:13:33.776+01:00  INFO 40526 --- [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-04-30T20:13:33.779+01:00  INFO 40526 --- [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-04-30T20:13:33.782+01:00  INFO 40526 --- [SpringApplicationShutdownHook] o.s.s.quartz.SchedulerFactoryBean        : Shutting down Quartz Scheduler
+2025-04-30T20:13:33.782+01:00  INFO 40526 --- [SpringApplicationShutdownHook] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED shutting down.
+2025-04-30T20:13:33.782+01:00  INFO 40526 --- [SpringApplicationShutdownHook] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2025-04-30T20:13:33.782+01:00  INFO 40526 --- [SpringApplicationShutdownHook] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED shutdown complete.
+2025-04-30T20:13:33.786+01:00  INFO 40526 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-04-30T20:13:33.792+01:00  INFO 40526 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-04-30T20:13:38.140+01:00  INFO 40526 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-04-30T20:13:39.049+01:00  INFO 41078 --- [main] u.a.n.t.Team5ProjectApplication          : Starting Team5ProjectApplication using Java 21.0.6 with PID 41078 (/Users/conqury/study/Postgraguate/CSC8019 Software Engineering and Team Project/BackEnd/target/classes started by conqury in /Users/conqury/study/Postgraguate/CSC8019 Software Engineering and Team Project/BackEnd)
+2025-04-30T20:13:39.050+01:00 DEBUG 41078 --- [main] u.a.n.t.Team5ProjectApplication          : Running with Spring Boot v3.4.4, Spring v6.2.5
+2025-04-30T20:13:39.051+01:00  INFO 41078 --- [main] u.a.n.t.Team5ProjectApplication          : No active profile set, falling back to 1 default profile: "default"
+2025-04-30T20:13:39.442+01:00  INFO 41078 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-04-30T20:13:39.477+01:00  INFO 41078 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 31 ms. Found 2 JPA repository interfaces.
+2025-04-30T20:13:39.531+01:00  WARN 41078 --- [main] o.m.s.mapper.ClassPathMapperScanner      : Skipping MapperFactoryBean with name 'adminMapper' and 'uk.ac.ncl.team5project.mapper.AdminMapper' mapperInterface. Bean already defined with the same name!
+2025-04-30T20:13:39.531+01:00  WARN 41078 --- [main] o.m.s.mapper.ClassPathMapperScanner      : Skipping MapperFactoryBean with name 'authorMapper' and 'uk.ac.ncl.team5project.mapper.AuthorMapper' mapperInterface. Bean already defined with the same name!
+2025-04-30T20:13:39.531+01:00  WARN 41078 --- [main] o.m.s.mapper.ClassPathMapperScanner      : Skipping MapperFactoryBean with name 'basketMapper' and 'uk.ac.ncl.team5project.mapper.BasketMapper' mapperInterface. Bean already defined with the same name!
+2025-04-30T20:13:39.531+01:00  WARN 41078 --- [main] o.m.s.mapper.ClassPathMapperScanner      : Skipping MapperFactoryBean with name 'bookMapper' and 'uk.ac.ncl.team5project.mapper.BookMapper' mapperInterface. Bean already defined with the same name!
+2025-04-30T20:13:39.531+01:00  WARN 41078 --- [main] o.m.s.mapper.ClassPathMapperScanner      : Skipping MapperFactoryBean with name 'reviewMapper' and 'uk.ac.ncl.team5project.mapper.ReviewMapper' mapperInterface. Bean already defined with the same name!
+2025-04-30T20:13:39.531+01:00  WARN 41078 --- [main] o.m.s.mapper.ClassPathMapperScanner      : Skipping MapperFactoryBean with name 'userMapper' and 'uk.ac.ncl.team5project.mapper.UserMapper' mapperInterface. Bean already defined with the same name!
+2025-04-30T20:13:39.531+01:00  WARN 41078 --- [main] o.m.s.mapper.ClassPathMapperScanner      : Skipping MapperFactoryBean with name 'wishlistMapper' and 'uk.ac.ncl.team5project.mapper.WishlistMapper' mapperInterface. Bean already defined with the same name!
+2025-04-30T20:13:39.532+01:00  WARN 41078 --- [main] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[uk.ac.ncl.team5project.mapper]' package. Please check your configuration.
+2025-04-30T20:13:39.749+01:00  INFO 41078 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-04-30T20:13:39.761+01:00  INFO 41078 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-04-30T20:13:39.761+01:00  INFO 41078 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.39]
+2025-04-30T20:13:39.800+01:00  INFO 41078 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-04-30T20:13:39.801+01:00  INFO 41078 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 723 ms
+2025-04-30T20:13:39.844+01:00 DEBUG 41078 --- [main] u.a.n.t.config.JwtAuthenticationFilter   : Filter 'jwtAuthenticationFilter' configured for use
+2025-04-30T20:13:39.928+01:00  INFO 41078 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-04-30T20:13:39.951+01:00  INFO 41078 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.11.Final
+2025-04-30T20:13:39.967+01:00  INFO 41078 --- [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-04-30T20:13:40.086+01:00  INFO 41078 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-04-30T20:13:40.099+01:00  INFO 41078 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-04-30T20:13:40.898+01:00  INFO 41078 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5ddb302
+2025-04-30T20:13:40.901+01:00  INFO 41078 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-04-30T20:13:41.033+01:00  WARN 41078 --- [main] org.hibernate.dialect.Dialect            : HHH000511: The 8.3.0 version for [org.hibernate.dialect.MariaDBDialect] is no longer supported, hence certain features may not work properly. The minimum supported version is 10.4.0. Check the community dialects project for available legacy versions.
+2025-04-30T20:13:41.036+01:00  WARN 41078 --- [main] org.hibernate.orm.deprecation            : HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-04-30T20:13:41.047+01:00  INFO 41078 --- [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.3
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-04-30T20:13:41.422+01:00  INFO 41078 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-04-30T20:13:41.423+01:00  INFO 41078 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-04-30T20:13:41.864+01:00  INFO 41078 --- [main] o.s.d.j.r.query.QueryEnhancerFactory     : JSqlParser is in classpath; If applicable, JSqlParser will be used.
+2025-04-30T20:13:41.865+01:00  INFO 41078 --- [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-04-30T20:13:42.529+01:00  WARN 41078 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-04-30T20:13:42.537+01:00  WARN 41078 --- [main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 97f34496-afc8-4e2b-a3c7-4f9c6ac90e1e
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-04-30T20:13:42.549+01:00  INFO 41078 --- [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2025-04-30T20:13:42.764+01:00  WARN 41078 --- [main] o.s.b.a.f.FreeMarkerAutoConfiguration    : Cannot find template location: [classpath:/templates/] (please add some templates, check your FreeMarker configuration, or set spring.freemarker.check-template-location=false)
+2025-04-30T20:13:42.789+01:00  INFO 41078 --- [main] org.quartz.impl.StdSchedulerFactory      : Using default implementation for ThreadExecutor
+2025-04-30T20:13:42.794+01:00  INFO 41078 --- [main] org.quartz.core.SchedulerSignalerImpl    : Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2025-04-30T20:13:42.794+01:00  INFO 41078 --- [main] org.quartz.core.QuartzScheduler          : Quartz Scheduler v.2.3.2 created.
+2025-04-30T20:13:42.794+01:00  INFO 41078 --- [main] org.quartz.simpl.RAMJobStore             : RAMJobStore initialized.
+2025-04-30T20:13:42.794+01:00  INFO 41078 --- [main] org.quartz.core.QuartzScheduler          : Scheduler meta-data: Quartz Scheduler (v2.3.2) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2025-04-30T20:13:42.794+01:00  INFO 41078 --- [main] org.quartz.impl.StdSchedulerFactory      : Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+2025-04-30T20:13:42.794+01:00  INFO 41078 --- [main] org.quartz.impl.StdSchedulerFactory      : Quartz scheduler version: 2.3.2
+2025-04-30T20:13:42.795+01:00  INFO 41078 --- [main] org.quartz.core.QuartzScheduler          : JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@6878e49e
+2025-04-30T20:13:42.819+01:00  INFO 41078 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-04-30T20:13:42.820+01:00  INFO 41078 --- [main] o.s.s.quartz.SchedulerFactoryBean        : Starting Quartz Scheduler now
+2025-04-30T20:13:42.820+01:00  INFO 41078 --- [main] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED started.
+2025-04-30T20:13:42.825+01:00  INFO 41078 --- [main] u.a.n.t.Team5ProjectApplication          : Started Team5ProjectApplication in 4.012 seconds (process running for 4.165)
+2025-04-30T20:13:56.687+01:00  INFO 41078 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-04-30T20:13:56.688+01:00  INFO 41078 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-04-30T20:13:56.689+01:00  INFO 41078 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-04-30T20:13:56.701+01:00 DEBUG 41078 --- [http-nio-8080-exec-1] u.a.n.t.config.JwtAuthenticationFilter   : Parsing JWT from Authorization header: null
+2025-04-30T20:13:56.702+01:00 DEBUG 41078 --- [http-nio-8080-exec-1] u.a.n.t.config.JwtAuthenticationFilter   : Received request for URL: http://localhost:8080/api/v1/basket/loadBasket
+2025-04-30T20:13:56.702+01:00 DEBUG 41078 --- [http-nio-8080-exec-1] u.a.n.t.config.JwtAuthenticationFilter   : Authorization header: null
+2025-04-30T20:13:56.702+01:00 DEBUG 41078 --- [http-nio-8080-exec-1] u.a.n.t.config.JwtAuthenticationFilter   : No JWT token found in request
+2025-04-30T20:18:24.681+01:00  INFO 41078 --- [SpringApplicationShutdownHook] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2025-04-30T20:18:24.685+01:00  INFO 41078 --- [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-04-30T20:18:24.689+01:00  INFO 41078 --- [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-04-30T20:18:24.694+01:00  INFO 41078 --- [SpringApplicationShutdownHook] o.s.s.quartz.SchedulerFactoryBean        : Shutting down Quartz Scheduler
+2025-04-30T20:18:24.694+01:00  INFO 41078 --- [SpringApplicationShutdownHook] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED shutting down.
+2025-04-30T20:18:24.695+01:00  INFO 41078 --- [SpringApplicationShutdownHook] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2025-04-30T20:18:24.695+01:00  INFO 41078 --- [SpringApplicationShutdownHook] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED shutdown complete.
+2025-04-30T20:18:24.698+01:00  INFO 41078 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-04-30T20:18:24.702+01:00  INFO 41078 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-04-30T20:18:24.966+01:00  INFO 41078 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-04-30T20:18:25.779+01:00  INFO 41943 --- [main] u.a.n.t.Team5ProjectApplication          : Starting Team5ProjectApplication using Java 21.0.6 with PID 41943 (/Users/conqury/study/Postgraguate/CSC8019 Software Engineering and Team Project/BackEnd/target/classes started by conqury in /Users/conqury/study/Postgraguate/CSC8019 Software Engineering and Team Project/BackEnd)
+2025-04-30T20:18:25.780+01:00 DEBUG 41943 --- [main] u.a.n.t.Team5ProjectApplication          : Running with Spring Boot v3.4.4, Spring v6.2.5
+2025-04-30T20:18:25.780+01:00  INFO 41943 --- [main] u.a.n.t.Team5ProjectApplication          : No active profile set, falling back to 1 default profile: "default"
+2025-04-30T20:18:26.126+01:00  INFO 41943 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-04-30T20:18:26.161+01:00  INFO 41943 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 30 ms. Found 2 JPA repository interfaces.
+2025-04-30T20:18:26.217+01:00  WARN 41943 --- [main] o.m.s.mapper.ClassPathMapperScanner      : Skipping MapperFactoryBean with name 'adminMapper' and 'uk.ac.ncl.team5project.mapper.AdminMapper' mapperInterface. Bean already defined with the same name!
+2025-04-30T20:18:26.217+01:00  WARN 41943 --- [main] o.m.s.mapper.ClassPathMapperScanner      : Skipping MapperFactoryBean with name 'authorMapper' and 'uk.ac.ncl.team5project.mapper.AuthorMapper' mapperInterface. Bean already defined with the same name!
+2025-04-30T20:18:26.217+01:00  WARN 41943 --- [main] o.m.s.mapper.ClassPathMapperScanner      : Skipping MapperFactoryBean with name 'basketMapper' and 'uk.ac.ncl.team5project.mapper.BasketMapper' mapperInterface. Bean already defined with the same name!
+2025-04-30T20:18:26.217+01:00  WARN 41943 --- [main] o.m.s.mapper.ClassPathMapperScanner      : Skipping MapperFactoryBean with name 'bookMapper' and 'uk.ac.ncl.team5project.mapper.BookMapper' mapperInterface. Bean already defined with the same name!
+2025-04-30T20:18:26.217+01:00  WARN 41943 --- [main] o.m.s.mapper.ClassPathMapperScanner      : Skipping MapperFactoryBean with name 'reviewMapper' and 'uk.ac.ncl.team5project.mapper.ReviewMapper' mapperInterface. Bean already defined with the same name!
+2025-04-30T20:18:26.217+01:00  WARN 41943 --- [main] o.m.s.mapper.ClassPathMapperScanner      : Skipping MapperFactoryBean with name 'userMapper' and 'uk.ac.ncl.team5project.mapper.UserMapper' mapperInterface. Bean already defined with the same name!
+2025-04-30T20:18:26.217+01:00  WARN 41943 --- [main] o.m.s.mapper.ClassPathMapperScanner      : Skipping MapperFactoryBean with name 'wishlistMapper' and 'uk.ac.ncl.team5project.mapper.WishlistMapper' mapperInterface. Bean already defined with the same name!
+2025-04-30T20:18:26.217+01:00  WARN 41943 --- [main] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[uk.ac.ncl.team5project.mapper]' package. Please check your configuration.
+2025-04-30T20:18:26.420+01:00  INFO 41943 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-04-30T20:18:26.428+01:00  INFO 41943 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-04-30T20:18:26.428+01:00  INFO 41943 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.39]
+2025-04-30T20:18:26.454+01:00  INFO 41943 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-04-30T20:18:26.454+01:00  INFO 41943 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 650 ms
+2025-04-30T20:18:26.482+01:00 DEBUG 41943 --- [main] u.a.n.t.config.JwtAuthenticationFilter   : Filter 'jwtAuthenticationFilter' configured for use
+2025-04-30T20:18:26.544+01:00  INFO 41943 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-04-30T20:18:26.564+01:00  INFO 41943 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.11.Final
+2025-04-30T20:18:26.577+01:00  INFO 41943 --- [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-04-30T20:18:26.689+01:00  INFO 41943 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-04-30T20:18:26.701+01:00  INFO 41943 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-04-30T20:18:28.236+01:00  INFO 41943 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@51813065
+2025-04-30T20:18:28.239+01:00  INFO 41943 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-04-30T20:18:28.355+01:00  WARN 41943 --- [main] org.hibernate.dialect.Dialect            : HHH000511: The 8.3.0 version for [org.hibernate.dialect.MariaDBDialect] is no longer supported, hence certain features may not work properly. The minimum supported version is 10.4.0. Check the community dialects project for available legacy versions.
+2025-04-30T20:18:28.357+01:00  WARN 41943 --- [main] org.hibernate.orm.deprecation            : HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-04-30T20:18:28.366+01:00  INFO 41943 --- [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.3
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-04-30T20:18:28.696+01:00  INFO 41943 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-04-30T20:18:28.697+01:00  INFO 41943 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-04-30T20:18:29.040+01:00  INFO 41943 --- [main] o.s.d.j.r.query.QueryEnhancerFactory     : JSqlParser is in classpath; If applicable, JSqlParser will be used.
+2025-04-30T20:18:29.040+01:00  INFO 41943 --- [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-04-30T20:18:29.632+01:00  WARN 41943 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-04-30T20:18:29.647+01:00  WARN 41943 --- [main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 57f1a45f-71a5-4bad-a616-82fa1a4f6ec1
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-04-30T20:18:29.665+01:00  INFO 41943 --- [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2025-04-30T20:18:29.904+01:00  WARN 41943 --- [main] o.s.b.a.f.FreeMarkerAutoConfiguration    : Cannot find template location: [classpath:/templates/] (please add some templates, check your FreeMarker configuration, or set spring.freemarker.check-template-location=false)
+2025-04-30T20:18:29.935+01:00  INFO 41943 --- [main] org.quartz.impl.StdSchedulerFactory      : Using default implementation for ThreadExecutor
+2025-04-30T20:18:29.940+01:00  INFO 41943 --- [main] org.quartz.core.SchedulerSignalerImpl    : Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2025-04-30T20:18:29.940+01:00  INFO 41943 --- [main] org.quartz.core.QuartzScheduler          : Quartz Scheduler v.2.3.2 created.
+2025-04-30T20:18:29.941+01:00  INFO 41943 --- [main] org.quartz.simpl.RAMJobStore             : RAMJobStore initialized.
+2025-04-30T20:18:29.941+01:00  INFO 41943 --- [main] org.quartz.core.QuartzScheduler          : Scheduler meta-data: Quartz Scheduler (v2.3.2) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2025-04-30T20:18:29.941+01:00  INFO 41943 --- [main] org.quartz.impl.StdSchedulerFactory      : Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+2025-04-30T20:18:29.941+01:00  INFO 41943 --- [main] org.quartz.impl.StdSchedulerFactory      : Quartz scheduler version: 2.3.2
+2025-04-30T20:18:29.941+01:00  INFO 41943 --- [main] org.quartz.core.QuartzScheduler          : JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@214a7560
+2025-04-30T20:18:29.966+01:00  INFO 41943 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-04-30T20:18:29.967+01:00  INFO 41943 --- [main] o.s.s.quartz.SchedulerFactoryBean        : Starting Quartz Scheduler now
+2025-04-30T20:18:29.967+01:00  INFO 41943 --- [main] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED started.
+2025-04-30T20:18:29.972+01:00  INFO 41943 --- [main] u.a.n.t.Team5ProjectApplication          : Started Team5ProjectApplication in 4.423 seconds (process running for 4.568)
+2025-04-30T20:18:36.095+01:00  INFO 41943 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-04-30T20:18:36.096+01:00  INFO 41943 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-04-30T20:18:36.098+01:00  INFO 41943 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-04-30T20:18:36.111+01:00 DEBUG 41943 --- [http-nio-8080-exec-1] u.a.n.t.config.JwtAuthenticationFilter   : Parsing JWT from Authorization header: null
+2025-04-30T20:18:36.111+01:00 DEBUG 41943 --- [http-nio-8080-exec-1] u.a.n.t.config.JwtAuthenticationFilter   : Received request for URL: http://localhost:8080/api/v1/basket/loadBasket
+2025-04-30T20:18:36.111+01:00 DEBUG 41943 --- [http-nio-8080-exec-1] u.a.n.t.config.JwtAuthenticationFilter   : Authorization header: null
+2025-04-30T20:18:36.112+01:00 DEBUG 41943 --- [http-nio-8080-exec-1] u.a.n.t.config.JwtAuthenticationFilter   : No JWT token found in request
+2025-04-30T20:18:51.858+01:00  INFO 41943 --- [SpringApplicationShutdownHook] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2025-04-30T20:18:51.862+01:00  INFO 41943 --- [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-04-30T20:18:51.868+01:00  INFO 41943 --- [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-04-30T20:18:51.875+01:00  INFO 41943 --- [SpringApplicationShutdownHook] o.s.s.quartz.SchedulerFactoryBean        : Shutting down Quartz Scheduler
+2025-04-30T20:18:51.878+01:00  INFO 41943 --- [SpringApplicationShutdownHook] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED shutting down.
+2025-04-30T20:18:51.878+01:00  INFO 41943 --- [SpringApplicationShutdownHook] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2025-04-30T20:18:51.879+01:00  INFO 41943 --- [SpringApplicationShutdownHook] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED shutdown complete.
+2025-04-30T20:18:51.884+01:00  INFO 41943 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-04-30T20:18:51.886+01:00  INFO 41943 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-04-30T20:18:54.387+01:00  INFO 41943 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-04-30T20:18:55.269+01:00  INFO 42451 --- [main] u.a.n.t.Team5ProjectApplication          : Starting Team5ProjectApplication using Java 21.0.6 with PID 42451 (/Users/conqury/study/Postgraguate/CSC8019 Software Engineering and Team Project/BackEnd/target/classes started by conqury in /Users/conqury/study/Postgraguate/CSC8019 Software Engineering and Team Project/BackEnd)
+2025-04-30T20:18:55.270+01:00 DEBUG 42451 --- [main] u.a.n.t.Team5ProjectApplication          : Running with Spring Boot v3.4.4, Spring v6.2.5
+2025-04-30T20:18:55.270+01:00  INFO 42451 --- [main] u.a.n.t.Team5ProjectApplication          : No active profile set, falling back to 1 default profile: "default"
+2025-04-30T20:18:55.654+01:00  INFO 42451 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-04-30T20:18:55.691+01:00  INFO 42451 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 32 ms. Found 2 JPA repository interfaces.
+2025-04-30T20:18:55.750+01:00  WARN 42451 --- [main] o.m.s.mapper.ClassPathMapperScanner      : Skipping MapperFactoryBean with name 'adminMapper' and 'uk.ac.ncl.team5project.mapper.AdminMapper' mapperInterface. Bean already defined with the same name!
+2025-04-30T20:18:55.750+01:00  WARN 42451 --- [main] o.m.s.mapper.ClassPathMapperScanner      : Skipping MapperFactoryBean with name 'authorMapper' and 'uk.ac.ncl.team5project.mapper.AuthorMapper' mapperInterface. Bean already defined with the same name!
+2025-04-30T20:18:55.750+01:00  WARN 42451 --- [main] o.m.s.mapper.ClassPathMapperScanner      : Skipping MapperFactoryBean with name 'basketMapper' and 'uk.ac.ncl.team5project.mapper.BasketMapper' mapperInterface. Bean already defined with the same name!
+2025-04-30T20:18:55.750+01:00  WARN 42451 --- [main] o.m.s.mapper.ClassPathMapperScanner      : Skipping MapperFactoryBean with name 'bookMapper' and 'uk.ac.ncl.team5project.mapper.BookMapper' mapperInterface. Bean already defined with the same name!
+2025-04-30T20:18:55.750+01:00  WARN 42451 --- [main] o.m.s.mapper.ClassPathMapperScanner      : Skipping MapperFactoryBean with name 'reviewMapper' and 'uk.ac.ncl.team5project.mapper.ReviewMapper' mapperInterface. Bean already defined with the same name!
+2025-04-30T20:18:55.750+01:00  WARN 42451 --- [main] o.m.s.mapper.ClassPathMapperScanner      : Skipping MapperFactoryBean with name 'userMapper' and 'uk.ac.ncl.team5project.mapper.UserMapper' mapperInterface. Bean already defined with the same name!
+2025-04-30T20:18:55.750+01:00  WARN 42451 --- [main] o.m.s.mapper.ClassPathMapperScanner      : Skipping MapperFactoryBean with name 'wishlistMapper' and 'uk.ac.ncl.team5project.mapper.WishlistMapper' mapperInterface. Bean already defined with the same name!
+2025-04-30T20:18:55.750+01:00  WARN 42451 --- [main] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[uk.ac.ncl.team5project.mapper]' package. Please check your configuration.
+2025-04-30T20:18:55.949+01:00  INFO 42451 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-04-30T20:18:55.956+01:00  INFO 42451 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-04-30T20:18:55.957+01:00  INFO 42451 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.39]
+2025-04-30T20:18:55.982+01:00  INFO 42451 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-04-30T20:18:55.982+01:00  INFO 42451 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 688 ms
+2025-04-30T20:18:56.010+01:00 DEBUG 42451 --- [main] u.a.n.t.config.JwtAuthenticationFilter   : Filter 'jwtAuthenticationFilter' configured for use
+2025-04-30T20:18:56.072+01:00  INFO 42451 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-04-30T20:18:56.090+01:00  INFO 42451 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.11.Final
+2025-04-30T20:18:56.103+01:00  INFO 42451 --- [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-04-30T20:18:56.214+01:00  INFO 42451 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-04-30T20:18:56.227+01:00  INFO 42451 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-04-30T20:18:56.869+01:00  INFO 42451 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@4a105556
+2025-04-30T20:18:56.874+01:00  INFO 42451 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-04-30T20:18:57.018+01:00  WARN 42451 --- [main] org.hibernate.dialect.Dialect            : HHH000511: The 8.3.0 version for [org.hibernate.dialect.MariaDBDialect] is no longer supported, hence certain features may not work properly. The minimum supported version is 10.4.0. Check the community dialects project for available legacy versions.
+2025-04-30T20:18:57.021+01:00  WARN 42451 --- [main] org.hibernate.orm.deprecation            : HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-04-30T20:18:57.036+01:00  INFO 42451 --- [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.3
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-04-30T20:18:57.432+01:00  INFO 42451 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-04-30T20:18:57.434+01:00  INFO 42451 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-04-30T20:18:57.745+01:00  INFO 42451 --- [main] o.s.d.j.r.query.QueryEnhancerFactory     : JSqlParser is in classpath; If applicable, JSqlParser will be used.
+2025-04-30T20:18:57.745+01:00  INFO 42451 --- [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-04-30T20:18:58.457+01:00  WARN 42451 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-04-30T20:18:58.472+01:00  WARN 42451 --- [main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 6b26640e-e832-43c8-8e6a-36ad1a4ef367
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-04-30T20:18:58.497+01:00  INFO 42451 --- [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2025-04-30T20:18:58.792+01:00  WARN 42451 --- [main] o.s.b.a.f.FreeMarkerAutoConfiguration    : Cannot find template location: [classpath:/templates/] (please add some templates, check your FreeMarker configuration, or set spring.freemarker.check-template-location=false)
+2025-04-30T20:18:58.821+01:00  INFO 42451 --- [main] org.quartz.impl.StdSchedulerFactory      : Using default implementation for ThreadExecutor
+2025-04-30T20:18:58.826+01:00  INFO 42451 --- [main] org.quartz.core.SchedulerSignalerImpl    : Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2025-04-30T20:18:58.827+01:00  INFO 42451 --- [main] org.quartz.core.QuartzScheduler          : Quartz Scheduler v.2.3.2 created.
+2025-04-30T20:18:58.827+01:00  INFO 42451 --- [main] org.quartz.simpl.RAMJobStore             : RAMJobStore initialized.
+2025-04-30T20:18:58.827+01:00  INFO 42451 --- [main] org.quartz.core.QuartzScheduler          : Scheduler meta-data: Quartz Scheduler (v2.3.2) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2025-04-30T20:18:58.827+01:00  INFO 42451 --- [main] org.quartz.impl.StdSchedulerFactory      : Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+2025-04-30T20:18:58.827+01:00  INFO 42451 --- [main] org.quartz.impl.StdSchedulerFactory      : Quartz scheduler version: 2.3.2
+2025-04-30T20:18:58.828+01:00  INFO 42451 --- [main] org.quartz.core.QuartzScheduler          : JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@414749f8
+2025-04-30T20:18:58.857+01:00  INFO 42451 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-04-30T20:18:58.857+01:00  INFO 42451 --- [main] o.s.s.quartz.SchedulerFactoryBean        : Starting Quartz Scheduler now
+2025-04-30T20:18:58.858+01:00  INFO 42451 --- [main] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED started.
+2025-04-30T20:18:58.863+01:00  INFO 42451 --- [main] u.a.n.t.Team5ProjectApplication          : Started Team5ProjectApplication in 3.817 seconds (process running for 3.961)
+2025-04-30T20:19:02.669+01:00  INFO 42451 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-04-30T20:19:02.670+01:00  INFO 42451 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-04-30T20:19:02.671+01:00  INFO 42451 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-04-30T20:19:02.684+01:00 DEBUG 42451 --- [http-nio-8080-exec-1] u.a.n.t.config.JwtAuthenticationFilter   : Parsing JWT from Authorization header: null
+2025-04-30T20:19:02.684+01:00 DEBUG 42451 --- [http-nio-8080-exec-1] u.a.n.t.config.JwtAuthenticationFilter   : Received request for URL: http://localhost:8080/api/v1/basket/loadBasket
+2025-04-30T20:19:02.685+01:00 DEBUG 42451 --- [http-nio-8080-exec-1] u.a.n.t.config.JwtAuthenticationFilter   : Authorization header: null
+2025-04-30T20:19:02.685+01:00 DEBUG 42451 --- [http-nio-8080-exec-1] u.a.n.t.config.JwtAuthenticationFilter   : No JWT token found in request
+2025-04-30T20:20:26.338+01:00  INFO 42451 --- [SpringApplicationShutdownHook] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2025-04-30T20:20:26.339+01:00  INFO 42451 --- [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-04-30T20:20:26.341+01:00  INFO 42451 --- [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-04-30T20:20:26.342+01:00  INFO 42451 --- [SpringApplicationShutdownHook] o.s.s.quartz.SchedulerFactoryBean        : Shutting down Quartz Scheduler
+2025-04-30T20:20:26.342+01:00  INFO 42451 --- [SpringApplicationShutdownHook] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED shutting down.
+2025-04-30T20:20:26.343+01:00  INFO 42451 --- [SpringApplicationShutdownHook] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2025-04-30T20:20:26.343+01:00  INFO 42451 --- [SpringApplicationShutdownHook] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED shutdown complete.
+2025-04-30T20:20:26.345+01:00  INFO 42451 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-04-30T20:20:26.347+01:00  INFO 42451 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-04-30T20:20:30.077+01:00  INFO 42451 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-04-30T20:20:30.892+01:00  INFO 43063 --- [main] u.a.n.t.Team5ProjectApplication          : Starting Team5ProjectApplication using Java 21.0.6 with PID 43063 (/Users/conqury/study/Postgraguate/CSC8019 Software Engineering and Team Project/BackEnd/target/classes started by conqury in /Users/conqury/study/Postgraguate/CSC8019 Software Engineering and Team Project/BackEnd)
+2025-04-30T20:20:30.893+01:00 DEBUG 43063 --- [main] u.a.n.t.Team5ProjectApplication          : Running with Spring Boot v3.4.4, Spring v6.2.5
+2025-04-30T20:20:30.893+01:00  INFO 43063 --- [main] u.a.n.t.Team5ProjectApplication          : No active profile set, falling back to 1 default profile: "default"
+2025-04-30T20:20:31.311+01:00  INFO 43063 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-04-30T20:20:31.347+01:00  INFO 43063 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 31 ms. Found 2 JPA repository interfaces.
+2025-04-30T20:20:31.459+01:00  WARN 43063 --- [main] o.m.s.mapper.ClassPathMapperScanner      : Skipping MapperFactoryBean with name 'adminMapper' and 'uk.ac.ncl.team5project.mapper.AdminMapper' mapperInterface. Bean already defined with the same name!
+2025-04-30T20:20:31.459+01:00  WARN 43063 --- [main] o.m.s.mapper.ClassPathMapperScanner      : Skipping MapperFactoryBean with name 'authorMapper' and 'uk.ac.ncl.team5project.mapper.AuthorMapper' mapperInterface. Bean already defined with the same name!
+2025-04-30T20:20:31.459+01:00  WARN 43063 --- [main] o.m.s.mapper.ClassPathMapperScanner      : Skipping MapperFactoryBean with name 'basketMapper' and 'uk.ac.ncl.team5project.mapper.BasketMapper' mapperInterface. Bean already defined with the same name!
+2025-04-30T20:20:31.459+01:00  WARN 43063 --- [main] o.m.s.mapper.ClassPathMapperScanner      : Skipping MapperFactoryBean with name 'bookMapper' and 'uk.ac.ncl.team5project.mapper.BookMapper' mapperInterface. Bean already defined with the same name!
+2025-04-30T20:20:31.459+01:00  WARN 43063 --- [main] o.m.s.mapper.ClassPathMapperScanner      : Skipping MapperFactoryBean with name 'reviewMapper' and 'uk.ac.ncl.team5project.mapper.ReviewMapper' mapperInterface. Bean already defined with the same name!
+2025-04-30T20:20:31.459+01:00  WARN 43063 --- [main] o.m.s.mapper.ClassPathMapperScanner      : Skipping MapperFactoryBean with name 'userMapper' and 'uk.ac.ncl.team5project.mapper.UserMapper' mapperInterface. Bean already defined with the same name!
+2025-04-30T20:20:31.459+01:00  WARN 43063 --- [main] o.m.s.mapper.ClassPathMapperScanner      : Skipping MapperFactoryBean with name 'wishlistMapper' and 'uk.ac.ncl.team5project.mapper.WishlistMapper' mapperInterface. Bean already defined with the same name!
+2025-04-30T20:20:31.460+01:00  WARN 43063 --- [main] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[uk.ac.ncl.team5project.mapper]' package. Please check your configuration.
+2025-04-30T20:20:31.662+01:00  INFO 43063 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-04-30T20:20:31.669+01:00  INFO 43063 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-04-30T20:20:31.670+01:00  INFO 43063 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.39]
+2025-04-30T20:20:31.696+01:00  INFO 43063 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-04-30T20:20:31.696+01:00  INFO 43063 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 778 ms
+2025-04-30T20:20:31.725+01:00 DEBUG 43063 --- [main] u.a.n.t.config.JwtAuthenticationFilter   : Filter 'jwtAuthenticationFilter' configured for use
+2025-04-30T20:20:31.787+01:00  INFO 43063 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-04-30T20:20:31.806+01:00  INFO 43063 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.11.Final
+2025-04-30T20:20:31.819+01:00  INFO 43063 --- [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-04-30T20:20:31.931+01:00  INFO 43063 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-04-30T20:20:31.944+01:00  INFO 43063 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-04-30T20:20:32.938+01:00  INFO 43063 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5ae66c98
+2025-04-30T20:20:32.942+01:00  INFO 43063 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-04-30T20:20:33.063+01:00  WARN 43063 --- [main] org.hibernate.dialect.Dialect            : HHH000511: The 8.3.0 version for [org.hibernate.dialect.MariaDBDialect] is no longer supported, hence certain features may not work properly. The minimum supported version is 10.4.0. Check the community dialects project for available legacy versions.
+2025-04-30T20:20:33.066+01:00  WARN 43063 --- [main] org.hibernate.orm.deprecation            : HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-04-30T20:20:33.076+01:00  INFO 43063 --- [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.3
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-04-30T20:20:33.393+01:00  INFO 43063 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-04-30T20:20:33.394+01:00  INFO 43063 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-04-30T20:20:33.732+01:00  INFO 43063 --- [main] o.s.d.j.r.query.QueryEnhancerFactory     : JSqlParser is in classpath; If applicable, JSqlParser will be used.
+2025-04-30T20:20:33.732+01:00  INFO 43063 --- [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-04-30T20:20:34.341+01:00  WARN 43063 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-04-30T20:20:34.352+01:00  WARN 43063 --- [main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: a1fc1fc3-4ebc-46b8-a41d-f4247a590bbd
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-04-30T20:20:34.366+01:00  INFO 43063 --- [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2025-04-30T20:20:34.597+01:00  WARN 43063 --- [main] o.s.b.a.f.FreeMarkerAutoConfiguration    : Cannot find template location: [classpath:/templates/] (please add some templates, check your FreeMarker configuration, or set spring.freemarker.check-template-location=false)
+2025-04-30T20:20:34.629+01:00  INFO 43063 --- [main] org.quartz.impl.StdSchedulerFactory      : Using default implementation for ThreadExecutor
+2025-04-30T20:20:34.634+01:00  INFO 43063 --- [main] org.quartz.core.SchedulerSignalerImpl    : Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2025-04-30T20:20:34.634+01:00  INFO 43063 --- [main] org.quartz.core.QuartzScheduler          : Quartz Scheduler v.2.3.2 created.
+2025-04-30T20:20:34.635+01:00  INFO 43063 --- [main] org.quartz.simpl.RAMJobStore             : RAMJobStore initialized.
+2025-04-30T20:20:34.635+01:00  INFO 43063 --- [main] org.quartz.core.QuartzScheduler          : Scheduler meta-data: Quartz Scheduler (v2.3.2) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2025-04-30T20:20:34.635+01:00  INFO 43063 --- [main] org.quartz.impl.StdSchedulerFactory      : Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+2025-04-30T20:20:34.635+01:00  INFO 43063 --- [main] org.quartz.impl.StdSchedulerFactory      : Quartz scheduler version: 2.3.2
+2025-04-30T20:20:34.635+01:00  INFO 43063 --- [main] org.quartz.core.QuartzScheduler          : JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@470bef04
+2025-04-30T20:20:34.659+01:00  INFO 43063 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-04-30T20:20:34.660+01:00  INFO 43063 --- [main] o.s.s.quartz.SchedulerFactoryBean        : Starting Quartz Scheduler now
+2025-04-30T20:20:34.660+01:00  INFO 43063 --- [main] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED started.
+2025-04-30T20:20:34.666+01:00  INFO 43063 --- [main] u.a.n.t.Team5ProjectApplication          : Started Team5ProjectApplication in 3.997 seconds (process running for 4.139)
+2025-04-30T20:20:42.169+01:00  INFO 43063 --- [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-04-30T20:20:42.169+01:00  INFO 43063 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-04-30T20:20:42.170+01:00  INFO 43063 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-04-30T20:20:42.183+01:00 DEBUG 43063 --- [http-nio-8080-exec-2] u.a.n.t.config.JwtAuthenticationFilter   : Parsing JWT from Authorization header: null
+2025-04-30T20:20:42.184+01:00 DEBUG 43063 --- [http-nio-8080-exec-2] u.a.n.t.config.JwtAuthenticationFilter   : Received request for URL: http://localhost:8080/api/v1/basket/loadBasket
+2025-04-30T20:20:42.185+01:00 DEBUG 43063 --- [http-nio-8080-exec-2] u.a.n.t.config.JwtAuthenticationFilter   : Authorization header: null
+2025-04-30T20:20:42.185+01:00 DEBUG 43063 --- [http-nio-8080-exec-2] u.a.n.t.config.JwtAuthenticationFilter   : No JWT token found in request

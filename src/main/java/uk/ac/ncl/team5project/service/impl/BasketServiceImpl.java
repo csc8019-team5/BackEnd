@@ -69,9 +69,11 @@ public class BasketServiceImpl implements BasketService{
                 books.add(book);
             }
             List<BasketInfoParam> basketInfoParams = new ArrayList<>();
-            BeanUtils.copyProperties(books, basketInfoParams);
-            for(BasketInfoParam basketInfoParam : basketInfoParams){
-                basketInfoParam.setUserId(userId);
+            for (Book book : books) {
+                BasketInfoParam param = new BasketInfoParam();
+                BeanUtils.copyProperties(book, param); 
+                param.setUserId(userId);              
+                basketInfoParams.add(param);           
             }
             return basketInfoParams;
         }else{
