@@ -42,6 +42,7 @@ public class SecurityConfig {
                                 "/v1/auth/**",  
                                 "/v1/categories/**",
                                 "/api/v1/admin/**",
+                                "/api/v1/basket/**",
                                 "/v1/reviews/**"
                         ).permitAll()
                         .requestMatchers("/v1/loans/**").authenticated()

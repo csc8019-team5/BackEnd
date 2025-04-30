@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import uk.ac.ncl.team5project.param.BasketInfoParam;
@@ -44,7 +45,7 @@ public class BasketController {
 
 //METHOD 1: Qurey books by userId with valid
     @GetMapping("/loadBasket")
-    public Result loadBasket(@RequestBody Integer userId) throws Exception{
+    public Result loadBasket(@RequestParam Integer userId) throws Exception{
         List<BasketInfoParam> basketInfoParams = basketService.loadBasket(userId);
         return Result.success("200",basketInfoParams);
     }
