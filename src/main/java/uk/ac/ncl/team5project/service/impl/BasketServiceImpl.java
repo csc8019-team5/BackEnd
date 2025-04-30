@@ -104,6 +104,7 @@ public class BasketServiceImpl implements BasketService{
     public void insert(Integer bookId, Integer userId) {
         // TODO Auto-generated method stub
         Basket basket = new Basket();
+        basket.setIsValid(1);
         basket.setUserId(userId);
         basket.setBookId(bookId);
         basketMapper.insert(basket);
