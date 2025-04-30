@@ -62,11 +62,11 @@ public class BasketServiceImpl implements BasketService{
         List<Basket> baskets = basketMapper.selectByExample(basketExample);
         if (baskets.size()>0) {
             List<Book> books = new ArrayList<>();
-            BookExample bookExample = new BookExample();
             for(Basket basket : baskets){
+                BookExample bookExample = new BookExample();
                 bookExample.createCriteria().andBookIdEqualTo(basket.getBookId());
-                Book book = bookMapper.selectByExample(bookExample).get(0);
-                books.add(book);
+                List<Book> booksInfo = bookMapper.selectByExample(bookExample);
+                books.addAll(booksInfo);
             }
             List<BasketInfoParam> basketInfoParams = new ArrayList<>();
             for (Book book : books) {
