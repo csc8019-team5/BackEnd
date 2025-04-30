@@ -1,10 +1,16 @@
 package uk.ac.ncl.team5project.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+import uk.ac.ncl.team5project.entity.jpa.Book;
 import uk.ac.ncl.team5project.entity.jpa.Loan;
 import uk.ac.ncl.team5project.entity.User;
+import uk.ac.ncl.team5project.model.vo.BookVO;
+import uk.ac.ncl.team5project.model.vo.LoanVO;
+import uk.ac.ncl.team5project.repository.BookRepository;
 import uk.ac.ncl.team5project.service.LoanService;
 import uk.ac.ncl.team5project.service.UserService;
 import uk.ac.ncl.team5project.util.Result;
@@ -12,8 +18,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import uk.ac.ncl.team5project.model.vo.UserInfoVO;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Class: LoanController
@@ -68,12 +77,16 @@ import java.util.Map;
 public class LoanController {
 
     private static final Logger logger = LoggerFactory.getLogger(LoanController.class);
+    private static final int MAX_LOANS = 10; 
 
     @Autowired
     private LoanService loanService;
 
     @Autowired
     private UserService userService;
+    
+    @Autowired
+    private BookRepository bookRepository;
 
     /**
      * Creates a new loan record for borrowing a book.
@@ -84,7 +97,7 @@ public class LoanController {
      * @throws RuntimeException If the book is not available or doesn't exist
      */
     @PostMapping
-    public Result<?> borrowBook(@RequestBody Map<String, Integer> request, Authentication authentication) {
+    public ResponseEntity<?> borrowBook(@RequestBody Map<String, Integer> request, Authentication authentication) {
         try {
             String username = (String) authentication.getPrincipal();
             logger.info("User {} attempting to borrow a book", username);
@@ -92,28 +105,52 @@ public class LoanController {
             Result<?> userResult = userService.getInfo();
             if (userResult.getCode() != 200) {
                 logger.error("Failed to get user info for {}: {}", username, userResult.getMessage());
-                return Result.error(401, "Failed to retrieve user information");
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                        .body(Result.error(401, "Failed to retrieve user information"));
             }
             
             UserInfoVO userInfo = (UserInfoVO) userResult.getData();
             if (userInfo == null) {
                 logger.error("User data is null for {}", username);
-                return Result.error(401, "User information does not exist");
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                        .body(Result.error(401, "User information does not exist"));
             }
             
             Integer bookId = request.get("book_id");
             if (bookId == null) {
                 logger.error("Book ID is missing in the request");
-                return Result.error(400, "Please provide book ID");
+                return ResponseEntity.badRequest()
+                        .body(Result.error(400, "Please provide book_id"));
             }
 
             int duration = 14; // Default 14 days
             Loan loan = loanService.borrowBook(userInfo.getUserId(), bookId, duration);
             logger.info("User {} successfully borrowed book {}", username, bookId);
-            return Result.success(loan);
+            
+           
+            Optional<Book> bookOpt = bookRepository.findById(bookId);
+            Book book = bookOpt.orElse(null);
+            
+            // convert to LoanVO, include book information
+            LoanVO loanVO = book != null ? 
+                    LoanVO.toLoanVO(loan, book) : 
+                    LoanVO.toLoanVO(loan);
+                    
+            loanVO.setMessage("User " + userInfo.getUserId() + " successfully borrowed book " + bookId);
+            
+            return ResponseEntity.status(HttpStatus.CREATED).body(loanVO);
         } catch (Exception e) {
-            logger.error("Error occurred while borrowing book: {}", e.getMessage());
-            return Result.error(500, "Error occurred during borrowing: " + e.getMessage());
+            logger.error("Error in borrowBook: {}", e.getMessage());
+            if (e.getMessage() != null && e.getMessage().contains("not available")) {
+                return ResponseEntity.status(HttpStatus.CONFLICT)
+                        .body(Result.conflict(e.getMessage()));
+            } else if (e.getMessage() != null && (e.getMessage().contains("loan limit") || e.getMessage().contains("maximum"))) {
+                return ResponseEntity.badRequest()
+                        .body(Result.error(400, "Maximum loan limit reached"));
+            } else {
+                return ResponseEntity.status(HttpStatus.CONFLICT)
+                        .body(Result.error(409, "Failed to borrow book: " + e.getMessage()));
+            }
         }
     }
 
@@ -124,23 +161,45 @@ public class LoanController {
      * @return List of active Loan objects
      */
     @GetMapping("/current")
-    public Result<?> getCurrentLoans(Authentication authentication) {
+    public ResponseEntity<?> getCurrentLoans(Authentication authentication) {
         try {
             String username = (String) authentication.getPrincipal();
             Result<?> userResult = userService.getInfo();
             if (userResult.getCode() != 200) {
-                return Result.error(401, "Failed to retrieve user information");
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                        .body(Result.error(401, "Failed to retrieve user information"));
             }
             
             UserInfoVO userInfo = (UserInfoVO) userResult.getData();
             if (userInfo == null) {
-                return Result.error(401, "User information does not exist");
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                        .body(Result.error(401, "User information does not exist"));
             }
             
-            return Result.success(loanService.getCurrentLoans(userInfo.getUserId()));
+            List<Loan> loans = loanService.getCurrentLoans(userInfo.getUserId());
+            
+            // Convert to LoanVO and add book information
+            List<LoanVO> loanVOs = loans.stream()
+                    .map(loan -> {
+                        // Get book information
+                        Optional<Book> bookOpt = bookRepository.findById(loan.getBookId());
+                        if (bookOpt.isPresent()) {
+                            return LoanVO.toLoanVO(loan, bookOpt.get());
+                        } else {
+                            return LoanVO.toLoanVO(loan);
+                        }
+                    })
+                    .collect(Collectors.toList());
+            
+            // Package response according to API documentation format
+            Map<String, Object> response = new HashMap<>();
+            response.put("loans", loanVOs);
+            
+            return ResponseEntity.ok(response);
         } catch (Exception e) {
             logger.error("Error getting current loans: {}", e.getMessage());
-            return Result.error(500, "Failed to retrieve current loan information");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(Result.error(500, "Failed to retrieve current loan information"));
         }
     }
 
@@ -152,12 +211,21 @@ public class LoanController {
      * @throws RuntimeException If the loan record doesn't exist
      */
     @PutMapping("/{loan_id}/return")
-    public Result<?> returnBook(@PathVariable("loan_id") Integer loanId) {
+    public ResponseEntity<?> returnBook(@PathVariable("loan_id") Integer loanId) {
         try {
-            return Result.success(loanService.returnBook(loanId));
+            Loan loan = loanService.returnBook(loanId);
+            
+            
+            Map<String, Object> response = new HashMap<>();
+            response.put("loan_id", loan.getId());
+            response.put("status", "returned");
+            response.put("return_date", loan.getReturnDate().toString() + "T00:00:00Z");
+            
+            return ResponseEntity.ok(response);
         } catch (Exception e) {
             logger.error("Error returning book: {}", e.getMessage());
-            return Result.error(500, "Return book failed: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(Result.error(500, "Return book failed: " + e.getMessage()));
         }
     }
 
@@ -168,23 +236,45 @@ public class LoanController {
      * @return List of all Loan objects for the user
      */
     @GetMapping("/history")
-    public Result<?> getLoanHistory(Authentication authentication) {
+    public ResponseEntity<?> getLoanHistory(Authentication authentication) {
         try {
             String username = (String) authentication.getPrincipal();
             Result<?> userResult = userService.getInfo();
             if (userResult.getCode() != 200) {
-                return Result.error(401, "Failed to retrieve user information");
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                        .body(Result.error(401, "Failed to retrieve user information"));
             }
             
             UserInfoVO userInfo = (UserInfoVO) userResult.getData();
             if (userInfo == null) {
-                return Result.error(401, "User information does not exist");
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                        .body(Result.error(401, "User information does not exist"));
             }
             
-            return Result.success(loanService.getLoanHistory(userInfo.getUserId()));
+            List<Loan> loans = loanService.getLoanHistory(userInfo.getUserId());
+            
+            // Convert to LoanVO and add book information
+            List<LoanVO> loanVOs = loans.stream()
+                    .map(loan -> {
+                        // Get book information
+                        Optional<Book> bookOpt = bookRepository.findById(loan.getBookId());
+                        if (bookOpt.isPresent()) {
+                            return LoanVO.toLoanVO(loan, bookOpt.get());
+                        } else {
+                            return LoanVO.toLoanVO(loan);
+                        }
+                    })
+                    .collect(Collectors.toList());
+            
+           
+            Map<String, Object> response = new HashMap<>();
+            response.put("history", loanVOs);
+            
+            return ResponseEntity.ok(response);
         } catch (Exception e) {
             logger.error("Error getting loan history: {}", e.getMessage());
-            return Result.error(500, "Failed to retrieve loan history");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(Result.error(500, "Failed to retrieve loan history"));
         }
     }
 }

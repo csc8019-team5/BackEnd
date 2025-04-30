@@ -1,6 +1,7 @@
 package uk.ac.ncl.team5project.service;
 
 import java.util.List;
+import java.util.Map;
 import org.springframework.data.domain.Page;
 import uk.ac.ncl.team5project.param.BookInsertParam;
 
@@ -19,4 +20,10 @@ public interface BookService {
     // JPA operations
     Page<uk.ac.ncl.team5project.entity.jpa.Book> getBooks(int page, int perPage, String search, String publishingHouse);
     uk.ac.ncl.team5project.entity.jpa.Book getBookById(Integer id);
+
+    // 分类方法
+    Page<uk.ac.ncl.team5project.entity.jpa.Book> getBooksByCategory(
+        int page, int perPage, String category, String search, String publishingHouse);
+    List<String> getAllCategories();
+    Map<String, Long> getCategoryStats();
 }

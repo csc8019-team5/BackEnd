@@ -12,7 +12,7 @@ public interface BookMapper {
 
     int deleteByPrimaryKey(Integer bookId);
 
-    int insert(uk.ac.ncl.team5project.entity.Book row);
+    int insert(Book row);
 
     int insertSelective(Book row);
 

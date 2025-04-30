@@ -60,7 +60,24 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
     // Fetch all available books
     Page<Book> findByAvailable(Boolean available, Pageable pageable);
 
+    // Query available books by category
+    Page<Book> findByCategoryAndAvailable(String category, Boolean available, Pageable pageable);
 
-    @Query("SELECT b.category, COUNT(b) FROM Book b WHERE b.available = true GROUP BY b.category")
+    // Fuzzy search of available books by category and book name
+    Page<Book> findByCategoryAndNameContainingAndAvailable(String category, String name, Boolean available, Pageable pageable);
+
+    // Query available books by category and publishing house
+    Page<Book> findByCategoryAndPublishingHouseAndAvailable(String category, String publishingHouse, Boolean available, Pageable pageable);
+
+    // Query available books by category, book name and publishing house
+    Page<Book> findByCategoryAndNameContainingAndPublishingHouseAndAvailable(
+        String category, String name, String publishingHouse, Boolean available, Pageable pageable);
+
+    // Get all available book categories
+    @Query("SELECT DISTINCT b.category FROM Book b WHERE b.available = true ORDER BY b.category")
+    List<String> findAllCategories();
+
+    // Get the number of books in each category
+    @Query("SELECT b.category, COUNT(b) FROM Book b WHERE b.available = true GROUP BY b.category ORDER BY b.category")
     List<Object[]> countBooksByCategory();
 }

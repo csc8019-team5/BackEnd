@@ -60,7 +60,7 @@ import java.util.stream.Collectors;
 public class LoanService {
 
     private static final Logger logger = LoggerFactory.getLogger(LoanService.class);
-    private static final int MAX_LOANS = 5; // Maximum number of simultaneous loans
+    private static final int MAX_LOANS = 10; 
 
     @Autowired
     private LoanRepository loanRepository;
@@ -80,52 +80,93 @@ public class LoanService {
      */
     @Transactional
     public Loan borrowBook(Integer userId, Integer bookId, int borrowDurationDays) {
+        if (userId == null || userId <= 0) {
+            logger.error("Invalid user ID: {}", userId);
+            throw new RuntimeException("无效的用户ID");
+        }
+        
+        if (bookId == null || bookId <= 0) {
+            logger.error("Invalid book ID: {}", bookId);
+            throw new RuntimeException("无效的图书ID");
+        }
+        
+        if (borrowDurationDays <= 0) {
+            logger.error("Invalid borrow duration: {}", borrowDurationDays);
+            throw new RuntimeException("借阅天数必须大于0");
+        }
+
         logger.info("Attempting to borrow book {} for user {}", bookId, userId);
 
-        // Check the current number of loans for the user
-        List<Loan> currentLoans = getCurrentLoans(userId);
-        if (currentLoans.size() >= MAX_LOANS) {
-            logger.warn("User {} has reached maximum loan limit", userId);
-            throw new RuntimeException("Maximum loan limit reached (" + MAX_LOANS + " books)");
+        try {
+            // 检查用户当前借阅数量
+            List<Loan> currentLoans = getCurrentLoans(userId);
+            if (currentLoans == null) {
+                throw new RuntimeException("系统错误：无法获取用户当前借阅信息");
+            }
+            
+            if (currentLoans.size() >= MAX_LOANS) {
+                logger.warn("User {} has reached maximum loan limit", userId);
+                throw new RuntimeException("已达到最大借阅限制 (" + MAX_LOANS + " 本书)");
+            }
+            
+            // 检查是否已经借阅过这本书
+            boolean hasBook = currentLoans.stream()
+                .anyMatch(loan -> loan.getBookId().equals(bookId));
+            if (hasBook) {
+                logger.warn("User {} has already borrowed book {}", userId, bookId);
+                throw new RuntimeException("您已经借阅过这本书");
+            }
+
+            // 检查图书是否存在且可用
+            Book book = bookRepository.findById(bookId)
+                    .orElseThrow(() -> {
+                        logger.error("Book {} not found", bookId);
+                        throw new RuntimeException("Book not available: Book does not exist");
+                    });
+
+            if (!Boolean.TRUE.equals(book.getAvailable())) {
+                logger.warn("Book {} is not available for borrowing", bookId);
+                throw new RuntimeException("Book not available: Book is currently unavailable");
+            }
+
+            if (book.getAvailableNumber() <= 0) {
+                logger.warn("Book {} has no available copies", bookId);
+                throw new RuntimeException("Book not available: No copies available");
+            }
+
+            // 更新图书状态
+            try {
+                book.setAvailable(false);
+                bookRepository.save(book);
+                logger.info("Book {} status updated to unavailable", bookId);
+            } catch (Exception e) {
+                logger.error("Failed to update book status: {}", e.getMessage());
+                throw new RuntimeException("更新图书状态失败");
+            }
+
+            // 创建借阅记录
+            Loan loan = new Loan();
+            loan.setUserId(userId);
+            loan.setBookId(bookId);
+            loan.setBorrowDate(LocalDate.now());
+            loan.setReturnDateEstimated(LocalDate.now().plusDays(borrowDurationDays));
+            loan.setReturnDate(null);
+            
+            try {
+                Loan savedLoan = loanRepository.save(loan);
+                logger.info("Loan record created successfully: {}", savedLoan);
+                return savedLoan;
+            } catch (Exception e) {
+                logger.error("Failed to create loan record: {}", e.getMessage());
+                // 回滚图书状态
+                book.setAvailable(true);
+                bookRepository.save(book);
+                throw new RuntimeException("创建借阅记录失败");
+            }
+        } catch (Exception e) {
+            logger.error("Error in borrowBook: {}", e.getMessage());
+            throw e;
         }
-        
-        // Check if the user has already borrowed this book
-        boolean hasBook = currentLoans.stream()
-            .anyMatch(loan -> loan.getBookId().equals(bookId));
-        if (hasBook) {
-            logger.warn("User {} has already borrowed book {}", userId, bookId);
-            throw new RuntimeException("You have already borrowed this book");
-        }
-
-        // Check if book exists and is available
-        Book book = bookRepository.findById(bookId)
-                .orElseThrow(() -> {
-                    logger.error("Book {} not found", bookId);
-                    return new RuntimeException("Book does not exist");
-                });
-
-        // Check if book is available
-        if (!Boolean.TRUE.equals(book.getAvailable())) {
-            logger.warn("Book {} is not available for borrowing", bookId);
-            throw new RuntimeException("The book is currently unavailable for borrowing");
-        }
-
-        // Set book status to unavailable
-        book.setAvailable(false);
-        bookRepository.save(book);
-        logger.info("Book {} status updated to unavailable", bookId);
-
-        // Create loan record
-        Loan loan = new Loan();
-        loan.setUserId(userId);
-        loan.setBookId(bookId);
-        loan.setBorrowDate(LocalDate.now());
-        loan.setReturnDateEstimated(LocalDate.now().plusDays(borrowDurationDays));
-        loan.setReturnDate(null);
-        
-        Loan savedLoan = loanRepository.save(loan);
-        logger.info("Loan record created successfully: {}", savedLoan);
-        return savedLoan;
     }
 
     /**

@@ -2,6 +2,7 @@ package uk.ac.ncl.team5project.entity.jpa;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Class: Book
@@ -85,4 +86,16 @@ public class Book {
 
     @Column(name = "keyfeature")
     private String keyfeature;
+
+    @Column(name = "available_number")
+    private Integer availableNumber;
+
+    public Integer getAvailableNumber() {
+        return availableNumber;
+    }
+
+    public void setAvailableNumber(Integer availableNumber) {
+        this.availableNumber = availableNumber;
+    }
+
 }
