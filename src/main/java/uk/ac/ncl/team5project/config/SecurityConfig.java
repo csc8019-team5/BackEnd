@@ -37,11 +37,13 @@ public class SecurityConfig {
                                 "/v1/users/register",
                                 "/v1/users/admin/login",
                                 "/v1/users/login",
+                                "/v1/users/me",
                                 "/v1/books/**",
                                 "/v1/books/*/reviews",
                                 "/v1/auth/**",  
                                 "/v1/categories/**",
                                 "/api/v1/admin/**",
+                                "/api/v1/basket/**",
                                 "/v1/reviews/**"
                         ).permitAll()
                         .requestMatchers("/v1/loans/**").authenticated()

@@ -62,16 +62,18 @@ public class BasketServiceImpl implements BasketService{
         List<Basket> baskets = basketMapper.selectByExample(basketExample);
         if (baskets.size()>0) {
             List<Book> books = new ArrayList<>();
-            BookExample bookExample = new BookExample();
             for(Basket basket : baskets){
+                BookExample bookExample = new BookExample();
                 bookExample.createCriteria().andBookIdEqualTo(basket.getBookId());
-                Book book = bookMapper.selectByExample(bookExample).get(0);
-                books.add(book);
+                List<Book> booksInfo = bookMapper.selectByExample(bookExample);
+                books.addAll(booksInfo);
             }
             List<BasketInfoParam> basketInfoParams = new ArrayList<>();
-            BeanUtils.copyProperties(books, basketInfoParams);
-            for(BasketInfoParam basketInfoParam : basketInfoParams){
-                basketInfoParam.setUserId(userId);
+            for (Book book : books) {
+                BasketInfoParam param = new BasketInfoParam();
+                BeanUtils.copyProperties(book, param); 
+                param.setUserId(userId);              
+                basketInfoParams.add(param);           
             }
             return basketInfoParams;
         }else{
@@ -102,6 +104,7 @@ public class BasketServiceImpl implements BasketService{
     public void insert(Integer bookId, Integer userId) {
         // TODO Auto-generated method stub
         Basket basket = new Basket();
+        basket.setIsValid(1);
         basket.setUserId(userId);
         basket.setBookId(bookId);
         basketMapper.insert(basket);
@@ -119,8 +122,10 @@ public class BasketServiceImpl implements BasketService{
         // TODO Auto-generated method stub
         BasketExample basketExample = new BasketExample();
         basketExample.createCriteria().andIsValidEqualTo(1).andUserIdEqualTo(userId).andBookIdEqualTo(bookId);
-        Basket book = basketMapper.selectByExample(basketExample).get(0);
-        book.setIsValid(0);
+        List<Basket> book = basketMapper.selectByExample(basketExample);
+        for (Basket bookArg : book) {
+            bookArg.setIsValid(0);
+        }
     }
 
 
