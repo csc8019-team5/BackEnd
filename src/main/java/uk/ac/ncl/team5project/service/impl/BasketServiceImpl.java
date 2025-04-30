@@ -121,8 +121,10 @@ public class BasketServiceImpl implements BasketService{
         // TODO Auto-generated method stub
         BasketExample basketExample = new BasketExample();
         basketExample.createCriteria().andIsValidEqualTo(1).andUserIdEqualTo(userId).andBookIdEqualTo(bookId);
-        Basket book = basketMapper.selectByExample(basketExample).get(0);
-        book.setIsValid(0);
+        List<Basket> book = basketMapper.selectByExample(basketExample);
+        for (Basket bookArg : book) {
+            bookArg.setIsValid(0);
+        }
     }
 
 
