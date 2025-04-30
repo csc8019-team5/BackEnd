@@ -24,6 +24,7 @@ import uk.ac.ncl.team5project.entity.jpa.Book;
  *         - category: Book category/genre.
  *         - description: Book description or summary.
  *         - coverUrl: URL to the book cover image.
+ *         - publishingHouse: Book publisher.
  *         - availableCopies: Number of available copies of the book.
  *         - loanDuration: Default loan duration in days.
  *     List of Subordinate Classes: None.
@@ -47,6 +48,8 @@ public class BookVO {
     private String description;
     @JsonProperty("cover_url")
     private String coverUrl;
+    @JsonProperty("publishing_house")
+    private String publishingHouse;
     @JsonProperty("available_copies")
     private Integer availableCopies;
     @JsonProperty("loan_duration")
@@ -68,6 +71,7 @@ public class BookVO {
         vo.setCategory(book.getCategory());
         vo.setDescription(book.getDescription());
         vo.setCoverUrl(book.getBookCover());
+        vo.setPublishingHouse(book.getPublishingHouse());
         vo.setAvailableCopies(book.getAvailableNumber());
         vo.setLoanDuration(14); 
         return vo;
