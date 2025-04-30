@@ -45,10 +45,10 @@ public class BasketServiceImpl implements BasketService{
     private BookMapper bookMapper;
 
     /**
-     * METHOD 1: Qurey books by userId with valid
+     * @METHOD_1: Qurey books by userId with valid
      * @param userId
      * @return List<Basket> 
-     * @throws Exception 
+     * @throws Exception : null data (basket is empty)
      * @apiNote This api will display all books in basket, 
      *          queried by user's ID and the filed 'valid' should be '1',
      *          the `valid` with `1` means books in user's basket,
@@ -80,7 +80,7 @@ public class BasketServiceImpl implements BasketService{
     }
 
     /**
-     * METHOD 2: Check the book if is already put into basket
+     * @METHOD_2: Check the book if is already put into basket
      * @param bookId,userId
      * @return List<Basket>
      * @apiNote This api is for checking the book if already put into the basket,
@@ -95,7 +95,7 @@ public class BasketServiceImpl implements BasketService{
     }
 
     /**
-     * METHOD 3: Insert the book into the basket
+     * @METHOD_3: Insert the book into the basket
      * @param bookId,userId
      */
     @Override
@@ -108,7 +108,7 @@ public class BasketServiceImpl implements BasketService{
     }
 
     /**
-     * METHOD 4: Delete the book from basket
+     * @METHOD_4: Delete the book from basket
      * @param userId,bookId
      * @apiNote This delete api designed by change the book's status to delete it from
      *          basket. User select the book then change the field `is_valid` from database

@@ -81,7 +81,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
             return Result.success(registerVO);
         }
-
         return Result.error(500, "Registration failed");
 
     }
