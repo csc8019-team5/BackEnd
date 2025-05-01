@@ -131,6 +131,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         String token = jwtUtil.generateJwtToken(user.getEmail(), Constants.USER_ROLE);
         LoginVO loginVO = new LoginVO();
         loginVO.setToken(token);
+        loginVO.setUsername(existingUser.getAdminName());
+        loginVO.setUserId(existingUser.getAdminId());
         return Result.success(loginVO);
     }
 

@@ -1,7 +1,9 @@
 package uk.ac.ncl.team5project.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -12,7 +14,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import uk.ac.ncl.team5project.param.BasketInfoParam;
+import uk.ac.ncl.team5project.param.BasketPaidParam;
+import uk.ac.ncl.team5project.param.BookInsertParam;
 import uk.ac.ncl.team5project.entity.Basket;
+import uk.ac.ncl.team5project.form.BasketPaidForm;
 import uk.ac.ncl.team5project.service.BasketService;
 import uk.ac.ncl.team5project.util.Result;
 
@@ -40,12 +45,14 @@ public class BasketController {
     @Autowired
     private BasketService basketService;
 
+    private Integer storedUserId;
+
 
 //METHOD 1: Qurey books by userId with valid
     @GetMapping("/loadBasket")
     public Result loadBasket(@RequestParam Integer userId) throws Exception{
+        storedUserId = userId;
         List<BasketInfoParam> basketInfoParams = basketService.loadBasket(userId);
-        System.out.println(basketInfoParams);
         return Result.success("200",basketInfoParams);
     }
 
@@ -73,6 +80,25 @@ public class BasketController {
     public Result deleteByBookId(@RequestParam Integer userId,@RequestParam Integer bookId){
         basketService.delete(userId,bookId);
         return Result.success("200", null);
+    }
+
+    //METHOD 5: Pay and add to USER_BOOK
+
+    @GetMapping("/pay")
+    public Result payAndRecord() throws Exception{
+        System.out.println("已经存储的账号："+storedUserId);
+        List<BasketInfoParam> basketInfoParams = basketService.loadBasket(storedUserId);
+        BasketPaidForm bpf = new BasketPaidForm();
+        List<Integer> bookIds = new ArrayList<>();
+        for(BasketInfoParam basketInfo : basketInfoParams){
+            bookIds.add(basketInfo.getBookId());
+        }
+        bpf.setBookIds(bookIds);
+        bpf.setUserId(storedUserId);
+        BasketPaidParam bpp = new BasketPaidParam();
+        BeanUtils.copyProperties(bpf, bpp);
+        basketService.pay(bpp);
+        return Result.success("200",null);
     }
 
 
