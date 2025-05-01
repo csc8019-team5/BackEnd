@@ -8,12 +8,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import uk.ac.ncl.team5project.param.BasketInfoParam;
+import uk.ac.ncl.team5project.param.BasketPaidParam;
 import uk.ac.ncl.team5project.entity.Basket;
 import uk.ac.ncl.team5project.entity.BasketExample;
 import uk.ac.ncl.team5project.entity.Book;
 import uk.ac.ncl.team5project.entity.BookExample;
+import uk.ac.ncl.team5project.entity.UserBook;
 import uk.ac.ncl.team5project.mapper.BasketMapper;
 import uk.ac.ncl.team5project.mapper.BookMapper;
+import uk.ac.ncl.team5project.mapper.UserBookMapper;
 import uk.ac.ncl.team5project.service.BasketService;
 
 /**
@@ -43,6 +46,8 @@ public class BasketServiceImpl implements BasketService{
     private BasketMapper basketMapper;
     @Autowired
     private BookMapper bookMapper;
+    @Autowired
+    private UserBookMapper userBookMapper;
 
     /**
      * METHOD 1: Qurey books by userId with valid
@@ -62,16 +67,18 @@ public class BasketServiceImpl implements BasketService{
         List<Basket> baskets = basketMapper.selectByExample(basketExample);
         if (baskets.size()>0) {
             List<Book> books = new ArrayList<>();
-            BookExample bookExample = new BookExample();
             for(Basket basket : baskets){
+                BookExample bookExample = new BookExample();
                 bookExample.createCriteria().andBookIdEqualTo(basket.getBookId());
-                Book book = bookMapper.selectByExample(bookExample).get(0);
-                books.add(book);
+                List<Book> booksInfo = bookMapper.selectByExample(bookExample);
+                books.addAll(booksInfo);
             }
             List<BasketInfoParam> basketInfoParams = new ArrayList<>();
-            BeanUtils.copyProperties(books, basketInfoParams);
-            for(BasketInfoParam basketInfoParam : basketInfoParams){
-                basketInfoParam.setUserId(userId);
+            for (Book book : books) {
+                BasketInfoParam param = new BasketInfoParam();
+                BeanUtils.copyProperties(book, param); 
+                param.setUserId(userId);              
+                basketInfoParams.add(param);           
             }
             return basketInfoParams;
         }else{
@@ -102,6 +109,7 @@ public class BasketServiceImpl implements BasketService{
     public void insert(Integer bookId, Integer userId) {
         // TODO Auto-generated method stub
         Basket basket = new Basket();
+        basket.setIsValid(1);
         basket.setUserId(userId);
         basket.setBookId(bookId);
         basketMapper.insert(basket);
@@ -119,8 +127,35 @@ public class BasketServiceImpl implements BasketService{
         // TODO Auto-generated method stub
         BasketExample basketExample = new BasketExample();
         basketExample.createCriteria().andIsValidEqualTo(1).andUserIdEqualTo(userId).andBookIdEqualTo(bookId);
-        Basket book = basketMapper.selectByExample(basketExample).get(0);
-        book.setIsValid(0);
+        List<Basket> book = basketMapper.selectByExample(basketExample);
+        for (Basket bookArg : book) {
+            bookArg.setIsValid(0);
+            basketMapper.updateByExample(bookArg, basketExample);
+        }
+    }
+
+    @Override
+    public void pay(BasketPaidParam bpp) {
+        // TODO Auto-generated method stub
+        //1. change `is_valid` from all books
+        List<Integer> bookIds = bpp.getBookIds();
+        for (Integer bookId : bookIds) {
+            BasketExample basketExample = new BasketExample();
+            basketExample.createCriteria().andIsValidEqualTo(1).andUserIdEqualTo(bpp.getUserId()).andBookIdEqualTo(bookId);
+            List<Basket> book = basketMapper.selectByExample(basketExample);
+            for (Basket bookArg : book) {
+                bookArg.setIsValid(0);
+                basketMapper.updateByExample(bookArg, basketExample);
+            }
+        }
+        //2. add `bookId` and `userId` to `USER_BOOK`
+        System.out.println("存入已购前的所有书Id："+bookIds);
+        for (Integer bookId : bookIds) {
+            UserBook userBook = new UserBook();
+            userBook.setUserId(bpp.getUserId());
+            userBook.setBookId(bookId);
+            userBookMapper.insert(userBook);
+        }
     }
 
 

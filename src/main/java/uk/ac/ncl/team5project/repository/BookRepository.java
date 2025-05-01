@@ -80,4 +80,10 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
     // Get the number of books in each category
     @Query("SELECT b.category, COUNT(b) FROM Book b WHERE b.available = true GROUP BY b.category ORDER BY b.category")
     List<Object[]> countBooksByCategory();
+
+    // 查询某个用户拥有的图书（原生 SQL）
+    @Query(value = "SELECT b.* FROM BOOK b " +
+            "JOIN USER_BOOK ub ON b.book_id = ub.book_id " +
+            "WHERE ub.user_id = :userId", nativeQuery = true)
+    List<Book> findBooksByUserId1(@Param("userId") Integer userId);
 }

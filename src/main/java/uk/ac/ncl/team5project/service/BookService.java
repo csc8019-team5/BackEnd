@@ -26,4 +26,6 @@ public interface BookService {
         int page, int perPage, String category, String search, String publishingHouse);
     List<String> getAllCategories();
     Map<String, Long> getCategoryStats();
+
+    List<uk.ac.ncl.team5project.entity.jpa.Book> getBooksByUserId1(Integer userId);
 }

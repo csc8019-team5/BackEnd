@@ -197,4 +197,10 @@ public class BookController {
                     .body(Result.error(500, "Failed to fetch books by category: " + e.getMessage()));
         }
     }
+
+    @GetMapping("/userBook/{userId}")
+    public ResponseEntity<List<uk.ac.ncl.team5project.entity.jpa.Book>> getBooksByUser(@PathVariable Integer userId) {
+        List<uk.ac.ncl.team5project.entity.jpa.Book> books = bookService.getBooksByUserId1(userId);
+        return ResponseEntity.ok(books);
+    }
 }

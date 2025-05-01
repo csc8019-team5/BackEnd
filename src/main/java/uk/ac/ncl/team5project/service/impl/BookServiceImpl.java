@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.LinkedHashMap;
+
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -186,6 +188,16 @@ public class BookServiceImpl implements BookService {
         } catch (Exception e) {
             log.error("Error fetching category statistics: {}", e.getMessage());
             return Collections.emptyMap();
+        }
+    }
+
+    @Override
+    public List<uk.ac.ncl.team5project.entity.jpa.Book> getBooksByUserId1(Integer userId) {
+        try {
+            return bookRepository.findBooksByUserId1(userId);
+        } catch (Exception e) {
+            log.error("Error fetching books by user ID: {}", e.getMessage());
+            return Collections.emptyList();
         }
     }
 }
