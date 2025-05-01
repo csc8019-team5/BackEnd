@@ -125,6 +125,7 @@ public class BasketServiceImpl implements BasketService{
         List<Basket> book = basketMapper.selectByExample(basketExample);
         for (Basket bookArg : book) {
             bookArg.setIsValid(0);
+            basketMapper.updateByExample(bookArg, basketExample);
         }
     }
 
