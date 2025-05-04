@@ -136,10 +136,7 @@ public class ReviewController {
 
     /**
      * Deletes a review for a specific book by a specific user.
-     * <p>
      * This endpoint deletes the review associated with the specified book and user.
-     * </p>
-     *
      * @param bookId The ID of the book whose review is to be deleted.
      * @param userId The ID of the user who submitted the review.
      * @return A {@link Result} indicating the success or failure of the operation.
