@@ -23,19 +23,16 @@ import uk.ac.ncl.team5project.util.Result;
 
 /**
  * @file BasketController.java
- * @date 2025-04-19 01:43
- * @function_description: 
- * @interface_description: 
- *     @calling_sequence: 
- *     @arguments_description: 
- *     @list_of_subordinate_classes: 
- * @discussion: 
+ * @date 2025-04-09 09:58
+ * @function_description: Manipulate all books from cart (CRUD)
+ * @discussion: Considering an extended method which can check the book if already in the cart [finished]
  * @development_history: 
  *     @designer Qingyu Cao 
- *     @reviewer: 
- *     @review_date: 
- *     @modification_date: 
+ *     @reviewer: Qingyu Cao
+ *     @review_date: 04/05 2025
+ *     @modification_date: 04/05 2025
  *     @description: 
+ *  - Review all method and test API by Postman to make sure is accessible. 
  */
 
  @RestController
@@ -48,7 +45,12 @@ public class BasketController {
     private Integer storedUserId;
 
 
-//METHOD 1: Qurey books by userId with valid
+/**
+* @method_1 Load and display all books from cart
+* @throws Exception
+* @return List<BasketInfroParam>
+* @apiNote Display all books
+*/
     @GetMapping("/loadBasket")
     public Result loadBasket(@RequestParam Integer userId) throws Exception{
         storedUserId = userId;
@@ -56,7 +58,12 @@ public class BasketController {
         return Result.success("200",basketInfoParams);
     }
 
-//METHOD 2: Check the book if is already put into basket
+/**
+* @method_2 Check the book if already in the cart
+* @return Boolean valid
+* @param bookId,userId
+* @throws Exception
+*/
     @GetMapping("/check")
     public Result check(@RequestParam Integer bookId, @RequestParam Integer userId){
         Boolean valid = true;
@@ -67,7 +74,11 @@ public class BasketController {
     }
 
 
-//METHOD 3: Insert the book into the basket
+/**
+* @method_3 Insert the book into the cart
+* @return message only
+* @param bookId,userId
+*/
     @PostMapping("/insert")
     public Result insertByBookId(@RequestParam Integer bookId, @RequestParam Integer userId){
         basketService.insert(bookId,userId);
@@ -75,7 +86,12 @@ public class BasketController {
     }
 
 
-//METHOD 4: Delete the book from basket
+/**
+* @method_4 Insert the book into the cart
+* @return message only
+* @param bookId,userId
+* @apiNote This method will only change the state of the the book which means be deleted
+*/
     @PatchMapping("/delete")
     public Result deleteByBookId(@RequestParam Integer userId,@RequestParam Integer bookId){
         basketService.delete(userId,bookId);
@@ -86,7 +102,6 @@ public class BasketController {
 
     @GetMapping("/pay")
     public Result payAndRecord() throws Exception{
-        System.out.println("已经存储的账号："+storedUserId);
         List<BasketInfoParam> basketInfoParams = basketService.loadBasket(storedUserId);
         BasketPaidForm bpf = new BasketPaidForm();
         List<Integer> bookIds = new ArrayList<>();
