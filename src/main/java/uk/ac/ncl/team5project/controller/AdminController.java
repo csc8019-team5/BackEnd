@@ -36,7 +36,9 @@ import org.springframework.web.bind.annotation.RequestBody;
  *     @reviewer: Qingyu Cao
  *     @review_date: 07/05 2025
  *     @modification_date: 07/05 2025
- *     @description: Review all method and test API by Postman to make sure is accessible.
+ *     @description: 
+ *  - Added a method to query all current administrators, making it convenient for future expansion.
+ *  - Review all method and test API by Postman to make sure is accessible. 
  */
 
 @CrossOrigin(origins = "http://127.0.0.1:5500")
@@ -49,23 +51,42 @@ public class AdminController {
     @Autowired
     private BookService bookService;
 
-//METHOD 1: Qurey and display all books
+/**
+* @method_1 Qurey and display all books
+* @return List<Book>
+* @apiNote This api will display all books in database
+*          It's worth noting that as for administrator, 
+*         this method will also display [books which already deleted]
+*/
     @GetMapping("/loadBooks")
-    public Result loadBooks(){
+    public Result loadBooks() {
         List<Book> books = bookService.loadBooks();
         return Result.success("200", books);
     }
 
-//METHOD 2: Add a new book
+/**
+* @method_2 Insert a book into the database.
+* @return message only
+* @param BookInsertForm
+* @throws Exception
+* @apiNote This method will receive the form from Front-end,
+*           It will be copied by [BeanUtils] to tranform to other layers
+*/
     @PostMapping("/insert")
-    public Result insert(@RequestBody BookInsertForm form) throws Exception{
+    public Result insert(@RequestBody BookInsertForm form) throws Exception {
         BookInsertParam param = new BookInsertParam();
         BeanUtils.copyProperties(form, param);
         bookService.insert(param);
-        return Result.success("200",null);
+        return Result.success("200", null);
     }
 
-//METHOD 3: Modify a book
+/**
+* @method_3 Modify a book's information
+* @return message only
+* @param BookModifyForm
+* @apiNote This method will receive the form from Front-end,
+*          Only some of the information can be modified, as it depends on the Front-end form.
+*/ 
     @PatchMapping("/modify")
     public Result modify(@RequestBody BookModifyForm form){
         BookInsertParam param = new BookInsertParam();
@@ -75,14 +96,15 @@ public class AdminController {
     }
 
     /**
-     * METHOD 4: delete a book 
-     * @Note
-     * This function will not actually 'DELETE' data from the database, 
-     * but rather modify the "available" field in the "book" table to mark a book as "deleted", 
-     * and then filter out the marked books when querying all books again. 
-     * This method is used to preserve historical records.
-     * @param bookId 
-     * @return State code
+     * @method_4: delete a book
+     * @param bookId
+     * @return message only
+     * @throws Exception
+     * @apiNote This function will not actually 'DELETE' data from the database,
+     *          but rather modify the "available" field in the "book" table to mark a
+     *          book as "deleted",
+     *          and then filter out the marked books when querying all books again.
+     *          This method is used to preserve historical records.
      */
     @PatchMapping("/delete")
     public Result delete(@RequestBody String id) throws Exception{
