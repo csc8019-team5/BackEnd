@@ -31,18 +31,19 @@ import java.util.List;
  * @file UserServiceImpl.java
  * @date 2025-04-01
  * @function_description: Service implementation for user registration, login, admin login, profile update and info retrieval.
- * @interface_description: register, login, adminLogin, update, getInfo
- * @calling_sequence: Controller → Service → Mapper → Database
- * @arguments_description: RegisterDTO, LoginDTO, String username/password
- * @list_of_subordinate_classes: JwtUtil, AdminMapper, WishlistMapper
- * @discussion: All endpoints require JWT authentication except register and login.
+ * @interface_description: Implements register, login, adminLogin, update, getInfo methods.
+ * @calling_sequence: Controller → UserServiceImpl → UserMapper/AdminMapper/WishlistMapper
+ * @arguments_description: RegisterDTO (email, username, password), LoginDTO (email, password), update params (username, password)
+ * @list_of_subordinate_classes: JwtUtil, AdminMapper, WishlistMapper, UserInfoVO, RegisterVO, LoginVO, UpdateVO
+ * @discussion: All endpoints except register/login require JWT authentication; token resolves user email.
  * @development_history: Created on 2025-04-01 as part of user module
  * @designer: wensi huang
  * @reviewer: wensi huang
  * @review_date: 2025-04-18
  * @modification_date: 2025-04-18
- * @description: Handles user business logic.
+ * @description: Handles user-related business logic including auth and profile management.
  */
+
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
     @Autowired
