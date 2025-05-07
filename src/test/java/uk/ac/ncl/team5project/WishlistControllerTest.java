@@ -45,7 +45,7 @@ public class WishlistControllerTest {
     @Test
     public void testAddToWishlist() throws Exception {
         WishlistAddDTO dto = new WishlistAddDTO();
-        dto.setBook_id(1); // 请确认 book_id=1 存在
+        dto.setBook_id(1); // 
 
         mockMvc.perform(post("/v1/wishlist")
                         .header("Authorization", token)
@@ -67,7 +67,7 @@ public class WishlistControllerTest {
 
     @Test
     public void testDeleteFromWishlist() throws Exception {
-        Integer wishlistIdToDelete = 1; // 请确保该 ID 存在且属于当前用户
+        Integer wishlistIdToDelete = 1; 
 
         mockMvc.perform(delete("/v1/wishlist/{wishlist_id}", wishlistIdToDelete)
                         .header("Authorization", token))
