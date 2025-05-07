@@ -29,14 +29,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 /**
  * @file AdminController.java
  * @date 2025-04-09 09:58
- * @function_description: 
- * @discussion: 
+ * @function_description: Administor can manipulate all books (CRUD)
+ * @discussion: Considering an extended method can activate the deleted book
  * @development_history: 
  *     @designer Qingyu Cao 
- *     @reviewer: 
- *     @review_date: 
- *     @modification_date: 
- *     @description: 
+ *     @reviewer: Qingyu Cao
+ *     @review_date: 07/05 2025
+ *     @modification_date: 07/05 2025
+ *     @description: Review all method and test API by Postman to make sure is accessible.
  */
 
 @CrossOrigin(origins = "http://127.0.0.1:5500")
