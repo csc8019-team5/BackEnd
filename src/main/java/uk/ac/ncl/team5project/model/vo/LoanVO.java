@@ -81,9 +81,18 @@ public class LoanVO {
     /**
      * Convert LocalDate to LocalDateTime (using the start of the day)
      * 
-     * @param date The LocalDate to convert
-     * @return A LocalDateTime representing the start of the specified date, or null if input is null
-     * @throws RuntimeException If the date conversion fails
+     * This utility method converts a LocalDate object to a LocalDateTime object
+     * by setting the time component to the beginning of the day (00:00:00).
+     * This is necessary because the API requires ISO-8601 formatted timestamps
+     * with time components, while the database stores only dates for loan records.
+     *
+     * The method handles null values gracefully, which is important for fields
+     * like returnDate that may be null for active loans.
+     *
+     * @param date The LocalDate to convert, can be null
+     * @return A LocalDateTime representing the start of the specified date (midnight),
+     *         or null if the input date is null
+     * @throws RuntimeException If there is an error during the date conversion process
      */
     private static LocalDateTime toLocalDateTime(LocalDate date) {
         if (date == null) return null;
@@ -97,9 +106,22 @@ public class LoanVO {
     /**
      * Convert Loan entity to LoanVO
      * 
-     * @param loan The Loan entity to convert
-     * @return The converted LoanVO with basic loan information
-     * @throws RuntimeException If the loan record is null or conversion fails
+     * This method transforms a database Loan entity into a LoanVO (Value Object)
+     * suitable for API responses. The conversion process includes:
+     * 
+     * 1. Basic property mapping from entity to VO fields
+     * 2. Date format conversion from LocalDate to ISO-8601 formatted LocalDateTime
+     * 3. Status calculation based on return date and due date
+     *    - "returned": The loan has a non-null return date
+     *    - "expired": The loan is past due but not returned
+     *    - "active": The loan is ongoing and not past due
+     *
+     * This separation of concerns allows the API to present loan data in a
+     * consistent format regardless of how it's stored in the database.
+     *
+     * @param loan The Loan entity to convert from the database layer
+     * @return A fully populated LoanVO with calculated status and formatted dates
+     * @throws RuntimeException If the loan is null or if any error occurs during conversion
      */
     public static LoanVO toLoanVO(Loan loan) {
         if (loan == null) {
@@ -136,10 +158,26 @@ public class LoanVO {
     /**
      * Convert Loan entity to LoanVO and set associated Book information
      * 
-     * @param loan The Loan entity to convert
-     * @param book The associated Book entity
-     * @return The converted LoanVO with loan information and associated book details
-     * @throws RuntimeException If the conversion of either loan or book fails
+     * This enhanced converter method extends the basic toLoanVO functionality
+     * by also incorporating detailed book information. It combines loan details
+     * with the associated book data to provide a comprehensive view of what
+     * book is involved in the loan transaction.
+     *
+     * The method performs the following steps:
+     * 1. Calls toLoanVO(loan) to convert basic loan information
+     * 2. Converts the Book entity to BookVO using BookVO.toBookVO()
+     * 3. Sets the book property in the LoanVO with the converted BookVO
+     *
+     * This approach provides a complete representation of the loan for API
+     * responses, particularly useful for endpoints that display loan history
+     * or current loans with full book details.
+     *
+     * @param loan The Loan entity containing borrowing details
+     * @param book The associated Book entity with detailed book information
+     * @return A LoanVO with both loan details and associated book information
+     * @throws RuntimeException If either conversion fails or if any required entity is null
+     * @see #toLoanVO(Loan) The base conversion method for loan-only information
+     * @see BookVO#toBookVO(Book) The conversion method for book information
      */
     public static LoanVO toLoanVO(Loan loan, Book book) {
         try {

@@ -9,6 +9,7 @@ import uk.ac.ncl.team5project.param.BookInsertParam;
  * @file BookService.java
  * @date 2025-04-13 15:12
  * @function_description: Book service interface that handles both MyBatis and JPA operations
+ * Author: Yixin Zhang
  */
 public interface BookService {
     // MyBatis operations
@@ -21,7 +22,7 @@ public interface BookService {
     Page<uk.ac.ncl.team5project.entity.jpa.Book> getBooks(int page, int perPage, String search, String publishingHouse);
     uk.ac.ncl.team5project.entity.jpa.Book getBookById(Integer id);
 
-    // 分类方法
+    // Category methods
     Page<uk.ac.ncl.team5project.entity.jpa.Book> getBooksByCategory(
         int page, int perPage, String category, String search, String publishingHouse);
     List<String> getAllCategories();

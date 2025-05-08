@@ -45,9 +45,19 @@ public class CategoryService {
 
     /**
      * Generates tag cloud data for book categories.
-     * Calculates category counts and relative weights for visualization.
      * 
-     * @return List of maps containing category name, count, and weight
+     * This method queries the database for all available book categories and their counts,
+     * then calculates relative weights for each category based on its proportion of total books.
+     * The resulting data structure is designed for rendering tag clouds in the UI, where
+     * categories with higher weights can be displayed more prominently.
+     * 
+     * The weight calculation formula is: weight = categoryCount / totalBooks
+     * 
+     * @return List of maps containing category information with the following keys:
+     *         - "name": The category name (String)
+     *         - "count": Number of books in the category (Integer)
+     *         - "weight": Relative weight of the category (Double between 0 and 1)
+     * @see BookRepository#countBooksByCategory() The underlying data source method
      */
     public List<Map<String, Object>> getCategoryTagCloud() {
         List<Object[]> result = bookRepository.countBooksByCategory();
@@ -68,9 +78,22 @@ public class CategoryService {
 
     /**
      * Calculates distribution statistics for book categories.
-     * Provides total book count and percentage breakdown by category.
      * 
-     * @return Map containing total books count and category distribution
+     * This method provides a comprehensive breakdown of how books are distributed
+     * across different categories in the library system. It queries the database for
+     * category counts, calculates the percentage for each category relative to the total
+     * book count, and returns a structured data set suitable for statistical analysis
+     * and visualization (e.g., pie charts, bar graphs).
+     * 
+     * The percentage calculation formula is: percentage = (categoryCount / totalBooks) * 100
+     * 
+     * @return Map containing two elements:
+     *         - "total_books": Total number of available books in the system (Integer)
+     *         - "distribution": List of maps, each containing:
+     *             - "category": The category name (String)
+     *             - "book_count": Number of books in the category (Integer)
+     *             - "percentage": Percentage of total books in this category (Double)
+     * @see BookRepository#countBooksByCategory() The underlying data source method
      */
     public Map<String, Object> getCategoryDistribution() {
         List<Object[]> result = bookRepository.countBooksByCategory();

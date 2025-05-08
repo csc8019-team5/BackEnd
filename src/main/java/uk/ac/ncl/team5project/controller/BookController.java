@@ -89,12 +89,12 @@ public class BookController {
             Page<Book> result = bookService.getBooks(page, perPage, search, publishingHouse);
             log.info("Found {} books, total {} pages", result.getTotalElements(), result.getTotalPages());
             
-            // 转换为BookVO
+            // Convert to BookVO
             List<BookVO> bookVOs = result.getContent().stream()
                     .map(BookVO::toBookVO)
                     .collect(Collectors.toList());
             
-            // 组装API文档格式的返回
+            // Assemble response in API documentation format
             Map<String, Object> response = new HashMap<>();
             response.put("total", result.getTotalElements());
             response.put("page", page);
@@ -178,12 +178,12 @@ public class BookController {
             log.info("Found {} books in category {}, total {} pages", 
                      result.getTotalElements(), category, result.getTotalPages());
             
-            // 转换为BookVO
+            // Convert to BookVO
             List<BookVO> bookVOs = result.getContent().stream()
                     .map(BookVO::toBookVO)
                     .collect(Collectors.toList());
             
-            // 组装API文档格式的返回
+            // Assemble response in API documentation format
             Map<String, Object> response = new HashMap<>();
             response.put("total", result.getTotalElements());
             response.put("page", page);

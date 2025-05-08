@@ -3,6 +3,7 @@ package uk.ac.ncl.team5project;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
  * @file Team5ProjectApplication.java
@@ -23,6 +24,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 @MapperScan("uk.ac.ncl.team5project.mapper")
+@EnableScheduling
 public class Team5ProjectApplication {
 
     public static void main(String[] args) {

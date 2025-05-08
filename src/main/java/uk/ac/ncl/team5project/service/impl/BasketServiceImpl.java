@@ -149,7 +149,7 @@ public class BasketServiceImpl implements BasketService{
             }
         }
         //2. add `bookId` and `userId` to `USER_BOOK`
-        System.out.println("存入已购前的所有书Id："+bookIds);
+        System.out.println("All book IDs before adding to purchased: "+bookIds);
         for (Integer bookId : bookIds) {
             UserBook userBook = new UserBook();
             userBook.setUserId(bpp.getUserId());

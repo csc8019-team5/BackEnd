@@ -86,7 +86,7 @@ public class BasketController {
 
     @GetMapping("/pay")
     public Result payAndRecord() throws Exception{
-        System.out.println("已经存储的账号："+storedUserId);
+        System.out.println("Stored account ID: "+storedUserId);
         List<BasketInfoParam> basketInfoParams = basketService.loadBasket(storedUserId);
         BasketPaidForm bpf = new BasketPaidForm();
         List<Integer> bookIds = new ArrayList<>();
