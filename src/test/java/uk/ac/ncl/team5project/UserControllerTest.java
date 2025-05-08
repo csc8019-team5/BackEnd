@@ -41,13 +41,15 @@ public class UserControllerTest {
 
     @Test
     public void testRegisterSuccess() throws Exception {
+        String email = "test" + System.currentTimeMillis() + "@example.com";
+
         String json = """
-            {
-                "username": "wensih",
-                "email": "wensih@gmail.com",
-                "password": "12345678"
-            }
-        """;
+        {
+            "username": "wensi",
+            "email": "%s",
+            "password": "12345678"
+        }
+    """.formatted(email);
 
         mockMvc.perform(post("/v1/users/register")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -55,6 +57,7 @@ public class UserControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.code").value(200));
     }
+
 
     @Test
     public void testLoginSuccess() throws Exception {
@@ -107,10 +110,10 @@ public class UserControllerTest {
                 .andExpect(jsonPath("$.code").value(200))
                 .andExpect(jsonPath("$.data.token").exists());
     }
-
+    //If the test fails due to an expired token, you can log in with 111@11.com and password 123 to obtain a new token.
     @Test
     public void testGetUserInfo() throws Exception {
-        String token = "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMTFAMTEuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NDY2MzU0MzQsImV4cCI6MTc0NjcyMTgzNH0.cuoa04YGofsHUI5IbhzI77-75G4nY7x7foXEeCf-bkCOrOvy6Fy13Bk5oZ1fmLtwd3RV6AsdLFbit2HDNZEVOA";
+        String token = "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMTFAMTEuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NDY3MzYyOTIsImV4cCI6MTc0NjgyMjY5Mn0.UKNTgtM_AhwuRurDKZBLMy7dlncfmU8cUqXgp0KUnwPY48FzoD6otd4Os8P8elfvPD9zpTqLdNZHR6F1wlTipA";
 
         mockMvc.perform(get("/v1/users/me")
                         .header("Authorization", token))
@@ -118,10 +121,10 @@ public class UserControllerTest {
                 .andExpect(jsonPath("$.code").value(200))
                 .andExpect(jsonPath("$.data.userId").exists());
     }
-
+    //If the test fails due to an expired token, you can log in with 111@11.com and password 123 to obtain a new token.
     @Test
     public void testUpdateUserInfo() throws Exception {
-        String token = "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMTFAMTEuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NDY2MzU0MzQsImV4cCI6MTc0NjcyMTgzNH0.cuoa04YGofsHUI5IbhzI77-75G4nY7x7foXEeCf-bkCOrOvy6Fy13Bk5oZ1fmLtwd3RV6AsdLFbit2HDNZEVOA";
+        String token = "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMTFAMTEuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NDY3MzYyOTIsImV4cCI6MTc0NjgyMjY5Mn0.UKNTgtM_AhwuRurDKZBLMy7dlncfmU8cUqXgp0KUnwPY48FzoD6otd4Os8P8elfvPD9zpTqLdNZHR6F1wlTipA";
         String json = """
             {
                 "username": "newusername",
@@ -137,5 +140,4 @@ public class UserControllerTest {
                 .andExpect(jsonPath("$.code").value(200));
     }
 }
-
 
