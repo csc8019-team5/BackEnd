@@ -2,7 +2,41 @@ package uk.ac.ncl.team5project.entity;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Class: BookExample
+ * File: BookExample.java
+ * Created on: 2025/5/8
+ * Author: Menghui Yao
+ *
+ * Description:
+ * <pre>
+ *     Function: Provides dynamic query construction capabilities for Book entity database operations.
+ *     Interface Description:
+ *         - Calling Sequence:
+ *                          setOrderByClause: Defines SQL ORDER BY clause
+ *                          setDistinct: Enables distinct result filtering
+ *                          createCriteria: Initiates new query criteria
+ *                          or: Adds alternative OR conditions
+ *                          clear: Resets all query parameters
+ *         - Argument Description:
+ *                          orderByClause (String): SQL sorting specification
+ *                          distinct (boolean): Distinct results flag
+ *                          oredCriteria (List<Criteria>): Collection of conditional expressions
+ *         - List of Subordinate Classes:
+ *                          GeneratedCriteria: Base class for conditional expressions
+ *                          Criteria: Implementation of condition builder
+ *                          Criterion: Individual query condition element
+ * </pre>
+ *
+ * Development History:
+ * <pre>
+ *     Designer: Menghui Yao
+ *     Reviewer: Menghui Yao
+ *     Review Date: 2025/5/8
+ *     Modification Date: 2025/5/8
+ *     Modification Description: Initial implementation of book query criteria
+ * </pre>
+ */
 public class BookExample {
     protected String orderByClause;
 

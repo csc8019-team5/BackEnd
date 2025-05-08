@@ -3,7 +3,52 @@ package uk.ac.ncl.team5project.entity;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
+/**
+ * Class: UserExample
+ * File: UserExample.java
+ * Created on: 2025/5/8
+ * Author: Menghui Yao
+ *
+ * Description:
+ * <pre>
+ *     Function: Provides a criteria-based query builder for constructing complex SQL queries for User entities.
+ *     Interface Description:
+ *         - Calling Sequence:
+ *                          setOrderByClause/getOrderByClause: Sets/Gets the ORDER BY clause for query results
+ *                          setDistinct/isDistinct: Sets/Gets whether to use DISTINCT in the query
+ *                          getOredCriteria: Retrieves the list of ORed criteria
+ *                          or: Adds a new criteria to the ORed criteria list
+ *                          createCriteria: Creates and returns a new Criteria object
+ *                          clear: Resets the criteria, orderByClause, and distinct flag
+ *                          GeneratedCriteria (abstract): Base class for criteria with methods to add conditions
+ *                          Criteria: Extends GeneratedCriteria to provide specific query conditions
+ *                          Criterion: Represents a single condition in a query
+ *         - Argument Description:
+ *                          orderByClause (String): SQL ORDER BY clause (e.g., "user_id DESC")
+ *                          distinct (boolean): Flag to enable/disable DISTINCT in the query
+ *                          oredCriteria (List<Criteria>): List of criteria combined with OR
+ *                          criteria (List<Criterion>): List of conditions in a single Criteria object
+ *                          condition (String): SQL condition (e.g., "user_id =")
+ *                          value (Object): Value for the condition
+ *                          secondValue (Object): Second value for BETWEEN conditions
+ *                          property (String): Property name for the condition (e.g., "userId", "userName")
+ *                          userId (Integer): Primary key of the user
+ *                          userName (String): Name of the user
+ *                          userEmail (String): Email address of the user
+ *                          password (String): User's password
+ *                          registrationTime (Date): Date when the user registered
+ *                          updateTime (Date): Date when the user record was last updated
+ * </pre>
+ *
+ * Development History:
+ * <pre>
+ *     Designer: Menghui Yao
+ *     Reviewer: Menghui Yao
+ *     Review Date: 2025/5/8
+ *     Modification Date: 2025/5/8
+ *     Modification Description: Initial implementation of query builder for User entity
+ * </pre>
+ */
 public class UserExample {
     protected String orderByClause;
 

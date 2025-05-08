@@ -2,7 +2,41 @@ package uk.ac.ncl.team5project.entity;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Class: AuthorExample
+ * File: AuthorExample.java
+ * Created on: 2025/5/8
+ * Author: Menghui Yao
+ *
+ * Description:
+ * <pre>
+ *     Function: Provides criteria-based filtering capabilities for Author entities in the database.
+ *     Interface Description:
+ *         - Calling Sequence:
+ *                          setOrderByClause: Sets the ordering clause for SQL queries
+ *                          setDistinct: Sets distinct filtering for query results
+ *                          createCriteria: Creates new criteria for query conditions
+ *                          or: Adds alternative criteria using OR operator
+ *                          clear: Clears all criteria and settings
+ *         - Argument Description:
+ *                          orderByClause (String): SQL ORDER BY clause specification
+ *                          distinct (boolean): Distinct results flag
+ *                          oredCriteria (List<Criteria>): List of criteria conditions
+ *         - List of Subordinate Classes:
+ *                          GeneratedCriteria: Base class for all query criteria
+ *                          Criteria: Concrete criteria implementation
+ *                          Criterion: Individual condition element
+ * </pre>
+ *
+ * Development History:
+ * <pre>
+ *     Designer: Menghui Yao
+ *     Reviewer: Menghui Yao
+ *     Review Date: 2025/5/8
+ *     Modification Date: 2025/5/8
+ *     Modification Description: Initial implementation of Author query criteria
+ * </pre>
+ */
 public class AuthorExample {
     protected String orderByClause;
 

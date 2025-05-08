@@ -2,7 +2,41 @@ package uk.ac.ncl.team5project.entity;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Class: BasketExample
+ * File: BasketExample.java
+ * Created on: 2025/5/8
+ * Author: Menghui Yao
+ *
+ * Description:
+ * <pre>
+ *     Function: Provides dynamic query construction for Basket entity database operations.
+ *     Interface Description:
+ *         - Calling Sequence:
+ *                          setOrderByClause: Sets SQL ORDER BY clause
+ *                          setDistinct: Enables distinct result filtering
+ *                          createCriteria: Creates new query criteria
+ *                          or: Adds alternative OR conditions
+ *                          clear: Resets all query conditions
+ *         - Argument Description:
+ *                          orderByClause (String): SQL sorting specification
+ *                          distinct (boolean): Distinct results flag
+ *                          oredCriteria (List<Criteria>): List of conditional criteria
+ *         - List of Subordinate Classes:
+ *                          GeneratedCriteria: Base class for conditional expressions
+ *                          Criteria: Concrete condition builder implementation
+ *                          Criterion: Individual condition element
+ * </pre>
+ *
+ * Development History:
+ * <pre>
+ *     Designer: Menghui Yao
+ *     Reviewer: Menghui Yao
+ *     Review Date: 2025/5/8
+ *     Modification Date: 2025/5/8
+ *     Modification Description: Initial implementation of basket query criteria
+ * </pre>
+ */
 public class BasketExample {
     protected String orderByClause;
 
