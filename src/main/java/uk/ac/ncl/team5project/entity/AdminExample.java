@@ -3,6 +3,39 @@ package uk.ac.ncl.team5project.entity;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+/**
+ * Class: AdminExample
+ * File: AdminExample.java
+ * Created on: 2025/4/25
+ * Author: menghui yao
+ *
+ * Description:
+ * <pre>
+ *     Function: Provides criteria-based filtering capabilities for Admin entities in the database.
+ *     Interface Description:
+ *         - Calling Sequence:
+ *                          setOrderByClause: Sets the ordering clause for the SQL query.
+ *                          setDistinct: Sets whether to filter for distinct results.
+ *                          createCriteria: Creates a new criteria for query filtering.
+ *                          clear: Clears all criteria and settings.
+ *         - Argument Description:
+ *                          orderByClause (String): SQL order clause to sort results.
+ *                          distinct (boolean): Whether to ensure unique results.
+ *                          oredCriteria (List<Criteria>): List of criteria to filter results.
+ *         - List of Subordinate Classes:
+ *                          Criteria: Internal class representing a single set of query conditions.
+ *                          Criterion: Internal class representing an individual condition.
+ * </pre>
+ *
+ * Development History:
+ * <pre>
+ *     Designer: menghui yao
+ *     Reviewer: menghui yao
+ *     Review Date: 2025/4/25
+ *     Modification Date: 2025/4/25
+ *     Modification Description: Added comprehensive JavaDoc comments.
+ * </pre>
+ */
 
 public class AdminExample {
     protected String orderByClause;
