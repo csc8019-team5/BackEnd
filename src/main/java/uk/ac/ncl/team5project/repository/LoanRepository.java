@@ -41,23 +41,56 @@ import java.util.List;
 
 public interface LoanRepository extends JpaRepository<Loan, Integer> {
 
-    // Find active loans for a user (not yet returned)
+    /**
+     * Retrieves active loans for a specific user that have not been returned yet.
+     * Active loans are defined as records where the return date is null.
+     *
+     * @param userId The ID of the user to get active loans for
+     * @return List of Loan objects with null return dates
+     */
     List<Loan> findByUserIdAndReturnDateIsNull(Integer userId);
 
-    // Find all loan records for a user (including returned ones)
+    /**
+     * Retrieves all loan records for a specific user, including both active and returned loans.
+     * This provides a complete history of a user's borrowing activity.
+     *
+     * @param userId The ID of the user to get loan history for
+     * @return Complete list of all loan records for the user
+     */
     List<Loan> findByUserId(Integer userId);
 
-    // Find all globally active loans (used by scheduled tasks)
+    /**
+     * Retrieves all active loans across the entire system.
+     * Used primarily by scheduled tasks for system-wide operations such as expiry checks.
+     *
+     * @return List of all active loans with null return dates
+     */
     List<Loan> findByReturnDateIsNull();
 
-    // Find all returned loan records
+    /**
+     * Retrieves all loans that have been returned across the system.
+     * These are identified as loans where the return date is not null.
+     *
+     * @return List of all returned loan records
+     */
     List<Loan> findByReturnDateIsNotNull();
 
-    // Find expired loans that have not been returned
+    /**
+     * Retrieves loans that have passed their due date but have not been returned.
+     * Identifies overdue loans by comparing estimated return date with current date.
+     *
+     * @return List of expired loan records
+     */
     @Query("SELECT l FROM Loan l WHERE l.returnDate IS NULL AND l.returnDateEstimated < CURRENT_DATE")
     List<Loan> findExpiredLoans();
 
-    // Find loan record by exact ID
+    /**
+     * Retrieves a specific loan record by its exact ID.
+     * Uses native SQL to directly query the USER_BOOK table.
+     *
+     * @param loanId The ID of the loan record to retrieve
+     * @return The Loan object matching the ID or null if not found
+     */
     @Query(value = "SELECT * FROM `USER_BOOK` WHERE id = :loanId", nativeQuery = true)
     Loan findLoanById(@Param("loanId") Integer loanId);
 }

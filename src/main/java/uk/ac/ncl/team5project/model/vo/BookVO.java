@@ -54,12 +54,26 @@ public class BookVO {
     @JsonProperty("loan_duration")
     private Integer loanDuration;
 
-    
+
     /**
-     * Converts a Book entity to BookVO for API responses
-     * 
-     * @param book The Book entity to convert
-     * @return The converted BookVO object or null if the input is null
+     * Converts a Book entity to BookVO for API responses.
+     *
+     * This method transforms a JPA Book entity into a BookVO (Value Object) that is
+     * specifically designed for REST API responses. The conversion process maps
+     * entity properties to their corresponding VO fields, with some field names
+     * changed to match API naming conventions (e.g., 'name' becomes 'title').
+     *
+     * Some additional processing includes:
+     * - Field renaming for consistent API schemas
+     * - Setting a default loan duration value (14 days)
+     * - Properly handling JSON property annotations for serialization
+     *
+     * This separation between entity and VO allows the API structure to evolve
+     * independently from the database schema, providing better maintainability.
+     *
+     * @param book The Book entity to convert from the database layer
+     * @return A new BookVO instance populated with data from the Book entity,
+     *         or null if the input book is null
      */
     public static BookVO toBookVO(Book book) {
         if (book == null) return null;
@@ -72,7 +86,7 @@ public class BookVO {
         vo.setCoverUrl(book.getBookCover());
         vo.setPublishingHouse(book.getPublishingHouse());
         vo.setAvailableCopies(book.getAvailableNumber());
-        vo.setLoanDuration(14); 
+        vo.setLoanDuration(14);
         return vo;
     }
 }

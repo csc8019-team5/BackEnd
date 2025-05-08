@@ -17,7 +17,7 @@ spring:
         globally_quoted_identifiers: true
     database-platform: org.hibernate.dialect.MariaDBDialect
 
-# 添加日志配置
+# log
 logging:
   level:
     root: INFO
@@ -41,5 +41,5 @@ mybatis-plus:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 jwt:
-  secret: MySecretKeyKK # 盐值 salt。炒菜 不同的菜加的盐不一样 就能保证安全了。因为你无法反推
-  expiration: 86400000 # 1天 (毫秒)  
+  secret: MySecretKeyKK
+  expiration: 86400000
